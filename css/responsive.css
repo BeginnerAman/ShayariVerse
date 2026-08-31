@@ -1,0 +1,336 @@
+/* ============================================================
+   responsive.css - Mobile-First Responsive Breakpoints
+   ShayariVerse - "Read, Listen, Feel"
+   
+   Strategy: MOBILE-FIRST
+   Base styles (in other CSS files) target mobile (< 640px).
+   This file ONLY contains overrides for larger screens.
+   
+   Breakpoints:
+   - Tablet:       640px  →  @media (min-width: 640px)
+   - Desktop:      1024px →  @media (min-width: 1024px)
+   - Large Desktop: 1440px →  @media (min-width: 1440px)
+   
+   No fixed pixel widths on containers - use max-width + margin: auto.
+   ============================================================ */
+
+
+/* ============================
+   1. TABLET (≥ 640px)
+   2-column grid, larger spacing,
+   side audio controls
+   ============================ */
+
+@media (min-width: 640px) {
+
+  /* --- Layout --- */
+  .container {
+    padding-inline: var(--space-lg);
+  }
+
+  .section {
+    padding-block: var(--space-3xl);
+  }
+
+  .section--hero {
+    padding-block: var(--space-4xl) var(--space-3xl);
+  }
+
+  /* --- Shayari Grid: 2 columns --- */
+  .shayari-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  /* --- Cards: more padding --- */
+  .shayari-card {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  /* --- Shayari text: slightly larger --- */
+  .shayari-card__text {
+    font-size: var(--text-xl);
+  }
+
+  /* --- Modal: wider --- */
+  .modal-content {
+    padding: var(--space-2xl);
+  }
+
+  /* --- Audio Player: show volume slider --- */
+  .audio-player__volume {
+    display: flex;
+  }
+
+  /* --- Audio Player: taller --- */
+  .audio-player {
+    height: 72px;
+  }
+
+  /* --- Search bar centered --- */
+  .search-bar {
+    margin-inline: auto;
+  }
+
+  /* --- Header: more padding --- */
+  .header {
+    padding-inline: var(--space-lg);
+  }
+}
+
+
+/* ============================
+   2. DESKTOP (≥ 1024px)
+   3-column grid, sidebar nav,
+   hover effects, keyboard shortcuts
+   ============================ */
+
+@media (min-width: 1024px) {
+
+  /* --- Layout --- */
+  .container {
+    padding-inline: var(--space-xl);
+  }
+
+  /* --- Header: show desktop nav, hide hamburger --- */
+  .header__nav {
+    display: flex;
+  }
+
+  .header__menu-btn {
+    display: none;
+  }
+
+  .header {
+    padding-inline: var(--space-xl);
+  }
+
+  /* --- Bottom Nav: HIDDEN on desktop (desktop uses header nav) --- */
+  .bottom-nav {
+    display: none;
+  }
+
+  /* --- Page wrapper: no bottom nav padding on desktop --- */
+  .page-wrapper {
+    padding-bottom: calc(var(--audio-player-h) + var(--space-xl));
+  }
+
+  /* --- Audio Player: sits at bottom, no bottom-nav offset --- */
+  .audio-player {
+    bottom: 0;
+    height: 72px;
+    padding-inline: var(--space-xl);
+  }
+
+  /* --- Shayari Grid: 3 columns --- */
+  .shayari-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+
+  /* --- Cards: enable hover lift (already defined in animations.css) --- */
+  /* Hover effects only activate on desktop with pointer devices */
+  .shayari-card {
+    cursor: pointer;
+  }
+
+  /* --- Shayari text: larger on desktop --- */
+  .shayari-text {
+    font-size: var(--text-2xl);
+  }
+
+  /* --- Search bar: wider --- */
+  .search-bar {
+    max-width: 560px;
+  }
+
+  /* --- Modal: max width larger --- */
+  .modal-content {
+    max-width: 560px;
+  }
+
+  /* --- Toast: position from bottom with no bottom-nav offset --- */
+  .toast-container {
+    bottom: calc(var(--audio-player-h) + var(--space-lg));
+  }
+
+  /* --- Category filter pills: allow wrapping on desktop --- */
+  .category-filters {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  /* --- Empty state: larger icon --- */
+  .empty-state {
+    padding: var(--space-4xl) var(--space-xl);
+  }
+}
+
+
+/* ============================
+   3. LARGE DESKTOP (≥ 1440px)
+   Maximum widths, luxury spacing
+   ============================ */
+
+@media (min-width: 1440px) {
+
+  /* --- Container: max-width cap --- */
+  .container {
+    padding-inline: var(--space-2xl);
+  }
+
+  /* --- Shayari Grid: could go 4 columns if desired --- */
+  /* Keeping 3 columns for readability - shayari needs breathing room */
+  .shayari-grid {
+    gap: var(--space-2xl);
+  }
+
+  /* --- Cards: luxurious padding --- */
+  .shayari-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  /* --- Hero: larger spacing --- */
+  .section--hero {
+    padding-block: var(--space-4xl);
+  }
+}
+
+
+/* ============================
+   4. POINTER-BASED INTERACTIONS
+   Distinguish touch vs. mouse
+   ============================ */
+
+/* Enable hover effects ONLY on devices with a fine pointer (mouse) */
+@media (hover: hover) and (pointer: fine) {
+  .shayari-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .bottom-nav__item:hover {
+    color: var(--clr-text-primary);
+  }
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
+  .shayari-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn--primary:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+
+/* ============================
+   5. SAFE AREA INSETS
+   For devices with notches (iPhone etc.)
+   ============================ */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom));
+  }
+
+  .page-wrapper {
+    padding-bottom: calc(
+      var(--bottom-nav-h) +
+      var(--audio-player-h) +
+      var(--space-md) +
+      env(safe-area-inset-bottom)
+    );
+  }
+}
+
+
+/* ============================
+   6. LANDSCAPE MOBILE
+   Special handling for landscape orientation
+   on small screens
+   ============================ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Reduce header height */
+  .header {
+    height: 48px;
+  }
+
+  /* Reduce bottom nav */
+  .bottom-nav {
+    height: 48px;
+  }
+
+  .bottom-nav__label {
+    display: none;  /* Hide text labels, show icons only */
+  }
+
+  /* Reduce audio player height */
+  .audio-player {
+    height: 48px;
+    bottom: 48px;
+  }
+
+  /* Adjust page wrapper */
+  .page-wrapper {
+    padding-top: 48px;
+    padding-bottom: calc(48px + 48px + var(--space-sm));
+  }
+}
+
+
+/* ============================
+   7. PRINT STYLES
+   Clean output for printing shayari
+   ============================ */
+
+@media print {
+  .header,
+  .bottom-nav,
+  .audio-player,
+  .toast-container,
+  .search-bar,
+  .shayari-card__actions,
+  .category-filters,
+  .particle {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .page-wrapper {
+    padding: 0;
+  }
+
+  .shayari-card {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+
+  .shayari-text,
+  .shayari-card__text {
+    text-shadow: none;
+    color: black;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}

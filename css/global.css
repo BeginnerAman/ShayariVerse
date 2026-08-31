@@ -1,0 +1,386 @@
+/* ============================================================
+   global.css - CSS Reset, Custom Properties & Base Typography
+   ShayariVerse - "Read, Listen, Feel"
+   
+   This file contains:
+   1. Modern CSS Reset (box-sizing, margin reset, smooth scroll)
+   2. Custom Properties (spacing, typography, animation tokens)
+   3. Fluid Type Scale (clamp-based responsive typography)
+   4. Base Element Styles (body, headings, links, images)
+   5. Utility Classes (screen-reader only, visually hidden)
+   ============================================================ */
+
+
+/* ======================
+   1. MODERN CSS RESET
+   ====================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent font-size inflation on mobile */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100dvh;
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--clr-text-primary);
+  background-color: var(--clr-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color var(--duration-normal) var(--ease-smooth),
+              color var(--duration-normal) var(--ease-smooth);
+}
+
+/* Balanced text wrapping for headings */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  line-height: 1.2;
+}
+
+/* Prevent long words from overflowing */
+p, li, figcaption {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+/* Remove built-in form typography */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove textarea default styling */
+textarea {
+  resize: vertical;
+}
+
+/* Anchor defaults */
+a {
+  color: var(--clr-accent);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+a:hover {
+  color: var(--clr-accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Image defaults - prevent layout shift */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Button reset */
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove all animations and transitions for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================
+   2. CUSTOM PROPERTIES
+   ============================ */
+
+:root {
+  /* ---- Spacing Scale ---- */
+  --space-3xs: 0.125rem;   /* 2px */
+  --space-2xs: 0.1875rem;  /* 3px */
+  --space-xs:  0.25rem;    /* 4px */
+  --space-sm:  0.5rem;     /* 8px */
+  --space-md:  1rem;       /* 16px */
+  --space-lg:  1.5rem;     /* 24px */
+  --space-xl:  2rem;       /* 32px */
+  --space-2xl: 3rem;       /* 48px */
+  --space-3xl: 4rem;       /* 64px */
+  --space-4xl: 6rem;       /* 96px */
+
+  /* ---- Typography - Font Families ---- */
+  --font-shayari: 'Kalam', 'Noto Nastaliq Urdu', 'Noto Sans Devanagari', cursive;
+  --font-heading: 'Playfair Display', 'Noto Serif Devanagari', serif;
+  --font-ui:      'Poppins', 'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* ---- Typography - Fluid Type Scale (clamp) ---- */
+  --text-xs:   clamp(0.6875rem, 0.6rem + 0.25vw, 0.75rem);     /* 11px → 12px */
+  --text-sm:   clamp(0.8125rem, 0.75rem + 0.25vw, 0.875rem);    /* 13px → 14px */
+  --text-base: clamp(0.9375rem, 0.85rem + 0.35vw, 1.0625rem);   /* 15px → 17px */
+  --text-lg:   clamp(1.125rem, 0.95rem + 0.6vw, 1.375rem);      /* 18px → 22px */
+  --text-xl:   clamp(1.375rem, 1rem + 1.2vw, 1.875rem);         /* 22px → 30px */
+  --text-2xl:  clamp(1.75rem, 1.2rem + 1.8vw, 2.625rem);        /* 28px → 42px */
+  --text-hero: clamp(2.25rem, 1.5rem + 3vw, 4rem);              /* 36px → 64px */
+
+  /* ---- Typography - Font Weights ---- */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ---- Animation Timing ---- */
+  --ease-smooth:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  --duration-instant: 100ms;
+  --duration-fast:    200ms;
+  --duration-normal:  400ms;
+  --duration-slow:    800ms;
+  --duration-glacial: 1200ms;
+
+  /* ---- Layout ---- */
+  --max-width:      1280px;
+  --max-width-sm:   640px;
+  --max-width-md:   960px;
+
+  --header-height:  64px;
+  --bottom-nav-h:   64px;
+  --audio-player-h: 64px;
+
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* ---- Z-Index Scale ---- */
+  --z-base:       1;
+  --z-card:       10;
+  --z-sticky:     100;
+  --z-header:     200;
+  --z-overlay:    300;
+  --z-modal:      400;
+  --z-audio:      500;
+  --z-bottom-nav: 600;
+  --z-toast:      700;
+  --z-max:        9999;
+}
+
+
+/* ============================
+   3. BASE ELEMENT STYLES
+   ============================ */
+
+/* Headings */
+h1 { font-size: var(--text-hero); font-weight: var(--weight-bold); }
+h2 { font-size: var(--text-2xl);  font-weight: var(--weight-bold); }
+h3 { font-size: var(--text-xl);   font-weight: var(--weight-semibold); }
+h4 { font-size: var(--text-lg);   font-weight: var(--weight-semibold); }
+h5 { font-size: var(--text-base); font-weight: var(--weight-medium); }
+h6 { font-size: var(--text-sm);   font-weight: var(--weight-medium); }
+
+/* Body text */
+p {
+  font-size: var(--text-base);
+  color: var(--clr-text-secondary);
+  line-height: 1.7;
+}
+
+/* Small / Caption text */
+small,
+.text-sm {
+  font-size: var(--text-sm);
+  color: var(--clr-text-faded);
+}
+
+.text-xs {
+  font-size: var(--text-xs);
+  color: var(--clr-text-faded);
+}
+
+/* Shayari text - the star of the show */
+.shayari-text {
+  font-family: var(--font-shayari);
+  font-size: var(--text-xl);
+  line-height: 2;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--clr-text-primary);
+  text-shadow: 0 0 40px var(--clr-accent-glow);
+  white-space: pre-line;
+}
+
+/* Heading font for decorative titles */
+.heading-decorative {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+}
+
+/* Section dividers */
+hr {
+  border: none;
+  height: 1px;
+  background: var(--clr-divider);
+  margin: var(--space-xl) 0;
+}
+
+/* Selection color */
+::selection {
+  background: var(--clr-accent);
+  color: var(--clr-bg-primary);
+}
+
+/* Scrollbar styling (Webkit) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-text-faded);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-text-secondary);
+}
+
+/* Firefox scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-text-faded) transparent;
+}
+
+
+/* ============================
+   4. LAYOUT UTILITIES
+   ============================ */
+
+/* Main content wrapper - prevents content going behind fixed header/nav */
+.page-wrapper {
+  padding-top: var(--header-height);
+  padding-bottom: calc(var(--bottom-nav-h) + var(--audio-player-h) + var(--space-md));
+  min-height: 100dvh;
+}
+
+/* Centered container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+.container--sm {
+  max-width: var(--max-width-sm);
+}
+
+.container--md {
+  max-width: var(--max-width-md);
+}
+
+/* Section spacing */
+.section {
+  padding-block: var(--space-2xl);
+}
+
+.section--hero {
+  padding-block: var(--space-3xl) var(--space-2xl);
+}
+
+
+/* ============================
+   5. ACCESSIBILITY UTILITIES
+   ============================ */
+
+/* Screen-reader only - hidden visually but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--clr-accent);
+  color: var(--clr-bg-primary);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-sm);
+  z-index: var(--z-max);
+  transition: top var(--duration-fast) var(--ease-smooth);
+}
+
+.skip-link:focus {
+  top: var(--space-md);
+}
+
+/* Focus-visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}

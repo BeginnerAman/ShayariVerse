@@ -1,0 +1,222 @@
+/* ============================================================
+   themes.css - Dark / Light / Sepia Color Themes
+   ShayariVerse - "Read, Listen, Feel"
+   
+   Theme switching via `data-theme` attribute on <html>:
+     <html data-theme="dark">   ← Default
+     <html data-theme="light">
+     <html data-theme="sepia">
+   
+   All colors are CSS Custom Properties - no hardcoded values
+   anywhere else in the codebase. Change colors HERE only.
+   ============================================================ */
+
+
+/* ============================
+   1. DARK THEME (DEFAULT)
+   Mood: Deep midnight, premium, cinematic
+   ============================ */
+
+:root,
+:root[data-theme="dark"] {
+  /* ---- Backgrounds ---- */
+  --clr-bg-primary:     #06060a;                     /* Deep midnight black */
+  --clr-bg-secondary:   #0f0f18;                     /* Card backgrounds */
+  --clr-bg-elevated:    #1a1a2e;                     /* Modals, elevated surfaces */
+  --clr-bg-glass:       rgba(15, 15, 24, 0.7);       /* Glassmorphism panels */
+  --clr-bg-glass-heavy: rgba(15, 15, 24, 0.85);      /* Heavier glass overlay */
+
+  /* ---- Text ---- */
+  --clr-text-primary:   #f0e6d3;                     /* Warm cream - soft on dark */
+  --clr-text-secondary: #a89f91;                     /* Muted warm gray */
+  --clr-text-faded:     #5c564e;                     /* Metadata, timestamps */
+  --clr-text-inverse:   #06060a;                     /* Text on accent backgrounds */
+
+  /* ---- Accent - Purple (Poetry Mood) ---- */
+  --clr-accent:         #c084fc;                     /* Primary purple */
+  --clr-accent-hover:   #a855f7;                     /* Hover state */
+  --clr-accent-glow:    rgba(168, 85, 247, 0.25);    /* Soft glow / text-shadow */
+  --clr-accent-subtle:  rgba(192, 132, 252, 0.08);   /* Accent tint for backgrounds */
+
+  /* ---- Warm Accent - Orange ---- */
+  --clr-accent-warm:    #fb923c;                     /* Highlights, featured badge */
+  --clr-accent-warm-glow: rgba(251, 146, 60, 0.2);  /* Warm glow */
+
+  /* ---- Semantic Colors ---- */
+  --clr-success:        #4ade80;                     /* Favorited, copied */
+  --clr-error:          #f87171;                     /* Errors */
+  --clr-warning:        #fbbf24;                     /* Warnings */
+  --clr-info:           #60a5fa;                     /* Info */
+
+  /* ---- Borders & Dividers ---- */
+  --clr-border:         rgba(255, 255, 255, 0.06);   /* Subtle card borders */
+  --clr-border-hover:   rgba(255, 255, 255, 0.12);   /* Hover border */
+  --clr-divider:        rgba(255, 255, 255, 0.04);   /* Section separators */
+
+  /* ---- Shadows ---- */
+  --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md:    0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg:    0 8px 40px rgba(0, 0, 0, 0.5);
+  --shadow-glow:  0 0 40px var(--clr-accent-glow);
+  --shadow-card:  0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 20px 60px rgba(0, 0, 0, 0.4),
+                       0 0 40px var(--clr-accent-glow);
+
+  /* ---- Glassmorphism ---- */
+  --glass-blur:         12px;
+  --glass-blur-heavy:   20px;
+
+  /* ---- Overlay ---- */
+  --clr-overlay:  rgba(0, 0, 0, 0.6);               /* Modal overlay */
+
+  /* ---- Audio Player ---- */
+  --clr-progress-bg:    rgba(255, 255, 255, 0.1);    /* Progress bar track */
+  --clr-progress-fill:  var(--clr-accent);            /* Progress bar fill */
+
+  /* ---- Scrollbar ---- */
+  --clr-scrollbar-track: transparent;
+  --clr-scrollbar-thumb: var(--clr-text-faded);
+}
+
+
+/* ============================
+   2. LIGHT THEME
+   Mood: Warm, clean, airy - like morning sunlight
+   ============================ */
+
+:root[data-theme="light"] {
+  /* ---- Backgrounds ---- */
+  --clr-bg-primary:     #faf8f5;                     /* Warm off-white */
+  --clr-bg-secondary:   #ffffff;                     /* Card backgrounds */
+  --clr-bg-elevated:    #f5f0eb;                     /* Modals, elevated surfaces */
+  --clr-bg-glass:       rgba(255, 255, 255, 0.75);   /* Glassmorphism panels */
+  --clr-bg-glass-heavy: rgba(255, 255, 255, 0.9);    /* Heavier glass overlay */
+
+  /* ---- Text ---- */
+  --clr-text-primary:   #1a1612;                     /* Warm dark brown */
+  --clr-text-secondary: #6b5e52;                     /* Muted brown */
+  --clr-text-faded:     #a39788;                     /* Metadata, timestamps */
+  --clr-text-inverse:   #ffffff;                     /* Text on accent backgrounds */
+
+  /* ---- Accent - Deeper purple for contrast on light ---- */
+  --clr-accent:         #7c3aed;
+  --clr-accent-hover:   #6d28d9;
+  --clr-accent-glow:    rgba(124, 58, 237, 0.15);
+  --clr-accent-subtle:  rgba(124, 58, 237, 0.06);
+
+  /* ---- Warm Accent ---- */
+  --clr-accent-warm:    #ea580c;
+  --clr-accent-warm-glow: rgba(234, 88, 12, 0.12);
+
+  /* ---- Semantic Colors (darker for light bg) ---- */
+  --clr-success:        #16a34a;
+  --clr-error:          #dc2626;
+  --clr-warning:        #d97706;
+  --clr-info:           #2563eb;
+
+  /* ---- Borders & Dividers ---- */
+  --clr-border:         rgba(0, 0, 0, 0.06);
+  --clr-border-hover:   rgba(0, 0, 0, 0.12);
+  --clr-divider:        rgba(0, 0, 0, 0.04);
+
+  /* ---- Shadows (softer for light theme) ---- */
+  --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md:    0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg:    0 8px 40px rgba(0, 0, 0, 0.12);
+  --shadow-glow:  0 0 30px var(--clr-accent-glow);
+  --shadow-card:  0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.1),
+                       0 0 30px var(--clr-accent-glow);
+
+  /* ---- Glassmorphism ---- */
+  --glass-blur:         12px;
+  --glass-blur-heavy:   20px;
+
+  /* ---- Overlay ---- */
+  --clr-overlay:  rgba(0, 0, 0, 0.3);
+
+  /* ---- Audio Player ---- */
+  --clr-progress-bg:    rgba(0, 0, 0, 0.08);
+  --clr-progress-fill:  var(--clr-accent);
+
+  /* ---- Scrollbar ---- */
+  --clr-scrollbar-track: transparent;
+  --clr-scrollbar-thumb: var(--clr-text-faded);
+}
+
+
+/* ============================
+   3. SEPIA THEME (Reading Mode)
+   Mood: Old parchment, candlelight, warm ink
+   ============================ */
+
+:root[data-theme="sepia"] {
+  /* ---- Backgrounds ---- */
+  --clr-bg-primary:     #f4ecd8;                     /* Aged parchment */
+  --clr-bg-secondary:   #efe5cc;                     /* Card backgrounds */
+  --clr-bg-elevated:    #e8dcc0;                     /* Modals, elevated surfaces */
+  --clr-bg-glass:       rgba(244, 236, 216, 0.8);    /* Glassmorphism panels */
+  --clr-bg-glass-heavy: rgba(244, 236, 216, 0.92);   /* Heavier glass overlay */
+
+  /* ---- Text ---- */
+  --clr-text-primary:   #3d2b1f;                     /* Deep brown ink */
+  --clr-text-secondary: #6b5740;                     /* Muted brown */
+  --clr-text-faded:     #9c8a72;                     /* Metadata, timestamps */
+  --clr-text-inverse:   #f4ecd8;                     /* Text on accent backgrounds */
+
+  /* ---- Accent - Amber/Burnt orange for sepia mood ---- */
+  --clr-accent:         #b45309;
+  --clr-accent-hover:   #92400e;
+  --clr-accent-glow:    rgba(180, 83, 9, 0.15);
+  --clr-accent-subtle:  rgba(180, 83, 9, 0.06);
+
+  /* ---- Warm Accent ---- */
+  --clr-accent-warm:    #c2410c;
+  --clr-accent-warm-glow: rgba(194, 65, 12, 0.12);
+
+  /* ---- Semantic Colors ---- */
+  --clr-success:        #15803d;
+  --clr-error:          #b91c1c;
+  --clr-warning:        #a16207;
+  --clr-info:           #1d4ed8;
+
+  /* ---- Borders & Dividers ---- */
+  --clr-border:         rgba(61, 43, 31, 0.1);
+  --clr-border-hover:   rgba(61, 43, 31, 0.18);
+  --clr-divider:        rgba(61, 43, 31, 0.06);
+
+  /* ---- Shadows ---- */
+  --shadow-sm:    0 2px 8px rgba(61, 43, 31, 0.08);
+  --shadow-md:    0 4px 20px rgba(61, 43, 31, 0.1);
+  --shadow-lg:    0 8px 40px rgba(61, 43, 31, 0.14);
+  --shadow-glow:  0 0 30px var(--clr-accent-glow);
+  --shadow-card:  0 2px 12px rgba(61, 43, 31, 0.08);
+  --shadow-card-hover: 0 12px 40px rgba(61, 43, 31, 0.12),
+                       0 0 30px var(--clr-accent-glow);
+
+  /* ---- Glassmorphism ---- */
+  --glass-blur:         10px;
+  --glass-blur-heavy:   16px;
+
+  /* ---- Overlay ---- */
+  --clr-overlay:  rgba(61, 43, 31, 0.35);
+
+  /* ---- Audio Player ---- */
+  --clr-progress-bg:    rgba(61, 43, 31, 0.1);
+  --clr-progress-fill:  var(--clr-accent);
+
+  /* ---- Scrollbar ---- */
+  --clr-scrollbar-track: transparent;
+  --clr-scrollbar-thumb: var(--clr-text-faded);
+}
+
+
+/* ============================
+   4. THEME TRANSITION
+   Smooth color transition when switching themes
+   ============================ */
+
+:root {
+  transition: background-color var(--duration-normal) var(--ease-smooth),
+              color var(--duration-normal) var(--ease-smooth);
+}

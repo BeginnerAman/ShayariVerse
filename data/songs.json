@@ -1,0 +1,54 @@
+{
+  "backgroundTracks": [
+    {
+      "id": "track-1",
+      "title": "Soulful Melody",
+      "file": "content/audio/background/track-1.mp3",
+      "mood": "calm",
+      "duration": 18,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-2",
+      "title": "Rainy Nostalgia",
+      "file": "content/audio/background/track-2.mp3",
+      "mood": "melancholic",
+      "duration": 16,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-3",
+      "title": "Evening Breeze",
+      "file": "content/audio/background/track-3.mp3",
+      "mood": "romantic",
+      "duration": 15,
+      "artist": "ShayariVerse"
+    }
+  ],
+  "reelSongs": [
+    {
+      "id": "track-1",
+      "title": "Soulful Melody",
+      "file": "content/audio/songs/track-1.mp3",
+      "duration": 18,
+      "mood": "romantic",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-2",
+      "title": "Rainy Nostalgia",
+      "file": "content/audio/songs/track-2.mp3",
+      "duration": 16,
+      "mood": "sad",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-3",
+      "title": "Evening Breeze",
+      "file": "content/audio/songs/track-3.mp3",
+      "duration": 15,
+      "mood": "calm",
+      "artist": "ShayariVerse"
+    }
+  ]
+}

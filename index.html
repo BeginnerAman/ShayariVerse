@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark" data-font-size="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="ShayariVerse - Premium Poetry Experience. Read, Listen, Feel. 74+ beautiful shayaris with ambient music, reels, and share cards.">
+  <meta name="keywords" content="shayari, hindi poetry, urdu poetry, love shayari, sad shayari, motivational shayari, dosti shayari, romantic shayari, hindi shayari collection">
+  <meta name="author" content="ShayariVerse">
+  <meta name="theme-color" content="#06060a">
+  <meta name="color-scheme" content="dark light">
+
+  <title>ShayariVerse ✨ - Read, Listen, Feel</title>
+
+  <!-- Favicon & PWA Icons -->
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+  <meta property="og:title" content="ShayariVerse ✨ - Premium Shayari Experience">
+  <meta property="og:description" content="Read, Listen, Feel - 74+ beautiful Hindi/Urdu shayaris with mood music, reels & share cards.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/ShayariVerse/">
+  <meta property="og:image" content="https://yourusername.github.io/ShayariVerse/icons/icon.svg">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="ShayariVerse">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ShayariVerse ✨ - Premium Shayari Experience">
+  <meta name="twitter:description" content="Read, Listen, Feel - Hindi/Urdu poetry with mood music & reels.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Page-specific styles (font-size scaling, hero, search overlay) -->
+  <style>
+    /* ---- Font Size Scaling ---- */
+    [data-font-size="small"] .shayari-card__text,
+    [data-font-size="small"] .shayari-text {
+      font-size: var(--text-base);
+      line-height: 1.8;
+    }
+    [data-font-size="large"] .shayari-card__text,
+    [data-font-size="large"] .shayari-text {
+      font-size: var(--text-2xl);
+      line-height: 2.2;
+    }
+
+    /* ---- Hero Section ---- */
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 80dvh;
+      overflow: hidden;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: var(--z-base);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-lg);
+      padding: var(--space-xl);
+      max-width: 720px;
+    }
+
+    .hero__tagline {
+      font-family: var(--font-heading);
+      font-size: var(--text-hero);
+      font-weight: var(--weight-bold);
+      color: var(--clr-text-primary);
+      line-height: 1.15;
+    }
+
+    .hero__subtitle {
+      font-family: var(--font-ui);
+      font-size: var(--text-lg);
+      color: var(--clr-text-secondary);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .hero__cta {
+      margin-top: var(--space-sm);
+    }
+
+    /* Gradient backdrop behind hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 80%, var(--clr-accent-glow) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---- Particles Container ---- */
+    #particles-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* ---- Search Overlay ---- */
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--clr-overlay);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--space-4xl) var(--space-md) var(--space-md);
+      z-index: var(--z-modal);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-normal) var(--ease-smooth);
+    }
+
+    .search-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .search-overlay__inner {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      transform: translateY(-20px);
+      transition: transform var(--duration-normal) var(--ease-smooth);
+    }
+
+    .search-overlay.active .search-overlay__inner {
+      transform: translateY(0);
+    }
+
+    .search-overlay__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .search-overlay__input {
+      flex: 1;
+      padding: var(--space-md) var(--space-lg);
+      font-family: var(--font-ui);
+      font-size: var(--text-lg);
+      color: var(--clr-text-primary);
+      background: var(--clr-bg-elevated);
+      border: 2px solid var(--clr-accent);
+      border-radius: var(--radius-lg);
+      outline: none;
+    }
+
+    .search-overlay__input::placeholder {
+      color: var(--clr-text-faded);
+    }
+
+    /* ---- Section Header ---- */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-header__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--clr-text-primary);
+    }
+
+    /* ---- Font Size Controls ---- */
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: var(--clr-bg-secondary);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-full);
+      padding: 2px;
+    }
+
+    .font-controls__btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--clr-text-secondary);
+      transition: color var(--duration-fast) var(--ease-smooth),
+                  background var(--duration-fast) var(--ease-smooth);
+    }
+
+    .font-controls__btn:hover:not(:disabled) {
+      color: var(--clr-accent);
+      background: var(--clr-accent-subtle);
+    }
+
+    .font-controls__btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* ---- Soundwave Visualizer (CSS-only, 60fps) ---- */
+    .soundwave {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 24px;
+      padding: 0 var(--space-xs);
+    }
+
+    .soundwave__bar {
+      width: 3px;
+      height: 100%;
+      background: var(--clr-accent);
+      border-radius: 2px;
+      transform-origin: bottom;
+      transform: scaleY(0.15);
+    }
+
+    /* Animate only when playing - uses transform for 60fps */
+    .soundwave.playing .soundwave__bar {
+      animation: soundwaveBar 1s ease-in-out infinite;
+    }
+    .soundwave.playing .soundwave__bar:nth-child(1) { animation-duration: 0.8s; animation-delay: 0s; }
+    .soundwave.playing .soundwave__bar:nth-child(2) { animation-duration: 1.1s; animation-delay: 0.1s; }
+    .soundwave.playing .soundwave__bar:nth-child(3) { animation-duration: 0.7s; animation-delay: 0.2s; }
+    .soundwave.playing .soundwave__bar:nth-child(4) { animation-duration: 1.3s; animation-delay: 0.05s; }
+    .soundwave.playing .soundwave__bar:nth-child(5) { animation-duration: 0.9s; animation-delay: 0.15s; }
+
+    @keyframes soundwaveBar {
+      0%, 100% { transform: scaleY(0.15); }
+      50%      { transform: scaleY(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .soundwave.playing .soundwave__bar {
+        animation: none;
+        transform: scaleY(0.5);
+      }
+    }
+
+    /* ---- Music Prompt (First-time enable) ---- */
+    .music-prompt {
+      position: fixed;
+      bottom: calc(var(--bottom-nav-h) + var(--space-md));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: var(--z-audio);
+      transition: opacity var(--duration-normal) var(--ease-smooth),
+                  transform var(--duration-normal) var(--ease-smooth);
+    }
+
+    .music-prompt.hidden {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+      pointer-events: none;
+    }
+
+    .music-prompt__btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-lg);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--clr-text-primary);
+      background: var(--clr-bg-glass-heavy);
+      backdrop-filter: blur(var(--glass-blur-heavy));
+      -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
+      border: 1px solid var(--clr-accent-glow);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-glow), var(--shadow-md);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      animation: musicPromptPulse 2.5s ease-in-out infinite;
+    }
+
+    .music-prompt__btn:hover {
+      border-color: var(--clr-accent);
+    }
+
+    .music-prompt__btn:active {
+      transform: scale(0.95);
+    }
+
+    .music-prompt__icon {
+      width: 20px;
+      height: 20px;
+      color: var(--clr-accent);
+    }
+
+    @keyframes musicPromptPulse {
+      0%, 100% { box-shadow: var(--shadow-md), 0 0 20px var(--clr-accent-glow); }
+      50%      { box-shadow: var(--shadow-md), 0 0 40px var(--clr-accent-glow); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .music-prompt__btn { animation: none; }
+    }
+
+    /* Desktop: music prompt above audio player (no bottom nav) */
+    @media (min-width: 1024px) {
+      .music-prompt {
+        bottom: var(--space-lg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ================================
+       SKIP LINK (Accessibility)
+       ================================ -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+
+  <!-- ================================
+       HEADER (Glass Navbar)
+       ================================ -->
+  <header class="header" role="banner">
+    <!-- Logo -->
+    <a href="index.html" class="header__logo" aria-label="ShayariVerse Home">
+      <i data-lucide="sparkles" class="header__logo-icon" style="width: 22px; height: 22px; color: var(--clr-accent);"></i>
+      <span>ShayariVerse</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="header__nav" aria-label="Main Navigation">
+      <a href="index.html" class="header__nav-link active">Home</a>
+      <a href="browse.html" class="header__nav-link">Browse</a>
+      <a href="reels.html" class="header__nav-link">Reels</a>
+      <a href="favorites.html" class="header__nav-link">Favorites</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header__actions">
+      <!-- Font Size Controls -->
+      <div class="font-controls" role="group" aria-label="Font size controls">
+        <button class="font-controls__btn" id="font-decrease" aria-label="Decrease font size">A-</button>
+        <button class="font-controls__btn" id="font-increase" aria-label="Increase font size">A+</button>
+      </div>
+
+      <!-- Theme Toggle -->
+      <button class="btn btn--icon" id="theme-toggle" aria-label="Switch theme">
+        <i data-lucide="moon" class="btn__icon theme-icon" data-theme-icon="dark"></i>
+        <i data-lucide="sun" class="btn__icon theme-icon" data-theme-icon="light" style="display:none"></i>
+        <i data-lucide="book-open" class="btn__icon theme-icon" data-theme-icon="sepia" style="display:none"></i>
+      </button>
+
+      <!-- Search Toggle -->
+      <button class="btn btn--icon" id="search-toggle" aria-label="Search shayari">
+        <i data-lucide="search" class="btn__icon"></i>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ================================
+       SEARCH OVERLAY
+       ================================ -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-label="Search shayari" aria-modal="true">
+    <div class="search-overlay__inner">
+      <div class="search-overlay__header">
+        <input
+          type="search"
+          class="search-overlay__input"
+          id="search-input"
+          placeholder="Search shayari by keyword or mood... 🔍"
+          autocomplete="off"
+          aria-label="Search Shayari">
+        <button class="btn btn--icon" id="search-close" aria-label="Close Search">
+          <i data-lucide="x" class="btn__icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================
+       MAIN CONTENT
+       ================================ -->
+  <main id="main" class="page-wrapper">
+
+    <!-- ---- Hero Section ---- -->
+    <section class="hero section section--hero" aria-label="Welcome">
+      <div class="hero__content">
+        <h1 class="hero__tagline shimmer-text hero-enter">
+          Read, Listen, Feel
+        </h1>
+        <p class="hero__subtitle reveal">
+          A soulful collection of heartfelt poetry paired with soothing ambient melodies -
+          immerse yourself in the magic of every verse ✨
+        </p>
+        <a href="#shayari-section" class="btn btn--primary btn--lg hero__cta reveal stagger-2">
+          <i data-lucide="sparkles" style="width: 18px; height: 18px; margin-right: 6px;"></i>
+          Explore Poetry
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ---- Shayari Section ---- -->
+    <section class="section" id="shayari-section" aria-label="Shayari Collection">
+      <div class="container">
+
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <h2 class="section-header__title heading-decorative">
+            <i data-lucide="sparkles" style="width: 24px; height: 24px; color: var(--clr-accent); vertical-align: middle; margin-right: 6px;"></i>
+            Shayari Collection
+          </h2>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="category-filters reveal" id="category-filters" role="tablist" aria-label="Shayari categories">
+          <button class="category-filter active" data-category="all" role="tab" aria-selected="true">
+            <i data-lucide="sparkles" style="width:14px;height:14px;margin-right:4px;"></i> All
+          </button>
+          <button class="category-filter" data-category="love" role="tab" aria-selected="false">
+            <i data-lucide="heart" style="width:14px;height:14px;margin-right:4px;"></i> Love
+          </button>
+          <button class="category-filter" data-category="sad" role="tab" aria-selected="false">
+            <i data-lucide="heart-crack" style="width:14px;height:14px;margin-right:4px;"></i> Dard
+          </button>
+          <button class="category-filter" data-category="romantic" role="tab" aria-selected="false">
+            <i data-lucide="flower-2" style="width:14px;height:14px;margin-right:4px;"></i> Romantic
+          </button>
+          <button class="category-filter" data-category="zindagi" role="tab" aria-selected="false">
+            <i data-lucide="compass" style="width:14px;height:14px;margin-right:4px;"></i> Zindagi
+          </button>
+          <button class="category-filter" data-category="motivational" role="tab" aria-selected="false">
+            <i data-lucide="zap" style="width:14px;height:14px;margin-right:4px;"></i> Motivational
+          </button>
+          <button class="category-filter" data-category="dosti" role="tab" aria-selected="false">
+            <i data-lucide="users" style="width:14px;height:14px;margin-right:4px;"></i> Dosti
+          </button>
+          <button class="category-filter" data-category="funny" role="tab" aria-selected="false">
+            <i data-lucide="smile" style="width:14px;height:14px;margin-right:4px;"></i> Funny
+          </button>
+        </div>
+
+        <!-- Shayari Grid (dynamically populated by JS) -->
+        <div class="shayari-grid" id="shayari-grid" role="feed" aria-label="Shayari cards">
+          <!-- Skeleton loading placeholders (replaced by JS) -->
+          <div class="skeleton skeleton--card" aria-hidden="true"></div>
+          <div class="skeleton skeleton--card" aria-hidden="true"></div>
+          <div class="skeleton skeleton--card" aria-hidden="true"></div>
+          <div class="skeleton skeleton--card" aria-hidden="true"></div>
+          <div class="skeleton skeleton--card" aria-hidden="true"></div>
+          <div class="skeleton skeleton--card" aria-hidden="true"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ================================
+       TOAST CONTAINER
+       ================================ -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-relevant="additions"></div>
+
+
+  <!-- ================================
+       FLOATING PARTICLES
+       ================================ -->
+  <div id="particles-container" aria-hidden="true"></div>
+
+
+  <!-- ================================
+       MUSIC PROMPT (Enable on first gesture)
+       ================================ -->
+  <div class="music-prompt" id="music-prompt">
+    <button class="music-prompt__btn" id="music-prompt-btn" aria-label="Enable Mood Music">
+      <i data-lucide="music-2" class="music-prompt__icon"></i>
+      <span>🎵 Enable Mood Music</span>
+    </button>
+  </div>
+
+
+  <!-- ================================
+       AUDIO PLAYER BAR (Fixed Bottom)
+       ================================ -->
+  <div class="audio-player audio-player--hidden" id="audio-player" role="region" aria-label="Audio Player">
+    <!-- Progress Bar -->
+    <div class="audio-player__progress" id="audio-progress-bar">
+      <div class="audio-player__progress-fill" id="audio-progress-fill" style="width:0%"></div>
+    </div>
+
+    <!-- Play / Pause -->
+    <button class="btn btn--icon" id="audio-play-pause" aria-label="Play / Pause">
+      <i data-lucide="play" class="btn__icon audio-icon-play"></i>
+      <i data-lucide="pause" class="btn__icon audio-icon-pause" style="display:none"></i>
+    </button>
+
+    <!-- Track Info -->
+    <div class="audio-player__info">
+      <span class="audio-player__title" id="audio-track-title">Soulful Melody</span>
+      <span class="audio-player__artist" id="audio-track-artist">ShayariVerse</span>
+    </div>
+
+    <!-- Soundwave Visualizer (CSS-only) -->
+    <div class="soundwave" id="audio-soundwave" aria-hidden="true">
+      <div class="soundwave__bar"></div>
+      <div class="soundwave__bar"></div>
+      <div class="soundwave__bar"></div>
+      <div class="soundwave__bar"></div>
+      <div class="soundwave__bar"></div>
+    </div>
+
+    <!-- Skip Track -->
+    <button class="btn btn--icon" id="audio-skip" aria-label="Next track">
+      <i data-lucide="skip-forward" class="btn__icon"></i>
+    </button>
+
+    <!-- Volume Controls -->
+    <div class="audio-player__volume">
+      <button class="btn btn--icon" id="audio-mute" aria-label="Mute / Unmute">
+        <i data-lucide="volume-2" class="btn__icon audio-icon-vol"></i>
+        <i data-lucide="volume-x" class="btn__icon audio-icon-muted" style="display:none"></i>
+      </button>
+      <input type="range"
+             class="audio-player__volume-slider"
+             id="audio-volume-slider"
+             min="0" max="100" value="45"
+             aria-label="Volume">
+    </div>
+  </div>
+
+
+  <!-- ================================
+       BOTTOM NAVIGATION (Mobile)
+       ================================ -->
+  <nav class="bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="bottom-nav__item" aria-label="Home">
+      <i data-lucide="home" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Home</span>
+    </a>
+    <a href="browse.html" class="bottom-nav__item" aria-label="Browse">
+      <i data-lucide="compass" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Browse</span>
+    </a>
+    <a href="reels.html" class="bottom-nav__item" aria-label="Reels">
+      <i data-lucide="film" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Reels</span>
+    </a>
+    <a href="favorites.html" class="bottom-nav__item" aria-label="Favorites">
+      <i data-lucide="heart" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Favorites</span>
+    </a>
+  </nav>
+
+
+  <!-- ================================
+       SCRIPTS (ES6 Modules)
+       ================================ -->
+  <!-- Howler.js - Cross-browser audio engine (only approved external JS lib) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"
+          integrity="sha512-xi/RZRIF/S0hJ+QLxFMJQhJ0mBEOwYsqU0VEVTIiGAoGMaJx1sFvJXEOwQcFMXoOhCVOL9ez5l6as1jdMXkyA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"></script>
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

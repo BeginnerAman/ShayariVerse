@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark" data-font-size="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="ShayariVerse Favorites - Aapki pasandida shayariyaan ek jagah. Save, share & download your favorite poetry.">
+  <meta name="keywords" content="favorite shayari, saved shayari, my shayari collection, best hindi shayari">
+  <meta name="theme-color" content="#06060a">
+  <meta name="color-scheme" content="dark light">
+
+  <title>Favorites - ShayariVerse ✨</title>
+
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.json">
+
+  <meta property="og:title" content="My Favorites - ShayariVerse ✨">
+  <meta property="og:description" content="Aapki pasandida shayariyaan - Save, share & download beautiful poetry cards.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://yourusername.github.io/ShayariVerse/icons/icon.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="My Favorites - ShayariVerse ✨">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* ---- Favorites Page Layout ---- */
+    .favorites-page {
+      min-height: 100vh;
+      padding-top: calc(var(--header-h) + var(--space-md));
+      padding-bottom: calc(var(--bottom-nav-h) + var(--space-xl));
+    }
+
+    .favorites-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* ---- Page Header ---- */
+    .favorites-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-lg) 0 var(--space-md);
+    }
+
+    .favorites-header__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--clr-text-primary);
+    }
+
+    .favorites-header__count {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--clr-text-faded);
+    }
+
+    .favorites-header__clear {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--clr-text-faded);
+      background: none;
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-xs) var(--space-md);
+      cursor: pointer;
+      transition: color var(--duration-fast), border-color var(--duration-fast);
+    }
+
+    .favorites-header__clear:hover {
+      color: #f87171;
+      border-color: #f87171;
+    }
+
+    /* ---- Empty State ---- */
+    .favorites-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-lg);
+      min-height: 50vh;
+      text-align: center;
+    }
+
+    .favorites-empty__icon {
+      font-size: 64px;
+      opacity: 0.5;
+      animation: emptyFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes emptyFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .favorites-empty__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      color: var(--clr-text-primary);
+    }
+
+    .favorites-empty__subtitle {
+      font-family: var(--font-ui);
+      font-size: var(--text-base);
+      color: var(--clr-text-faded);
+      max-width: 300px;
+      line-height: 1.6;
+    }
+
+    /* ---- Card Modal (reuse from browse) ---- */
+    .card-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: var(--z-modal);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      animation: fadeIn var(--duration-normal) var(--ease-smooth);
+    }
+    .card-modal-overlay.active { display: flex; }
+    .card-modal {
+      background: var(--clr-bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: var(--space-lg);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: modalIn var(--duration-normal) var(--ease-bounce);
+    }
+    .card-modal__preview {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-lg);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-modal__actions { display: flex; gap: var(--space-md); justify-content: center; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+    /* ---- Font Size ---- */
+    .font-controls { display: flex; align-items: center; gap: var(--space-3xs); }
+    .font-controls__btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      border: 1px solid var(--clr-border); border-radius: var(--radius-sm);
+      background: none; cursor: pointer;
+      font-family: var(--font-ui); font-size: var(--text-sm); font-weight: var(--weight-semibold);
+      color: var(--clr-text-secondary);
+      transition: color var(--duration-fast), background var(--duration-fast);
+    }
+    .font-controls__btn:hover:not(:disabled) { color: var(--clr-accent); background: var(--clr-accent-subtle); }
+    .font-controls__btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .favorites-empty__icon { animation: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================================
+       HEADER
+       ================================ -->
+  <header class="header" role="banner">
+    <a href="index.html" class="header__logo" aria-label="ShayariVerse Home">
+      <i data-lucide="sparkles" class="header__logo-icon" style="width: 22px; height: 22px; color: var(--clr-accent);"></i>
+      <span>ShayariVerse</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Main Navigation">
+      <a href="index.html" class="header__nav-link">Home</a>
+      <a href="browse.html" class="header__nav-link">Browse</a>
+      <a href="reels.html" class="header__nav-link">Reels</a>
+      <a href="favorites.html" class="header__nav-link active">Favorites</a>
+    </nav>
+
+    <div class="header__actions">
+      <div class="font-controls">
+        <button class="font-controls__btn" id="font-decrease" aria-label="Decrease font size">A-</button>
+        <button class="font-controls__btn" id="font-increase" aria-label="Increase font size">A+</button>
+      </div>
+      <button class="btn btn--icon" id="theme-toggle" aria-label="Toggle theme">
+        <i data-lucide="moon" class="btn__icon icon-moon"></i>
+        <i data-lucide="sun" class="btn__icon icon-sun" style="display:none"></i>
+        <i data-lucide="book-open" class="btn__icon icon-book" style="display:none"></i>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ================================
+       FAVORITES PAGE CONTENT
+       ================================ -->
+  <main class="favorites-page" id="main">
+    <div class="favorites-content">
+
+      <!-- Page Header -->
+      <div class="favorites-header">
+        <div>
+          <h1 class="favorites-header__title">
+            <i data-lucide="heart" style="width: 22px; height: 22px; color: #f87171; vertical-align: middle; margin-right: 6px;"></i>
+            Favorites
+          </h1>
+          <span class="favorites-header__count" id="fav-count"></span>
+        </div>
+        <button class="favorites-header__clear" id="fav-clear-all" style="display:none">
+          <i data-lucide="trash-2" style="width: 14px; height: 14px; margin-right: 4px; vertical-align: middle;"></i>
+          Clear All
+        </button>
+      </div>
+
+      <!-- Dynamic Content Area -->
+      <section id="favorites-area" aria-label="Favorite Shayaris">
+        <!-- Populated by JS -->
+      </section>
+    </div>
+  </main>
+
+
+  <!-- ================================
+       SHARE CARD MODAL
+       ================================ -->
+  <div class="card-modal-overlay" id="card-modal">
+    <div class="card-modal">
+      <img class="card-modal__preview" id="card-modal-preview" src="" alt="Shayari Card Preview">
+      <div class="card-modal__actions">
+        <button class="btn btn--primary" id="card-download">
+          <i data-lucide="download" style="width: 18px; height: 18px; margin-right:6px"></i>
+          Download Card
+        </button>
+        <button class="btn btn--secondary" id="card-share">
+          <i data-lucide="share-2" style="width: 18px; height: 18px; margin-right:6px"></i>
+          Share
+        </button>
+        <button class="btn btn--ghost" id="card-close">
+          <i data-lucide="x" style="width: 16px; height: 16px; margin-right:4px"></i>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================
+       TOAST CONTAINER
+       ================================ -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-relevant="additions"></div>
+
+
+  <!-- ================================
+       BOTTOM NAVIGATION (Mobile)
+       ================================ -->
+  <nav class="bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="bottom-nav__item" aria-label="Home">
+      <i data-lucide="home" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Home</span>
+    </a>
+    <a href="browse.html" class="bottom-nav__item" aria-label="Browse">
+      <i data-lucide="compass" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Browse</span>
+    </a>
+    <a href="reels.html" class="bottom-nav__item" aria-label="Reels">
+      <i data-lucide="film" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Reels</span>
+    </a>
+    <a href="favorites.html" class="bottom-nav__item active" aria-label="Favorites">
+      <i data-lucide="heart" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Favorites</span>
+    </a>
+  </nav>
+
+
+  <!-- ================================
+       SCRIPTS
+       ================================ -->
+  <script type="module">
+    import * as ThemeManager from './js/theme-manager.js';
+    import * as FavoritesManager from './js/favorites-manager.js';
+    import * as ShareManager from './js/share-manager.js';
+    import { loadShayaris, getAllShayaris, renderShayariCards } from './js/shayari-loader.js';
+
+
+    /* ---- Utilities ---- */
+    function showToast(message, type) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast${type ? ` toast--${type}` : ''}`;
+      toast.textContent = message;
+      toast.setAttribute('role', 'status');
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('toast--exit');
+        toast.addEventListener('animationend', () => toast.remove(), { once: true });
+      }, 2500);
+    }
+
+
+    /* ---- State ---- */
+    let allShayaris = [];
+    let currentCardShayari = null;
+
+
+    /* ---- Init ---- */
+    document.addEventListener('DOMContentLoaded', async () => {
+      /* Theme */
+      ThemeManager.init(updateThemeIcon);
+      updateThemeIcon(ThemeManager.get());
+      initFontSize();
+
+      /* Load data */
+      await loadShayaris();
+      allShayaris = getAllShayaris();
+
+      /* Render favorites */
+      renderFavorites();
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      /* Theme toggle */
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const t = ThemeManager.cycle();
+        const labels = { dark: '🌙 Dark mode', light: '☀️ Light mode', sepia: '📖 Sepia mode' };
+        showToast(labels[t] || t, '');
+      });
+
+      /* Clear all favorites */
+      document.getElementById('fav-clear-all')?.addEventListener('click', () => {
+        if (confirm('Kya aap saare saved favorites remove karna chahte hain?')) {
+          FavoritesManager.clearAll();
+          renderFavorites();
+          showToast('Saari favorites clear ho gayi', '');
+        }
+      });
+
+      /* Card actions - event delegation */
+      document.getElementById('favorites-area')?.addEventListener('click', handleCardAction);
+
+      /* Share card modal */
+      document.getElementById('card-close')?.addEventListener('click', closeCardModal);
+      document.getElementById('card-modal')?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeCardModal();
+      });
+      document.getElementById('card-download')?.addEventListener('click', async () => {
+        if (!currentCardShayari) return;
+        const ok = await ShareManager.downloadCard(currentCardShayari);
+        if (ok) showToast('📥 Card download ho gayi!', 'success');
+      });
+      document.getElementById('card-share')?.addEventListener('click', async () => {
+        if (!currentCardShayari) return;
+        await ShareManager.shareWithCard(currentCardShayari);
+      });
+    });
+
+
+    /* ---- Render Favorites ---- */
+    function renderFavorites() {
+      const area = document.getElementById('favorites-area');
+      const countEl = document.getElementById('fav-count');
+      const clearBtn = document.getElementById('fav-clear-all');
+      if (!area) return;
+
+      const favIds = FavoritesManager.getAll();
+      const favShayaris = allShayaris.filter((s) => favIds.includes(s.id));
+
+      if (countEl) countEl.textContent = `${favShayaris.length} saved shayari${favShayaris.length !== 1 ? 's' : ''}`;
+      if (clearBtn) clearBtn.style.display = favShayaris.length > 0 ? 'inline-block' : 'none';
+
+      if (favShayaris.length === 0) {
+        area.innerHTML = `
+          <div class="favorites-empty">
+            <i data-lucide="heart-off" style="width: 56px; height: 56px; color: var(--clr-accent); opacity: 0.5;"></i>
+            <h2 class="favorites-empty__title">No favorites yet</h2>
+            <p class="favorites-empty__subtitle">
+              Tap the heart button on any shayari card to save your favorite poetry here!
+            </p>
+            <a href="browse.html" class="btn btn--primary">
+              <i data-lucide="compass" style="width: 16px; height: 16px; margin-right: 6px;"></i>
+              Browse Shayari
+            </a>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      /* Create grid and render cards */
+      area.innerHTML = '<div class="shayari-grid" id="fav-grid"></div>';
+      const grid = document.getElementById('fav-grid');
+      renderShayariCards(grid, favShayaris);
+      FavoritesManager.restoreUI();
+    }
+
+
+    /* ---- Card Action Handler ---- */
+    async function handleCardAction(e) {
+      /* Favorite (remove) */
+      const favBtn = e.target.closest('.action-favorite');
+      if (favBtn) {
+        const id = favBtn.dataset.id;
+        FavoritesManager.remove(id);
+        favBtn.classList.add('heart-pop');
+        showToast('Removed from favorites', '');
+        /* Re-render after animation */
+        setTimeout(() => renderFavorites(), 400);
+        return;
+      }
+
+      /* Copy */
+      const copyBtn = e.target.closest('.action-copy');
+      if (copyBtn) {
+        const text = decodeURIComponent(copyBtn.dataset.text || '');
+        const ok = await ShareManager.copyText(text);
+        showToast(ok ? '📋 Copied to clipboard!' : 'Failed to copy', ok ? 'success' : 'error');
+        copyBtn.classList.add('copy-success');
+        copyBtn.addEventListener('animationend', () => copyBtn.classList.remove('copy-success'), { once: true });
+        return;
+      }
+
+      /* Share (open card modal) */
+      const shareBtn = e.target.closest('.action-share');
+      if (shareBtn) {
+        const id = shareBtn.dataset.id;
+        const shayari = allShayaris.find((s) => s.id === id);
+        if (shayari) {
+          currentCardShayari = shayari;
+          openCardModal(shayari);
+        }
+        return;
+      }
+    }
+
+
+    /* ---- Share Card Modal ---- */
+    async function openCardModal(shayari) {
+      const modal = document.getElementById('card-modal');
+      const preview = document.getElementById('card-modal-preview');
+      if (!modal || !preview) return;
+      try {
+        const blob = await ShareManager.generateCard(shayari);
+        const url = URL.createObjectURL(blob);
+        preview.src = url;
+        preview.onload = () => URL.revokeObjectURL(url);
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } catch (err) {
+        showToast('Card generate nahi ho payi 😕', 'error');
+      }
+    }
+
+    function closeCardModal() {
+      const modal = document.getElementById('card-modal');
+      if (modal) modal.classList.remove('active');
+      document.body.style.overflow = '';
+      currentCardShayari = null;
+    }
+
+
+    /* ---- Theme Icon ---- */
+    function updateThemeIcon(theme) {
+      const moon = document.querySelector('.icon-moon');
+      const sun = document.querySelector('.icon-sun');
+      const book = document.querySelector('.icon-book');
+      if (moon) moon.style.display = theme === 'dark' ? 'block' : 'none';
+      if (sun) sun.style.display = theme === 'light' ? 'block' : 'none';
+      if (book) book.style.display = theme === 'sepia' ? 'block' : 'none';
+    }
+
+
+    /* ---- Font Size ---- */
+    function initFontSize() {
+      const sizes = ['small', 'normal', 'large'];
+      let current = localStorage.getItem('sv-font-size') || 'normal';
+      document.documentElement.setAttribute('data-font-size', current);
+      document.getElementById('font-decrease')?.addEventListener('click', () => {
+        const idx = sizes.indexOf(current);
+        if (idx > 0) { current = sizes[idx - 1]; apply(); }
+      });
+      document.getElementById('font-increase')?.addEventListener('click', () => {
+        const idx = sizes.indexOf(current);
+        if (idx < sizes.length - 1) { current = sizes[idx + 1]; apply(); }
+      });
+      function apply() {
+        document.documentElement.setAttribute('data-font-size', current);
+        localStorage.setItem('sv-font-size', current);
+        document.getElementById('font-decrease').disabled = current === 'small';
+        document.getElementById('font-increase').disabled = current === 'large';
+      }
+      apply();
+    }
+  </script>
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

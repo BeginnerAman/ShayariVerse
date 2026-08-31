@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark" data-font-size="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="ShayariVerse Reels - Instagram-style full-screen poetry with music sync. Swipe through beautiful shayari.">
+  <meta name="keywords" content="shayari reels, poetry reels, hindi shayari video, shayari with music">
+  <meta name="theme-color" content="#06060a">
+  <meta name="color-scheme" content="dark light">
+
+  <title>Reels - ShayariVerse ✨</title>
+
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.json">
+
+  <meta property="og:title" content="Shayari Reels - ShayariVerse ✨">
+  <meta property="og:description" content="Full-screen poetry reels with mood music - swipe through beautiful Hindi/Urdu shayari.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://yourusername.github.io/ShayariVerse/icons/icon.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shayari Reels - ShayariVerse ✨">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- ================================
+       REELS-SPECIFIC STYLES
+       Full-screen immersive experience
+       ================================ -->
+  <style>
+    body {
+      overflow: hidden;
+      background: #06060a;
+    }
+
+    /* ---- Reels Container (Scroll Snap Parent) ---- */
+    .reels-container {
+      height: 100dvh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+      scrollbar-width: none;
+    }
+    .reels-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ---- Single Reel (Scroll Snap Child) ---- */
+    .reel {
+      position: relative;
+      height: 100dvh;
+      width: 100%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ---- Glow Overlay (center radial gradient) ---- */
+    .reel__glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(192, 132, 252, 0.09) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---- Reel Content (Centered Poetry Stanza) ---- */
+    .reel__content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: min(840px, 90vw);
+      max-height: calc(100dvh - 140px);
+      padding: 60px 85px 80px 30px;
+      box-sizing: border-box;
+      text-align: center;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.45s var(--ease-smooth),
+                  transform 0.45s var(--ease-smooth);
+    }
+
+    .reel--active .reel__content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- Shayari Poetry Text ---- */
+    .reel__text {
+      font-family: 'Kalam', 'Playfair Display', cursive, sans-serif;
+      font-size: clamp(1.2rem, 1rem + 1.2vw, 1.75rem);
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+      color: #f8f3ea;
+      text-shadow: 0 0 30px rgba(192, 132, 252, 0.35),
+                   0 3px 15px rgba(0, 0, 0, 0.85);
+      white-space: pre-line;
+      word-break: normal;
+      overflow-wrap: break-word;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .reel__poet {
+      display: none;
+    }
+
+    /* ---- Category Badge (Top-Left) ---- */
+    .reel__category {
+      position: absolute;
+      top: calc(env(safe-area-inset-top, 0px) + 68px);
+      left: var(--space-md);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      color: var(--clr-text-secondary);
+      text-transform: capitalize;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.4s var(--ease-smooth) 0.2s;
+    }
+
+    .reel--active .reel__category {
+      opacity: 1;
+    }
+
+    /* ---- Action Buttons (Right Side, Vertical Stack) ---- */
+    .reel__actions {
+      position: absolute;
+      right: var(--space-md);
+      bottom: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+      z-index: 2;
+      opacity: 0;
+      transform: translateX(16px);
+      transition: opacity 0.45s var(--ease-smooth) 0.15s,
+                  transform 0.45s var(--ease-smooth) 0.15s;
+    }
+
+    .reel--active .reel__actions {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reel__action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3xs);
+      color: var(--clr-text-primary);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      padding: var(--space-xs);
+      width: 46px;
+      height: 46px;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform var(--duration-fast) var(--ease-smooth),
+                  background var(--duration-fast) var(--ease-smooth),
+                  border-color var(--duration-fast);
+    }
+
+    .reel__action-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .reel__action-btn:active {
+      transform: scale(0.85);
+    }
+
+    .reel__action-btn .lucide {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+    }
+
+    .reel__action-btn.active {
+      color: #f87171;
+      border-color: rgba(248, 113, 113, 0.5);
+    }
+
+    .reel__action-btn.active .lucide {
+      fill: #f87171;
+      filter: drop-shadow(0 0 10px rgba(248, 113, 113, 0.6));
+    }
+
+    .reel__action-pop {
+      animation: reelActionPop 0.4s var(--ease-bounce);
+    }
+
+    @keyframes reelActionPop {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    /* ---- Music Tag (Bottom Center) ---- */
+    .reel__music-tag {
+      position: absolute;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+      left: var(--space-md);
+      right: 80px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      z-index: 2;
+      opacity: 0;
+      background: rgba(0, 0, 0, 0.4);
+      padding: var(--space-2xs) var(--space-sm);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      width: fit-content;
+      max-width: calc(100% - 100px);
+      cursor: pointer;
+      transition: opacity 0.4s var(--ease-smooth) 0.3s;
+    }
+
+    .reel--active .reel__music-tag {
+      opacity: 0.9;
+    }
+
+    .reel__music-tag:hover {
+      opacity: 1;
+    }
+
+    .reel__music-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--clr-accent);
+      flex-shrink: 0;
+      animation: musicSpin 3s linear infinite;
+    }
+
+    @keyframes musicSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .reel--active .reel__music-icon {
+      animation-play-state: running;
+    }
+
+    .reel:not(.reel--active) .reel__music-icon {
+      animation-play-state: paused;
+    }
+
+    .reel__music-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--clr-text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ---- Reels Header (Minimal Overlay) ---- */
+    .reels-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: env(safe-area-inset-top, 12px) var(--space-md) var(--space-sm);
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(6, 6, 10, 0.8) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .reels-header > * {
+      pointer-events: auto;
+    }
+
+    .reels-header__back {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      color: var(--clr-text-primary);
+      text-decoration: none;
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background var(--duration-fast);
+    }
+
+    .reels-header__back:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .reels-header__back .lucide {
+      width: 18px;
+      height: 18px;
+    }
+
+    .reels-header__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-base);
+      font-weight: var(--weight-semibold);
+      color: var(--clr-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reels-header__controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .reels-sound-toggle {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--clr-text-primary);
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background var(--duration-fast), transform var(--duration-fast);
+    }
+
+    .reels-sound-toggle:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .reels-sound-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .reels-sound-toggle .lucide {
+      width: 16px;
+      height: 16px;
+    }
+
+    .reels-header__counter {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--clr-text-secondary);
+      background: rgba(0, 0, 0, 0.45);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* ---- Audio Prompt Overlay ---- */
+    .reels-audio-prompt {
+      position: fixed;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      background: rgba(192, 132, 252, 0.25);
+      border: 1px solid rgba(192, 132, 252, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      animation: promptFloat 2s ease-in-out infinite;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .reels-audio-prompt.hidden {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+      pointer-events: none;
+    }
+
+    @keyframes promptFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-4px); }
+    }
+
+    /* ---- Toast (Reels context) ---- */
+    .reel-toast-container {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      pointer-events: none;
+    }
+
+    .reel-toast {
+      padding: var(--space-sm) var(--space-lg);
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--clr-text-primary);
+      white-space: nowrap;
+      animation: reelToastIn 0.3s var(--ease-smooth);
+    }
+
+    .reel-toast--exit {
+      animation: reelToastOut 0.3s var(--ease-smooth) forwards;
+    }
+
+    @keyframes reelToastIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.9); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes reelToastOut {
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to   { opacity: 0; transform: translateY(-10px) scale(0.9); }
+    }
+
+    /* ---- Empty Reel ---- */
+    .reel--empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-lg);
+      background: var(--clr-bg-primary);
+    }
+
+    .reel__empty-text {
+      font-family: var(--font-shayari);
+      font-size: var(--text-xl);
+      color: var(--clr-text-secondary);
+    }
+
+    /* ---- Scroll Hint (first load) ---- */
+    .scroll-hint {
+      position: fixed;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 70px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      z-index: 5;
+      animation: scrollHintPulse 2s ease-in-out infinite;
+      pointer-events: none;
+      opacity: 0.6;
+      transition: opacity 0.5s;
+    }
+
+    .scroll-hint.hidden {
+      opacity: 0;
+    }
+
+    .scroll-hint__arrow {
+      width: 20px;
+      height: 20px;
+      color: var(--clr-text-secondary);
+      animation: scrollHintBounce 1.5s ease-in-out infinite;
+    }
+
+    .scroll-hint__text {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--clr-text-faded);
+    }
+
+    @keyframes scrollHintBounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(6px); }
+    }
+
+    @keyframes scrollHintPulse {
+      0%, 100% { opacity: 0.6; }
+      50%      { opacity: 0.9; }
+    }
+
+    /* ---- Reduced Motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      .reel__content {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+      .reel__category,
+      .reel__actions,
+      .reel__music-tag {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+      .reel__music-icon { animation: none; }
+      .scroll-hint__arrow { animation: none; }
+      .scroll-hint { animation: none; }
+    }
+
+    /* ---- Mobile Responsive ---- */
+    @media (max-width: 640px) {
+      .reel__content {
+        padding: 50px 65px 70px 18px;
+        max-width: 100%;
+      }
+      .reel__text {
+        font-size: clamp(1.05rem, 4.4vw, 1.35rem);
+        line-height: 1.65;
+      }
+      .reel__actions {
+        right: 10px;
+        bottom: 90px;
+        gap: var(--space-sm);
+      }
+      .reel__action-btn {
+        width: 40px;
+        height: 40px;
+      }
+      .reel__action-btn .lucide {
+        width: 18px;
+        height: 18px;
+      }
+      .reel__music-tag {
+        bottom: 16px;
+        left: 12px;
+        right: 60px;
+      }
+      .reels-sound-toggle span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================================
+       REELS HEADER (Minimal Overlay)
+       ================================ -->
+  <header class="reels-header">
+    <a href="index.html" class="reels-header__back" aria-label="Go back to home">
+      <i data-lucide="arrow-left"></i>
+      Home
+    </a>
+
+    <span class="reels-header__title">
+      <i data-lucide="sparkles" style="width: 18px; height: 18px; color: var(--clr-accent);"></i>
+      Reels
+    </span>
+
+    <div class="reels-header__controls">
+      <button class="reels-sound-toggle" id="reels-sound-toggle" aria-label="Toggle Sound">
+        <span id="sound-icon-on"><i data-lucide="volume-2"></i></span>
+        <span id="sound-icon-off" style="display:none;"><i data-lucide="volume-x"></i></span>
+        <span id="sound-toggle-text">Music</span>
+      </button>
+
+      <span class="reels-header__counter">
+        <span id="reel-counter-current">1</span> / <span id="reel-counter-total">-</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- ================================
+       TAP TO ENABLE AUDIO PROMPT
+       ================================ -->
+  <div class="reels-audio-prompt" id="reels-audio-prompt">
+    <i data-lucide="music-2" style="width: 16px; height: 16px;"></i>
+    <span>Tap for sound</span>
+  </div>
+
+  <!-- ================================
+       REELS CONTAINER (Scroll Snap)
+       ================================ -->
+  <main class="reels-container" id="reels-container" role="feed" aria-label="Shayari Reels">
+    <!-- Loading skeleton -->
+    <div class="reel" style="background: var(--clr-bg-primary); display:flex; align-items:center; justify-content:center;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:var(--space-md);">
+        <div class="skeleton" style="width:200px; height:24px; border-radius:var(--radius-sm);"></div>
+        <div class="skeleton" style="width:280px; height:24px; border-radius:var(--radius-sm);"></div>
+        <div class="skeleton" style="width:160px; height:24px; border-radius:var(--radius-sm);"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================================
+       SCROLL HINT
+       ================================ -->
+  <div class="scroll-hint" id="scroll-hint">
+    <i data-lucide="chevron-down" class="scroll-hint__arrow"></i>
+    <span class="scroll-hint__text">Swipe up for more</span>
+  </div>
+
+  <!-- ================================
+       TOAST CONTAINER (Reels)
+       ================================ -->
+  <div id="reel-toast-container" class="reel-toast-container" aria-live="polite"></div>
+
+  <!-- ================================
+       SCRIPTS
+       ================================ -->
+  <script type="module" src="js/reels-engine.js"></script>
+
+  <!-- Hide scroll hint after first scroll -->
+  <script>
+    (function() {
+      const hint = document.getElementById('scroll-hint');
+      const container = document.getElementById('reels-container');
+      if (!hint || !container) return;
+      let hidden = false;
+      container.addEventListener('scroll', function() {
+        if (!hidden && container.scrollTop > 50) {
+          hint.classList.add('hidden');
+          hidden = true;
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

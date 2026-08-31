@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark" data-font-size="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="ShayariVerse - Browse & search Hindi/Urdu shayari by category, mood, or keyword. Instant search across 74+ curated shayaris.">
+  <meta name="keywords" content="search shayari, browse shayari, hindi poetry search, urdu shayari, shayari categories">
+  <meta name="theme-color" content="#06060a">
+  <meta name="color-scheme" content="dark light">
+
+  <title>Browse & Explore - ShayariVerse ✨</title>
+
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.json">
+
+  <meta property="og:title" content="Browse Shayari - ShayariVerse ✨">
+  <meta property="og:description" content="Search & explore 74+ Hindi/Urdu shayaris by category - Love, Dard, Motivational, Dosti & more.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://yourusername.github.io/ShayariVerse/icons/icon.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Browse Shayari - ShayariVerse ✨">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ---- Browse Page Layout ---- */
+    .browse-page {
+      min-height: 100vh;
+      padding-top: calc(var(--header-height, 64px) + var(--space-md));
+      padding-bottom: calc(var(--bottom-nav-h, 60px) + var(--space-2xl));
+    }
+
+    .browse-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* ---- Browse Hero Banner ---- */
+    .browse-hero {
+      text-align: center;
+      padding: var(--space-lg) 0 var(--space-md);
+      position: relative;
+    }
+
+    .browse-hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 2vw + 1rem, 2.3rem);
+      font-weight: var(--weight-bold);
+      color: var(--clr-text-primary);
+      margin-bottom: var(--space-xs);
+      letter-spacing: -0.02em;
+    }
+
+    .browse-hero__subtitle {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--clr-text-secondary);
+      max-width: 540px;
+      margin: 0 auto var(--space-md);
+      line-height: 1.6;
+    }
+
+    /* ---- Search Bar Section ---- */
+    .browse-search {
+      position: sticky;
+      top: var(--header-height, 64px);
+      z-index: var(--z-sticky, 20);
+      padding: var(--space-sm) 0;
+      background: var(--clr-bg-primary);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .browse-search__wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .browse-search__icon {
+      position: absolute;
+      left: var(--space-md);
+      width: 20px;
+      height: 20px;
+      color: var(--clr-accent);
+      pointer-events: none;
+    }
+
+    .browse-search__input {
+      width: 100%;
+      padding: 14px var(--space-xl) 14px calc(var(--space-md) + 32px);
+      font-family: var(--font-ui);
+      font-size: var(--text-base);
+      color: var(--clr-text-primary);
+      background: var(--clr-bg-elevated);
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--radius-full);
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: border-color var(--duration-fast) var(--ease-smooth),
+                  box-shadow var(--duration-fast) var(--ease-smooth),
+                  background var(--duration-fast);
+    }
+
+    .browse-search__input:focus {
+      border-color: var(--clr-accent);
+      box-shadow: 0 0 0 3px var(--clr-accent-glow), var(--shadow-md);
+      background: var(--clr-bg-secondary);
+    }
+
+    .browse-search__input::placeholder {
+      color: var(--clr-text-faded);
+    }
+
+    /* Hide browser native search cancel icon to avoid duplicate cross */
+    .browse-search__input::-webkit-search-cancel-button,
+    .browse-search__input::-webkit-search-decoration,
+    .browse-search__input::-webkit-search-results-button,
+    .browse-search__input::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+      appearance: none;
+      display: none;
+    }
+
+    .browse-search__clear {
+      position: absolute;
+      right: 14px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: var(--clr-text-secondary);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      z-index: 2;
+      transition: color var(--duration-fast), background var(--duration-fast), transform var(--duration-fast);
+    }
+
+    .browse-search__clear:hover {
+      color: var(--clr-text-primary);
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .browse-search__clear:active {
+      transform: scale(0.9);
+    }
+
+    .browse-search__clear.visible {
+      display: flex;
+    }
+
+    /* ---- Trending Quick Tags ---- */
+    .trending-tags {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: var(--space-xs) 0 var(--space-sm);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+    }
+
+    .trending-tags__label {
+      color: var(--clr-text-faded);
+      font-weight: var(--weight-medium);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: 4px;
+    }
+
+    .trending-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text-secondary);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--duration-fast);
+    }
+
+    .trending-tag:hover {
+      background: var(--clr-accent-subtle);
+      border-color: var(--clr-accent);
+      color: var(--clr-accent);
+      transform: translateY(-1px);
+    }
+
+    /* ---- Controls Toolbar (Category Pills + Sort) ---- */
+    .browse-controls {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin: var(--space-sm) 0 var(--space-md);
+    }
+
+    .browse-filters-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .category-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      flex: 1;
+    }
+
+    .category-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      white-space: nowrap;
+      background: var(--clr-bg-elevated);
+      color: var(--clr-text-secondary);
+      border: 1px solid var(--clr-border);
+      cursor: pointer;
+      user-select: none;
+      transition: all var(--duration-fast) var(--ease-smooth);
+    }
+
+    .category-pill:hover {
+      border-color: var(--clr-accent);
+      color: var(--clr-text-primary);
+      transform: translateY(-1px);
+    }
+
+    .category-pill.active {
+      background: var(--clr-accent);
+      color: var(--clr-text-inverse, #fff);
+      border-color: var(--clr-accent);
+      box-shadow: 0 0 15px var(--clr-accent-glow);
+    }
+
+    .category-pill__count {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+    }
+
+    .category-pill.active .category-pill__count {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ---- Sort Select ---- */
+    .sort-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--clr-text-secondary);
+    }
+
+    .sort-select {
+      background: var(--clr-bg-elevated);
+      color: var(--clr-text-primary);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: 6px 10px;
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      outline: none;
+      cursor: pointer;
+      transition: border-color var(--duration-fast);
+    }
+
+    .sort-select:focus {
+      border-color: var(--clr-accent);
+    }
+
+    /* ---- Result Stats & Active Filters Row ---- */
+    .browse-stats-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-xs) var(--space-2xs);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--clr-text-faded);
+      border-bottom: 1px solid var(--clr-border);
+      margin-bottom: var(--space-md);
+    }
+
+    .browse-stats-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      flex-wrap: wrap;
+    }
+
+    .browse-filter-tag {
+      background: var(--clr-accent-subtle);
+      color: var(--clr-accent);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-weight: var(--weight-medium);
+    }
+
+    .browse-reset-btn {
+      background: none;
+      border: none;
+      color: #f87171;
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      transition: background var(--duration-fast);
+    }
+
+    .browse-reset-btn:hover {
+      background: rgba(248, 113, 113, 0.12);
+    }
+
+    /* ---- Empty Results State ---- */
+    .browse-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3xl) var(--space-md);
+      text-align: center;
+      gap: var(--space-md);
+      background: var(--clr-bg-elevated);
+      border: 1px dashed var(--clr-border);
+      border-radius: var(--radius-xl);
+      margin: var(--space-lg) 0;
+    }
+
+    .browse-empty__icon {
+      font-size: 3rem;
+      opacity: 0.6;
+    }
+
+    .browse-empty__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--clr-text-primary);
+    }
+
+    .browse-empty__desc {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--clr-text-secondary);
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    /* ---- Download Card Modal ---- */
+    .card-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: var(--z-modal, 100);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      animation: fadeIn var(--duration-normal) var(--ease-smooth);
+    }
+
+    .card-modal-overlay.active {
+      display: flex;
+    }
+
+    .card-modal {
+      background: var(--clr-bg-elevated);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-lg);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-2xl);
+      animation: modalIn var(--duration-normal) var(--ease-bounce);
+    }
+
+    .card-modal__preview {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-modal__actions {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.92) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ---- Font Controls ---- */
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3xs);
+    }
+
+    .font-controls__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      background: none;
+      cursor: pointer;
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--clr-text-secondary);
+      transition: color var(--duration-fast), background var(--duration-fast);
+    }
+
+    .font-controls__btn:hover:not(:disabled) {
+      color: var(--clr-accent);
+      background: var(--clr-accent-subtle);
+    }
+
+    .font-controls__btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================================
+       HEADER
+       ================================ -->
+  <header class="header" role="banner">
+    <a href="index.html" class="header__logo" aria-label="ShayariVerse Home">
+      <i data-lucide="sparkles" class="header__logo-icon" style="width: 22px; height: 22px; color: var(--clr-accent);"></i>
+      <span>ShayariVerse</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Main Navigation">
+      <a href="index.html" class="header__nav-link">Home</a>
+      <a href="browse.html" class="header__nav-link active">Browse</a>
+      <a href="reels.html" class="header__nav-link">Reels</a>
+      <a href="favorites.html" class="header__nav-link">Favorites</a>
+    </nav>
+
+    <div class="header__actions">
+      <div class="font-controls">
+        <button class="font-controls__btn" id="font-decrease" aria-label="Decrease font size">A-</button>
+        <button class="font-controls__btn" id="font-increase" aria-label="Increase font size">A+</button>
+      </div>
+      <button class="btn btn--icon" id="theme-toggle" aria-label="Toggle theme">
+        <i data-lucide="moon" class="btn__icon icon-moon"></i>
+        <i data-lucide="sun" class="btn__icon icon-sun" style="display:none"></i>
+        <i data-lucide="book-open" class="btn__icon icon-book" style="display:none"></i>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ================================
+       BROWSE PAGE CONTENT
+       ================================ -->
+  <main class="browse-page" id="main">
+    <div class="browse-content">
+
+      <!-- Hero Header -->
+      <section class="browse-hero">
+        <h1 class="browse-hero__title">Explore & Search Shayari</h1>
+        <p class="browse-hero__subtitle">Search heartfelt couplets by keywords, explore by mood or category, and download beautiful poetry cards.</p>
+      </section>
+
+      <!-- Sticky Search Bar -->
+      <section class="browse-search" aria-label="Search Bar">
+        <div class="browse-search__wrapper">
+          <i data-lucide="search" class="browse-search__icon"></i>
+          <input type="search"
+                 class="browse-search__input"
+                 id="browse-search-input"
+                 placeholder="Search by words (e.g. dil, dost, khwaab, manzil)..."
+                 autocomplete="off"
+                 aria-label="Search Shayari">
+          <button class="browse-search__clear" id="browse-search-clear" aria-label="Clear search">
+            <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+
+        <!-- Trending Search Tags -->
+        <div class="trending-tags" id="trending-tags">
+          <span class="trending-tags__label">
+            <i data-lucide="trending-up" style="width: 14px; height: 14px; color: var(--clr-accent);"></i>
+            Trending:
+          </span>
+          <button class="trending-tag" data-tag="dil">Dil</button>
+          <button class="trending-tag" data-tag="dost">Dosti</button>
+          <button class="trending-tag" data-tag="ishq">Ishq</button>
+          <button class="trending-tag" data-tag="zindagi">Zindagi</button>
+          <button class="trending-tag" data-tag="khwaab">Khwaab</button>
+          <button class="trending-tag" data-tag="tanha">Tanha</button>
+          <button class="trending-tag" data-tag="waqt">Waqt</button>
+          <button class="trending-tag" data-tag="aankhein">Aankhein</button>
+        </div>
+      </section>
+
+      <!-- Controls: Category Pills & Sort -->
+      <section class="browse-controls" aria-label="Filter & Sort Controls">
+        <div class="browse-filters-row">
+          <!-- Category Pills -->
+          <div class="category-pills" id="category-pills" role="tablist" aria-label="Category Filters">
+            <button class="category-pill active" data-category="all" role="tab" aria-selected="true">
+              <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> All <span class="category-pill__count" id="count-all">0</span>
+            </button>
+            <button class="category-pill" data-category="love" role="tab" aria-selected="false">
+              <i data-lucide="heart" style="width: 14px; height: 14px;"></i> Love <span class="category-pill__count" id="count-love">0</span>
+            </button>
+            <button class="category-pill" data-category="sad" role="tab" aria-selected="false">
+              <i data-lucide="heart-crack" style="width: 14px; height: 14px;"></i> Dard <span class="category-pill__count" id="count-sad">0</span>
+            </button>
+            <button class="category-pill" data-category="romantic" role="tab" aria-selected="false">
+              <i data-lucide="flower-2" style="width: 14px; height: 14px;"></i> Romantic <span class="category-pill__count" id="count-romantic">0</span>
+            </button>
+            <button class="category-pill" data-category="zindagi" role="tab" aria-selected="false">
+              <i data-lucide="compass" style="width: 14px; height: 14px;"></i> Zindagi <span class="category-pill__count" id="count-zindagi">0</span>
+            </button>
+            <button class="category-pill" data-category="motivational" role="tab" aria-selected="false">
+              <i data-lucide="zap" style="width: 14px; height: 14px;"></i> Motivational <span class="category-pill__count" id="count-motivational">0</span>
+            </button>
+            <button class="category-pill" data-category="dosti" role="tab" aria-selected="false">
+              <i data-lucide="users" style="width: 14px; height: 14px;"></i> Dosti <span class="category-pill__count" id="count-dosti">0</span>
+            </button>
+            <button class="category-pill" data-category="funny" role="tab" aria-selected="false">
+              <i data-lucide="smile" style="width: 14px; height: 14px;"></i> Funny <span class="category-pill__count" id="count-funny">0</span>
+            </button>
+          </div>
+
+          <!-- Sort Selector -->
+          <div class="sort-wrapper">
+            <i data-lucide="arrow-up-down" style="width: 14px; height: 14px;"></i>
+            <label for="browse-sort">Sort:</label>
+            <select id="browse-sort" class="sort-select">
+              <option value="default">Curated</option>
+              <option value="az">A to Z</option>
+              <option value="short">Shortest</option>
+              <option value="long">Longest</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Result Stats & Active Filters Row -->
+        <div class="browse-stats-bar" id="browse-stats-bar">
+          <div class="browse-stats-info">
+            <span id="browse-result-count">Loading collection...</span>
+            <span id="browse-active-pill" class="browse-filter-tag" style="display:none;"></span>
+            <span id="browse-active-query" class="browse-filter-tag" style="display:none;"></span>
+          </div>
+          <button class="browse-reset-btn" id="browse-reset-btn" style="display:none;">
+            <i data-lucide="rotate-ccw" style="width: 13px; height: 13px;"></i>
+            Reset
+          </button>
+        </div>
+      </section>
+
+      <!-- Shayari Grid -->
+      <section class="shayari-grid" id="shayari-grid" aria-label="Shayari Results">
+        <article class="shayari-card">
+          <div class="skeleton" style="height:20px;width:80%;border-radius:var(--radius-sm);margin-bottom:var(--space-sm)"></div>
+          <div class="skeleton" style="height:20px;width:100%;border-radius:var(--radius-sm);margin-bottom:var(--space-sm)"></div>
+          <div class="skeleton" style="height:20px;width:60%;border-radius:var(--radius-sm)"></div>
+        </article>
+        <article class="shayari-card">
+          <div class="skeleton" style="height:20px;width:90%;border-radius:var(--radius-sm);margin-bottom:var(--space-sm)"></div>
+          <div class="skeleton" style="height:20px;width:70%;border-radius:var(--radius-sm);margin-bottom:var(--space-sm)"></div>
+          <div class="skeleton" style="height:20px;width:85%;border-radius:var(--radius-sm)"></div>
+        </article>
+        <article class="shayari-card">
+          <div class="skeleton" style="height:20px;width:75%;border-radius:var(--radius-sm);margin-bottom:var(--space-sm)"></div>
+          <div class="skeleton" style="height:20px;width:95%;border-radius:var(--radius-sm);margin-bottom:var(--space-sm)"></div>
+          <div class="skeleton" style="height:20px;width:50%;border-radius:var(--radius-sm)"></div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+
+  <!-- ================================
+       SHARE CARD MODAL
+       ================================ -->
+  <div class="card-modal-overlay" id="card-modal">
+    <div class="card-modal">
+      <img class="card-modal__preview" id="card-modal-preview" src="" alt="Shayari Card Preview">
+      <div class="card-modal__actions">
+        <button class="btn btn--primary" id="card-download">
+          <i data-lucide="download" style="width: 18px; height: 18px; margin-right:6px"></i>
+          Download Card
+        </button>
+        <button class="btn btn--secondary" id="card-share">
+          <i data-lucide="share-2" style="width: 18px; height: 18px; margin-right:6px"></i>
+          Share
+        </button>
+        <button class="btn btn--ghost" id="card-close">
+          <i data-lucide="x" style="width: 16px; height: 16px; margin-right:4px"></i>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================
+       TOAST CONTAINER
+       ================================ -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-relevant="additions"></div>
+
+
+  <!-- ================================
+       BOTTOM NAVIGATION (Mobile)
+       ================================ -->
+  <nav class="bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="bottom-nav__item" aria-label="Home">
+      <i data-lucide="home" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Home</span>
+    </a>
+    <a href="browse.html" class="bottom-nav__item active" aria-label="Browse">
+      <i data-lucide="compass" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Browse</span>
+    </a>
+    <a href="reels.html" class="bottom-nav__item" aria-label="Reels">
+      <i data-lucide="film" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Reels</span>
+    </a>
+    <a href="favorites.html" class="bottom-nav__item" aria-label="Favorites">
+      <i data-lucide="heart" class="bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Favorites</span>
+    </a>
+  </nav>
+
+
+  <!-- ================================
+       SCRIPTS
+       ================================ -->
+  <script type="module">
+    import * as ThemeManager from './js/theme-manager.js';
+    import * as FavoritesManager from './js/favorites-manager.js';
+    import * as ShareManager from './js/share-manager.js';
+    import {
+      loadShayaris,
+      filterByCategory,
+      searchShayaris,
+      getAllShayaris,
+      renderShayariCards,
+    } from './js/shayari-loader.js';
+
+
+    /* ---- Utilities ---- */
+    function debounce(fn, ms) {
+      let timer;
+      return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
+    }
+
+    function showToast(message, type) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast${type ? ` toast--${type}` : ''}`;
+      toast.textContent = message;
+      toast.setAttribute('role', 'status');
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('toast--exit');
+        toast.addEventListener('animationend', () => toast.remove(), { once: true });
+      }, 2500);
+    }
+
+
+    /* ---- State ---- */
+    let allShayaris = [];
+    let activeCategory = 'all';
+    let currentQuery = '';
+    let currentSort = 'default';
+    let currentCardShayari = null;
+
+
+    /* ---- Init ---- */
+    document.addEventListener('DOMContentLoaded', async () => {
+      /* Theme */
+      ThemeManager.init(updateThemeIcon);
+      updateThemeIcon(ThemeManager.get());
+
+      /* Font size */
+      initFontSize();
+
+      /* Load data */
+      await loadShayaris();
+      allShayaris = getAllShayaris();
+
+      /* Update category counts */
+      updateCategoryCounts();
+
+      /* Parse URL query params if any (e.g. ?q=ishq or ?category=love) */
+      const urlParams = new URLSearchParams(window.location.search);
+      const qParam = urlParams.get('q');
+      const catParam = urlParams.get('category');
+
+      if (catParam) {
+        activeCategory = catParam;
+        document.querySelectorAll('#category-pills .category-pill').forEach(p => {
+          p.classList.toggle('active', p.dataset.category === catParam);
+        });
+      }
+
+      const searchInput = document.getElementById('browse-search-input');
+      const clearBtn = document.getElementById('browse-search-clear');
+
+      if (qParam && searchInput) {
+        currentQuery = qParam.trim();
+        searchInput.value = currentQuery;
+        clearBtn?.classList.add('visible');
+      }
+
+      /* Initial render */
+      applyFilters();
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      /* Search input */
+      const doSearch = debounce((query) => {
+        currentQuery = query.trim();
+        applyFilters();
+      }, 200);
+
+      searchInput?.addEventListener('input', (e) => {
+        doSearch(e.target.value);
+        clearBtn?.classList.toggle('visible', e.target.value.length > 0);
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        clearBtn.classList.remove('visible');
+        currentQuery = '';
+        applyFilters();
+        searchInput?.focus();
+      });
+
+      /* Trending tags click */
+      document.getElementById('trending-tags')?.addEventListener('click', (e) => {
+        const tagBtn = e.target.closest('.trending-tag');
+        if (!tagBtn) return;
+        const tag = tagBtn.dataset.tag;
+        if (searchInput) searchInput.value = tag;
+        clearBtn?.classList.add('visible');
+        currentQuery = tag;
+        applyFilters();
+      });
+
+      /* Category pills click */
+      document.getElementById('category-pills')?.addEventListener('click', (e) => {
+        const pill = e.target.closest('.category-pill');
+        if (!pill) return;
+        document.querySelectorAll('#category-pills .category-pill').forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCategory = pill.dataset.category || 'all';
+        applyFilters();
+      });
+
+      /* Sort change */
+      document.getElementById('browse-sort')?.addEventListener('change', (e) => {
+        currentSort = e.target.value;
+        applyFilters();
+      });
+
+      /* Reset button */
+      document.getElementById('browse-reset-btn')?.addEventListener('click', () => {
+        activeCategory = 'all';
+        currentQuery = '';
+        currentSort = 'default';
+        if (searchInput) searchInput.value = '';
+        clearBtn?.classList.remove('visible');
+        const sortSelect = document.getElementById('browse-sort');
+        if (sortSelect) sortSelect.value = 'default';
+        document.querySelectorAll('#category-pills .category-pill').forEach(p => {
+          p.classList.toggle('active', p.dataset.category === 'all');
+        });
+        applyFilters();
+      });
+
+      /* Theme toggle */
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const newTheme = ThemeManager.cycle();
+        const labels = { dark: '🌙 Dark mode', light: '☀️ Light mode', sepia: '📖 Sepia mode' };
+        showToast(labels[newTheme] || newTheme, '');
+      });
+
+      /* Card actions - event delegation on grid */
+      document.getElementById('shayari-grid')?.addEventListener('click', handleCardAction);
+
+      /* Share card modal */
+      document.getElementById('card-close')?.addEventListener('click', closeCardModal);
+      document.getElementById('card-modal')?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeCardModal();
+      });
+      document.getElementById('card-download')?.addEventListener('click', async () => {
+        if (!currentCardShayari) return;
+        const ok = await ShareManager.downloadCard(currentCardShayari);
+        if (ok) showToast('📥 Card download ho gayi!', 'success');
+      });
+      document.getElementById('card-share')?.addEventListener('click', async () => {
+        if (!currentCardShayari) return;
+        await ShareManager.shareWithCard(currentCardShayari);
+      });
+    });
+
+
+    /* ---- Update category counts on pills ---- */
+    function updateCategoryCounts() {
+      const allCountEl = document.getElementById('count-all');
+      if (allCountEl) allCountEl.textContent = allShayaris.length;
+
+      const cats = ['love', 'sad', 'romantic', 'zindagi', 'motivational', 'dosti', 'funny'];
+      cats.forEach((cat) => {
+        const count = allShayaris.filter(s => s.category === cat).length;
+        const el = document.getElementById(`count-${cat}`);
+        if (el) el.textContent = count;
+      });
+    }
+
+
+    /* ---- Apply combined search + category filter + sort ---- */
+    function applyFilters() {
+      let results;
+
+      if (currentQuery) {
+        results = searchShayaris(currentQuery);
+        if (activeCategory !== 'all') {
+          results = results.filter((s) => s.category === activeCategory);
+        }
+      } else {
+        results = activeCategory === 'all' ? getAllShayaris() : filterByCategory(activeCategory);
+      }
+
+      /* Apply sorting */
+      if (currentSort === 'az') {
+        results = [...results].sort((a, b) => a.textHinglish.localeCompare(b.textHinglish));
+      } else if (currentSort === 'short') {
+        results = [...results].sort((a, b) => a.textHinglish.length - b.textHinglish.length);
+      } else if (currentSort === 'long') {
+        results = [...results].sort((a, b) => b.textHinglish.length - a.textHinglish.length);
+      }
+
+      renderResults(results);
+    }
+
+
+    /* ---- Render results into grid ---- */
+    function renderResults(shayaris) {
+      const grid = document.getElementById('shayari-grid');
+      const countEl = document.getElementById('browse-result-count');
+      const activePill = document.getElementById('browse-active-pill');
+      const activeQuery = document.getElementById('browse-active-query');
+      const resetBtn = document.getElementById('browse-reset-btn');
+
+      if (!grid) return;
+
+      if (shayaris.length === 0) {
+        grid.innerHTML = `
+          <div class="browse-empty">
+            <span class="browse-empty__icon">🔍</span>
+            <h3 class="browse-empty__title">Koi shayari nahi mili</h3>
+            <p class="browse-empty__desc">
+              "${currentQuery || activeCategory}" se match karti hui shayari nahi mili. Dusra word search karein ya filters reset karein.
+            </p>
+            <button class="btn btn--primary" id="empty-reset-btn">
+              <i data-lucide="rotate-ccw" style="width: 16px; height: 16px; margin-right:6px"></i>
+              Reset All Filters
+            </button>
+          </div>
+        `;
+        document.getElementById('empty-reset-btn')?.addEventListener('click', () => {
+          document.getElementById('browse-reset-btn')?.click();
+        });
+      } else {
+        renderShayariCards(grid, shayaris);
+        FavoritesManager.restoreUI();
+      }
+
+      /* Update stats bar */
+      if (countEl) {
+        countEl.textContent = `${shayaris.length} shayari${shayaris.length !== 1 ? 's' : ''} found`;
+      }
+
+      const hasActiveFilters = activeCategory !== 'all' || currentQuery.length > 0 || currentSort !== 'default';
+
+      if (activePill) {
+        if (activeCategory !== 'all') {
+          activePill.textContent = `Category: ${activeCategory}`;
+          activePill.style.display = 'inline-block';
+        } else {
+          activePill.style.display = 'none';
+        }
+      }
+
+      if (activeQuery) {
+        if (currentQuery) {
+          activeQuery.textContent = `Query: "${currentQuery}"`;
+          activeQuery.style.display = 'inline-block';
+        } else {
+          activeQuery.style.display = 'none';
+        }
+      }
+
+      if (resetBtn) {
+        resetBtn.style.display = hasActiveFilters ? 'inline-flex' : 'none';
+      }
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+
+    /* ---- Card Action Handler (Event Delegation) ---- */
+    async function handleCardAction(e) {
+      /* Favorite */
+      const favBtn = e.target.closest('.action-favorite');
+      if (favBtn) {
+        const id = favBtn.dataset.id;
+        const isNowFav = FavoritesManager.toggle(id);
+        favBtn.classList.toggle('active', isNowFav);
+        const svg = favBtn.querySelector('svg');
+        if (svg) svg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
+        favBtn.classList.add('heart-pop');
+        favBtn.addEventListener('animationend', () => favBtn.classList.remove('heart-pop'), { once: true });
+        showToast(isNowFav ? '❤️ Added to favorites' : 'Removed from favorites', isNowFav ? 'success' : '');
+        return;
+      }
+
+      /* Copy */
+      const copyBtn = e.target.closest('.action-copy');
+      if (copyBtn) {
+        const text = decodeURIComponent(copyBtn.dataset.text || '');
+        const ok = await ShareManager.copyText(text);
+        showToast(ok ? '📋 Copied to clipboard!' : 'Failed to copy', ok ? 'success' : 'error');
+        copyBtn.classList.add('copy-success');
+        copyBtn.addEventListener('animationend', () => copyBtn.classList.remove('copy-success'), { once: true });
+        return;
+      }
+
+      /* Share */
+      const shareBtn = e.target.closest('.action-share');
+      if (shareBtn) {
+        const id = shareBtn.dataset.id;
+        const shayari = allShayaris.find((s) => s.id === id);
+        if (shayari) {
+          currentCardShayari = shayari;
+          openCardModal(shayari);
+        }
+        return;
+      }
+    }
+
+
+    /* ---- Share Card Modal ---- */
+    async function openCardModal(shayari) {
+      const modal = document.getElementById('card-modal');
+      const preview = document.getElementById('card-modal-preview');
+      if (!modal || !preview) return;
+
+      try {
+        const blob = await ShareManager.generateCard(shayari);
+        const url = URL.createObjectURL(blob);
+        preview.src = url;
+        preview.onload = () => URL.revokeObjectURL(url);
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } catch (err) {
+        showToast('Card generate nahi ho payi 😕', 'error');
+        console.error('[Browse] Card generation error:', err);
+      }
+    }
+
+    function closeCardModal() {
+      const modal = document.getElementById('card-modal');
+      if (modal) modal.classList.remove('active');
+      document.body.style.overflow = '';
+      currentCardShayari = null;
+    }
+
+
+    /* ---- Theme Icon Update ---- */
+    function updateThemeIcon(theme) {
+      const moon = document.querySelector('.icon-moon');
+      const sun = document.querySelector('.icon-sun');
+      const book = document.querySelector('.icon-book');
+      if (moon) moon.style.display = theme === 'dark' ? 'block' : 'none';
+      if (sun) sun.style.display = theme === 'light' ? 'block' : 'none';
+      if (book) book.style.display = theme === 'sepia' ? 'block' : 'none';
+    }
+
+
+    /* ---- Font Size ---- */
+    function initFontSize() {
+      const sizes = ['small', 'normal', 'large'];
+      let current = localStorage.getItem('sv-font-size') || 'normal';
+      document.documentElement.setAttribute('data-font-size', current);
+
+      document.getElementById('font-decrease')?.addEventListener('click', () => {
+        const idx = sizes.indexOf(current);
+        if (idx > 0) { current = sizes[idx - 1]; apply(); }
+      });
+      document.getElementById('font-increase')?.addEventListener('click', () => {
+        const idx = sizes.indexOf(current);
+        if (idx < sizes.length - 1) { current = sizes[idx + 1]; apply(); }
+      });
+
+      function apply() {
+        document.documentElement.setAttribute('data-font-size', current);
+        localStorage.setItem('sv-font-size', current);
+        const dec = document.getElementById('font-decrease');
+        const inc = document.getElementById('font-increase');
+        if (dec) dec.disabled = current === 'small';
+        if (inc) inc.disabled = current === 'large';
+      }
+      apply();
+    }
+  </script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

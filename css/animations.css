@@ -1,0 +1,565 @@
+/* ============================================================
+   animations.css - Hardware-Accelerated Animation Library
+   ShayariVerse - "Read, Listen, Feel"
+   
+   ⚡ PERFORMANCE RULE:
+   ONLY animate: transform, opacity, filter, clip-path
+   NEVER animate: width, height, top, left, margin, padding, border
+   
+   This file contains:
+   1. Scroll Reveal Animations
+   2. Shayari Card Interactions
+   3. Page Transitions
+   4. Floating Poetry Particles
+   5. Text Shimmer (Featured Shayari)
+   6. Micro-Interactions (Heart, Copy, Theme Toggle)
+   7. Skeleton Loading Pulse
+   8. Entry Stagger Delays
+   9. Reduced Motion Override
+   ============================================================ */
+
+
+/* ============================
+   1. SCROLL REVEAL
+   Cards & elements entering viewport
+   ============================ */
+
+/* Base reveal state - hidden, shifted down */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+/* Revealed - visible, in position */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reveal from left */
+.reveal--left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.reveal--left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Reveal from right */
+.reveal--right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.reveal--right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Reveal with scale */
+.reveal--scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.reveal--scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* ============================
+   2. SHAYARI CARD INTERACTIONS
+   ============================ */
+
+/* Card hover lift - desktop only */
+.shayari-card {
+  transition: transform var(--duration-normal) var(--ease-smooth),
+              box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.shayari-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Card press / active state - subtle shrink */
+.shayari-card:active {
+  transform: translateY(-1px) scale(0.99);
+  transition-duration: var(--duration-instant);
+}
+
+/* Card focus for keyboard users */
+.shayari-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 3px var(--clr-accent),
+              var(--shadow-card-hover);
+}
+
+
+/* ============================
+   3. PAGE TRANSITIONS
+   ============================ */
+
+/* Page entering */
+.page-enter {
+  animation: pageIn var(--duration-slow) var(--ease-smooth) forwards;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page exiting */
+.page-exit {
+  animation: pageOut var(--duration-normal) var(--ease-smooth) forwards;
+}
+
+@keyframes pageOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Hero section entrance - dramatic slow reveal */
+.hero-enter {
+  animation: heroIn var(--duration-glacial) var(--ease-smooth) forwards;
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* ============================
+   4. FLOATING POETRY PARTICLES
+   Ambient background decoration
+   ============================ */
+
+.particle {
+  position: fixed;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  opacity: 0.06;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Slow float - large particles */
+.particle--slow {
+  animation: floatSlow 25s infinite ease-in-out;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(80px, -120px) scale(1.08);
+  }
+  50% {
+    transform: translate(-40px, -250px) scale(0.92);
+  }
+  75% {
+    transform: translate(60px, -120px) scale(1.04);
+  }
+}
+
+/* Medium float - medium particles */
+.particle--medium {
+  animation: floatMedium 18s infinite ease-in-out;
+}
+
+@keyframes floatMedium {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(60px, -180px) scale(1.1) rotate(120deg);
+  }
+  66% {
+    transform: translate(-30px, -100px) scale(0.9) rotate(240deg);
+  }
+}
+
+/* Fast drift - small sparkle particles */
+.particle--fast {
+  animation: floatFast 12s infinite ease-in-out;
+}
+
+@keyframes floatFast {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.04;
+  }
+  50% {
+    transform: translate(-50px, -200px) scale(1.2);
+    opacity: 0.1;
+  }
+}
+
+/* Warm accent particles (orange) */
+.particle--warm {
+  background: var(--clr-accent-warm);
+  opacity: 0.04;
+}
+
+
+/* ============================
+   5. TEXT SHIMMER
+   Featured shayari glow effect
+   ============================ */
+
+.shimmer-text {
+  background: linear-gradient(
+    120deg,
+    var(--clr-text-primary) 0%,
+    var(--clr-accent) 50%,
+    var(--clr-text-primary) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Subtle glow pulse for featured elements */
+.glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px var(--clr-accent-glow));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px var(--clr-accent-glow));
+  }
+}
+
+
+/* ============================
+   6. MICRO-INTERACTIONS
+   ============================ */
+
+/* ❤️ Favorite heart - pop + scale bounce */
+.heart-pop {
+  animation: heartPop var(--duration-normal) var(--ease-bounce) forwards;
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.3);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Heart particle burst (pseudo-element based) */
+.heart-burst {
+  animation: heartBurst var(--duration-slow) var(--ease-smooth) forwards;
+}
+
+@keyframes heartBurst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* 📋 Copy success - checkmark scale bounce */
+.copy-success {
+  animation: copyBounce var(--duration-normal) var(--ease-bounce) forwards;
+}
+
+@keyframes copyBounce {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.15) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* 🌙 Theme toggle - sun/moon morph rotation */
+.theme-morph {
+  animation: themeSpin var(--duration-normal) var(--ease-smooth) forwards;
+}
+
+@keyframes themeSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.6);
+    opacity: 0.3;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 🔊 Volume / slider interaction - subtle scale */
+.slider-active {
+  animation: sliderPulse var(--duration-fast) var(--ease-smooth);
+}
+
+@keyframes sliderPulse {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.3);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+/* Generic icon button press */
+.icon-press {
+  transition: transform var(--duration-fast) var(--ease-smooth),
+              opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.icon-press:active {
+  transform: scale(0.88);
+  opacity: 0.7;
+}
+
+/* Toast notification slide-in */
+.toast-enter {
+  animation: toastIn var(--duration-normal) var(--ease-smooth) forwards;
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateY(100%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Toast notification slide-out */
+.toast-exit {
+  animation: toastOut var(--duration-normal) var(--ease-smooth) forwards;
+}
+
+@keyframes toastOut {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%) scale(0.9);
+    opacity: 0;
+  }
+}
+
+
+/* ============================
+   7. SKELETON LOADING PULSE
+   Gentle shimmer for content placeholders
+   ============================ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--clr-bg-secondary) 25%,
+    var(--clr-bg-elevated) 50%,
+    var(--clr-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeletonPulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Skeleton shapes */
+.skeleton--line {
+  height: 1em;
+  margin-bottom: var(--space-sm);
+}
+
+.skeleton--line:last-child {
+  width: 60%;
+}
+
+.skeleton--circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.skeleton--card {
+  height: 200px;
+  border-radius: var(--radius-lg);
+}
+
+
+/* ============================
+   8. STAGGER DELAYS
+   Sequential reveal for grid items
+   ============================ */
+
+.stagger-1  { transition-delay: 50ms; }
+.stagger-2  { transition-delay: 100ms; }
+.stagger-3  { transition-delay: 150ms; }
+.stagger-4  { transition-delay: 200ms; }
+.stagger-5  { transition-delay: 250ms; }
+.stagger-6  { transition-delay: 300ms; }
+.stagger-7  { transition-delay: 350ms; }
+.stagger-8  { transition-delay: 400ms; }
+.stagger-9  { transition-delay: 450ms; }
+.stagger-10 { transition-delay: 500ms; }
+.stagger-11 { transition-delay: 550ms; }
+.stagger-12 { transition-delay: 600ms; }
+
+
+/* ============================
+   9. MODAL ANIMATIONS
+   ============================ */
+
+/* Overlay fade */
+.modal-overlay {
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+}
+
+/* Modal content - scale + fade */
+.modal-content {
+  opacity: 0;
+  transform: scale(0.92) translateY(20px);
+  transition: opacity var(--duration-normal) var(--ease-smooth),
+              transform var(--duration-normal) var(--ease-smooth);
+}
+
+.modal-overlay.active .modal-content {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+
+/* ============================
+   10. REDUCED MOTION
+   Respects user accessibility preference.
+   Disables ALL motion-based animations.
+   ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--left,
+  .reveal--right,
+  .reveal--scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .particle,
+  .particle--slow,
+  .particle--medium,
+  .particle--fast {
+    animation: none;
+    opacity: 0.04;
+  }
+
+  .shimmer-text {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: var(--clr-text-primary);
+  }
+
+  .glow-pulse {
+    animation: none;
+  }
+
+  .skeleton {
+    animation: none;
+  }
+
+  .shayari-card {
+    transition: none;
+  }
+
+  .shayari-card:hover {
+    transform: none;
+  }
+}
