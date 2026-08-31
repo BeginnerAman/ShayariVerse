@@ -1,5 +1,12 @@
-# Dependencies (build tools only, not served)
-tools/node_modules/
+# Dependencies and local tools
+tools/
+content/images/
+content/README.md
+specs/
+AGENTS.md
+
+# Duplicate or raw audio files with long names
+content/audio/songs/*Snapchat*
 
 # OS files
 .DS_Store
@@ -13,5 +20,6 @@ desktop.ini
 *.swo
 *~
 
-# System generated
+# System and logs
 .gemini/
+*.log
