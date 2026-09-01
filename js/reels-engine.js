@@ -195,7 +195,7 @@ function playSongNative(songId) {
   const currentAudio = activeChannel === 'A' ? audioChannelA : audioChannelB;
   const nextAudio = activeChannel === 'A' ? audioChannelB : audioChannelA;
 
-  /* If same song already playing and not paused, keep playing seamlessly */
+  /* If same song already playing and actively playing (not paused), keep playing smoothly */
   if (currentSongId === song.id && !currentAudio.paused && currentAudio.currentTime > 0) {
     updateVisualizerState(true);
     return;
@@ -210,8 +210,10 @@ function playSongNative(songId) {
       currentAudio.currentTime = 0;
     });
   } else {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
+    try {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    } catch (e) {}
   }
 
   /* Switch active channel */
@@ -232,7 +234,9 @@ function playSongNative(songId) {
         fadeAudio(nextAudio, 0, TARGET_VOLUME, CROSSFADE_DURATION_MS);
       })
       .catch((err) => {
-        console.log('[ReelsEngine] Autoplay waiting for user gesture:', err.message);
+        console.log('[ReelsEngine] Play interrupted or waiting for gesture:', err.message);
+        /* Reset currentSongId so next scroll settlement immediately retries */
+        currentSongId = null;
         updateVisualizerState(false);
       });
   }
@@ -389,6 +393,8 @@ function renderReels() {
    5. INTERSECTION OBSERVER
    ============================ */
 
+let reelAudioDebounceTimer = null;
+
 function setupObserver() {
   if (reelObserver) reelObserver.disconnect();
 
@@ -396,29 +402,65 @@ function setupObserver() {
 
   reelObserver = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        const index = parseInt(entry.target.dataset.index, 10);
+      let bestEntry = null;
+      let maxRatio = 0;
 
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-          activateReel(index, entry.target);
-        } else if (index === activeReelIndex && entry.intersectionRatio < 0.45) {
-          deactivateReel(index, entry.target);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio;
+          bestEntry = entry;
         }
       });
+
+      if (bestEntry && maxRatio >= 0.4) {
+        const index = parseInt(bestEntry.target.dataset.index, 10);
+        activateReel(index, bestEntry.target);
+      }
     },
     {
       root: reelsContainer,
-      threshold: [0, 0.45, 0.5, 1],
+      threshold: [0.1, 0.3, 0.4, 0.6, 0.8, 1.0],
     }
   );
 
   reels.forEach((reel) => reelObserver.observe(reel));
+
+  /* Fallback scroll settlement listener: guarantees that the snapped reel is ALWAYS active and playing */
+  let scrollSettleTimer = null;
+  reelsContainer.addEventListener('scroll', () => {
+    if (scrollSettleTimer) clearTimeout(scrollSettleTimer);
+    scrollSettleTimer = setTimeout(() => {
+      const reelHeight = reelsContainer.clientHeight || window.innerHeight;
+      const snapIndex = Math.round(reelsContainer.scrollTop / reelHeight);
+      const targetReel = reelsContainer.querySelector(`.reel[data-index="${snapIndex}"]`);
+      if (targetReel) {
+        if (snapIndex !== activeReelIndex) {
+          activateReel(snapIndex, targetReel);
+        } else {
+          /* Ensure audio is playing if browser was idle or aborted */
+          const currentAudio = activeChannel === 'A' ? audioChannelA : audioChannelB;
+          const songId = targetReel.dataset.songId || 'track-1';
+          if (!isMuted && isAudioStarted && (!currentAudio || currentAudio.paused)) {
+            playSongNative(songId);
+          }
+        }
+      }
+    }, 90);
+  }, { passive: true });
 }
 
 function activateReel(index, reelEl) {
-  if (index === activeReelIndex) return;
+  if (index === activeReelIndex && reelEl.classList.contains('reel--active')) {
+    /* If already active, verify audio didn't get paused or aborted */
+    const currentAudio = activeChannel === 'A' ? audioChannelA : audioChannelB;
+    const songId = reelEl.dataset.songId || 'track-1';
+    if (!isMuted && isAudioStarted && (!currentAudio || currentAudio.paused)) {
+      playSongNative(songId);
+    }
+    return;
+  }
 
-  if (activeReelIndex >= 0) {
+  if (activeReelIndex >= 0 && activeReelIndex !== index) {
     const prevReel = reelsContainer.querySelector(`.reel[data-index="${activeReelIndex}"]`);
     if (prevReel) prevReel.classList.remove('reel--active');
   }
@@ -429,16 +471,16 @@ function activateReel(index, reelEl) {
   /* Update counter */
   if (counterEl) counterEl.textContent = index + 1;
 
-  /* Play song */
-  const songId = reelEl.dataset.songId || 'track-1';
-  playSongNative(songId);
+  /* Play song with slight debounce so rapid swipes don't conflict */
+  if (reelAudioDebounceTimer) clearTimeout(reelAudioDebounceTimer);
+  reelAudioDebounceTimer = setTimeout(() => {
+    const songId = reelEl.dataset.songId || 'track-1';
+    playSongNative(songId);
+  }, 60);
 }
 
 function deactivateReel(index, reelEl) {
   reelEl.classList.remove('reel--active');
-  if (index === activeReelIndex) {
-    activeReelIndex = -1;
-  }
 }
 
 

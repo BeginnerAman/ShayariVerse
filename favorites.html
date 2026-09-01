@@ -306,18 +306,31 @@
 
 
     /* ---- Utilities ---- */
-    function showToast(message, type) {
+    let favToastTimer = null;
+    let favToastExitTimer = null;
+
+    function showToast(message, type = '') {
       const container = document.getElementById('toast-container');
       if (!container) return;
+
+      if (favToastTimer) clearTimeout(favToastTimer);
+      if (favToastExitTimer) clearTimeout(favToastExitTimer);
+
+      container.innerHTML = '';
+
       const toast = document.createElement('div');
-      toast.className = `toast${type ? ` toast--${type}` : ''}`;
+      toast.className = `toast ${type ? `toast--${type}` : ''} toast-enter`;
       toast.textContent = message;
       toast.setAttribute('role', 'status');
       container.appendChild(toast);
-      setTimeout(() => {
-        toast.classList.add('toast--exit');
-        toast.addEventListener('animationend', () => toast.remove(), { once: true });
-      }, 2500);
+
+      favToastTimer = setTimeout(() => {
+        toast.classList.remove('toast-enter');
+        toast.classList.add('toast-exit');
+        favToastExitTimer = setTimeout(() => {
+          if (toast.parentNode) toast.remove();
+        }, 260);
+      }, 1800);
     }
 
 
@@ -347,7 +360,7 @@
       /* Theme toggle */
       document.getElementById('theme-toggle')?.addEventListener('click', () => {
         const t = ThemeManager.cycle();
-        const labels = { dark: '🌙 Dark mode', light: '☀️ Light mode', sepia: '📖 Sepia mode' };
+        const labels = { dark: 'Dark Mode', light: 'Light Mode', sepia: 'Sepia Mode' };
         showToast(labels[t] || t, '');
       });
 
@@ -356,7 +369,7 @@
         if (confirm('Kya aap saare saved favorites remove karna chahte hain?')) {
           FavoritesManager.clearAll();
           renderFavorites();
-          showToast('Saari favorites clear ho gayi', '');
+          showToast('All favorites cleared', '');
         }
       });
 
@@ -371,7 +384,7 @@
       document.getElementById('card-download')?.addEventListener('click', async () => {
         if (!currentCardShayari) return;
         const ok = await ShareManager.downloadCard(currentCardShayari);
-        if (ok) showToast('📥 Card download ho gayi!', 'success');
+        if (ok) showToast('Card downloaded successfully', 'success');
       });
       document.getElementById('card-share')?.addEventListener('click', async () => {
         if (!currentCardShayari) return;
@@ -427,7 +440,7 @@
         const id = favBtn.dataset.id;
         FavoritesManager.remove(id);
         favBtn.classList.add('heart-pop');
-        showToast('Removed from favorites', '');
+        showToast('Removed from Favorites', '');
         /* Re-render after animation */
         setTimeout(() => renderFavorites(), 400);
         return;
@@ -438,7 +451,7 @@
       if (copyBtn) {
         const text = decodeURIComponent(copyBtn.dataset.text || '');
         const ok = await ShareManager.copyText(text);
-        showToast(ok ? '📋 Copied to clipboard!' : 'Failed to copy', ok ? 'success' : 'error');
+        showToast(ok ? 'Shayari copied to clipboard' : 'Could not copy', ok ? 'success' : 'error');
         copyBtn.classList.add('copy-success');
         copyBtn.addEventListener('animationend', () => copyBtn.classList.remove('copy-success'), { once: true });
         return;
@@ -471,7 +484,7 @@
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
       } catch (err) {
-        showToast('Card generate nahi ho payi 😕', 'error');
+        showToast('Could not generate card', 'error');
       }
     }
 
