@@ -8,18 +8,26 @@
   <meta name="theme-color" content="#06060a">
   <meta name="color-scheme" content="dark light">
 
-  <title>Reels - ShayariVerse ✨</title>
+  <title>Reels - ShayariVerse</title>
 
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <!-- Favicon & PWA Icons -->
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
 
-  <meta property="og:title" content="Shayari Reels - ShayariVerse ✨">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shayari Reels - ShayariVerse">
   <meta property="og:description" content="Full-screen poetry reels with mood music - swipe through beautiful Hindi/Urdu shayari.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://yourusername.github.io/ShayariVerse/icons/icon.svg">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Shayari Reels - ShayariVerse ✨">
+  <meta property="og:url" content="https://beginneraman.github.io/ShayariVerse/reels.html">
+  <meta property="og:image" content="https://beginneraman.github.io/ShayariVerse/icons/og-image.jpg">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shayari Reels - ShayariVerse">
+  <meta name="twitter:description" content="Full-screen poetry reels with mood music - swipe through beautiful Hindi/Urdu shayari.">
+  <meta name="twitter:image" content="https://beginneraman.github.io/ShayariVerse/icons/og-image.jpg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -602,7 +610,7 @@
     </a>
 
     <span class="reels-header__title">
-      <i data-lucide="sparkles" style="width: 18px; height: 18px; color: var(--clr-accent);"></i>
+      <img src="icons/favicon.png" alt="ShayariVerse Logo" style="width: 20px; height: 20px; border-radius: 5px; object-fit: cover;">
       Reels
     </span>
 
@@ -679,7 +687,9 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then((reg) => console.log('[PWA] Service Worker registered:', reg.scope))
+          .catch((err) => console.warn('[PWA] Service Worker registration failed:', err));
       });
     }
   </script>

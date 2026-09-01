@@ -8,18 +8,26 @@
   <meta name="theme-color" content="#06060a">
   <meta name="color-scheme" content="dark light">
 
-  <title>Browse & Explore - ShayariVerse ✨</title>
+  <title>Browse & Explore - ShayariVerse</title>
 
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <!-- Favicon & PWA Icons -->
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
 
-  <meta property="og:title" content="Browse Shayari - ShayariVerse ✨">
-  <meta property="og:description" content="Search & explore 74+ Hindi/Urdu shayaris by category - Love, Dard, Motivational, Dosti & more.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Browse Shayari - ShayariVerse">
+  <meta property="og:description" content="Search and explore 74+ Hindi/Urdu shayaris by category - Love, Dard, Romantic, Zindagi & more.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://yourusername.github.io/ShayariVerse/icons/icon.svg">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Browse Shayari - ShayariVerse ✨">
+  <meta property="og:url" content="https://beginneraman.github.io/ShayariVerse/browse.html">
+  <meta property="og:image" content="https://beginneraman.github.io/ShayariVerse/icons/og-image.jpg">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Browse Shayari - ShayariVerse">
+  <meta name="twitter:description" content="Search and explore 74+ Hindi/Urdu shayaris by category - Love, Dard, Romantic, Zindagi & more.">
+  <meta name="twitter:image" content="https://beginneraman.github.io/ShayariVerse/icons/og-image.jpg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -485,7 +493,7 @@
        ================================ -->
   <header class="header" role="banner">
     <a href="index.html" class="header__logo" aria-label="ShayariVerse Home">
-      <i data-lucide="sparkles" class="header__logo-icon" style="width: 22px; height: 22px; color: var(--clr-accent);"></i>
+      <img src="icons/favicon.png" alt="ShayariVerse Logo" class="header__logo-img" style="width: 28px; height: 28px; border-radius: 7px; object-fit: cover; box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);">
       <span>ShayariVerse</span>
     </a>
 
@@ -1081,7 +1089,9 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then((reg) => console.log('[PWA] Service Worker registered:', reg.scope))
+          .catch((err) => console.warn('[PWA] Service Worker registration failed:', err));
       });
     }
   </script>

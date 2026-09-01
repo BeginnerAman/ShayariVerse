@@ -1,14 +1,15 @@
 {
   "name": "ShayariVerse",
   "short_name": "ShayariVerse",
-  "description": "Read, Listen, Feel - Premium Hindi/Urdu Poetry Experience",
-  "start_url": "/index.html",
-  "scope": "/",
+  "description": "Read, Listen, Feel - Premium Hindi and Urdu Poetry Experience",
+  "id": "shayariverse-pwa",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#06060a",
   "background_color": "#06060a",
-  "categories": ["entertainment", "lifestyle"],
+  "categories": ["entertainment", "lifestyle", "books"],
   "lang": "hi",
   "dir": "ltr",
   "icons": [
@@ -16,38 +17,49 @@
       "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
     }
   ],
-  "screenshots": [],
   "shortcuts": [
     {
       "name": "Browse Shayari",
       "short_name": "Browse",
-      "url": "/browse.html",
+      "url": "./browse.html",
       "description": "Search and explore shayari by category"
     },
     {
       "name": "Reels",
       "short_name": "Reels",
-      "url": "/reels.html",
+      "url": "./reels.html",
       "description": "Full-screen poetry reels"
     },
     {
       "name": "Favorites",
       "short_name": "Favorites",
-      "url": "/favorites.html",
+      "url": "./favorites.html",
       "description": "Your saved shayaris"
     }
   ]
