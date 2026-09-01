@@ -3,8 +3,8 @@
    ShayariVerse PWA
    ============================================================ */
 
-const CACHE_NAME = 'shayariverse-v2';
-const DATA_CACHE = 'shayariverse-data-v2';
+const CACHE_NAME = 'shayariverse-v3';
+const DATA_CACHE = 'shayariverse-data-v3';
 
 /* Core shell assets (using relative paths for GitHub Pages compatibility) */
 const CORE_ASSETS = [

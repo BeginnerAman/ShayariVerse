@@ -23,6 +23,86 @@
       "mood": "romantic",
       "duration": 15,
       "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-4",
+      "title": "Noor-e-Khwaab",
+      "file": "content/audio/background/track-4.mp3",
+      "mood": "romantic",
+      "duration": 20,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-5",
+      "title": "Zindagi Ka Safar",
+      "file": "content/audio/background/track-5.mp3",
+      "mood": "motivational",
+      "duration": 15,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-6",
+      "title": "Khamoshi Ki Dastaan",
+      "file": "content/audio/background/track-6.mp3",
+      "mood": "sad",
+      "duration": 25,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-7",
+      "title": "Yaadon Ka Karwaan",
+      "file": "content/audio/background/track-7.mp3",
+      "mood": "melancholic",
+      "duration": 25,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-8",
+      "title": "Sufi Sukoon",
+      "file": "content/audio/background/track-8.mp3",
+      "mood": "calm",
+      "duration": 18,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-9",
+      "title": "Dil Ki Aawaz",
+      "file": "content/audio/background/track-9.mp3",
+      "mood": "love",
+      "duration": 15,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-10",
+      "title": "Kismat Ki Judai",
+      "file": "content/audio/background/track-10.mp3",
+      "mood": "sad",
+      "duration": 12,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-11",
+      "title": "Ruhani Ehsaas",
+      "file": "content/audio/background/track-11.mp3",
+      "mood": "calm",
+      "duration": 21,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-12",
+      "title": "Jazbaat",
+      "file": "content/audio/background/track-12.mp3",
+      "mood": "romantic",
+      "duration": 25,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-13",
+      "title": "Dosti Ka Tarana",
+      "file": "content/audio/background/track-13.mp3",
+      "mood": "dosti",
+      "duration": 9,
+      "artist": "ShayariVerse"
     }
   ],
   "reelSongs": [
@@ -48,6 +128,86 @@
       "file": "content/audio/songs/track-3.mp3",
       "duration": 15,
       "mood": "calm",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-4",
+      "title": "Noor-e-Khwaab",
+      "file": "content/audio/songs/track-4.mp3",
+      "duration": 20,
+      "mood": "romantic",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-5",
+      "title": "Zindagi Ka Safar",
+      "file": "content/audio/songs/track-5.mp3",
+      "duration": 15,
+      "mood": "motivational",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-6",
+      "title": "Khamoshi Ki Dastaan",
+      "file": "content/audio/songs/track-6.mp3",
+      "duration": 25,
+      "mood": "sad",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-7",
+      "title": "Yaadon Ka Karwaan",
+      "file": "content/audio/songs/track-7.mp3",
+      "duration": 25,
+      "mood": "melancholic",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-8",
+      "title": "Sufi Sukoon",
+      "file": "content/audio/songs/track-8.mp3",
+      "duration": 18,
+      "mood": "calm",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-9",
+      "title": "Dil Ki Aawaz",
+      "file": "content/audio/songs/track-9.mp3",
+      "duration": 15,
+      "mood": "love",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-10",
+      "title": "Kismat Ki Judai",
+      "file": "content/audio/songs/track-10.mp3",
+      "duration": 12,
+      "mood": "sad",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-11",
+      "title": "Ruhani Ehsaas",
+      "file": "content/audio/songs/track-11.mp3",
+      "duration": 21,
+      "mood": "calm",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-12",
+      "title": "Jazbaat",
+      "file": "content/audio/songs/track-12.mp3",
+      "duration": 25,
+      "mood": "romantic",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-13",
+      "title": "Dosti Ka Tarana",
+      "file": "content/audio/songs/track-13.mp3",
+      "duration": 9,
+      "mood": "dosti",
       "artist": "ShayariVerse"
     }
   ]

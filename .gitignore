@@ -7,6 +7,7 @@ AGENTS.md
 
 # Duplicate or raw audio files with long names
 content/audio/songs/*Snapchat*
+content/new_mp3/
 
 # OS files
 .DS_Store
