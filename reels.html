@@ -91,7 +91,7 @@
       z-index: 0;
     }
 
-    /* ---- Reel Content (Centered Poetry Stanza) ---- */
+    /* ---- Reel Content (Balanced Center Poetry Stanza) ---- */
     .reel__content {
       position: relative;
       z-index: 1;
@@ -100,9 +100,9 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      max-width: min(840px, 90vw);
-      max-height: calc(100dvh - 140px);
-      padding: 60px 85px 80px 30px;
+      max-width: min(840px, 92vw);
+      max-height: calc(100dvh - 160px);
+      padding: 70px 72px 90px 20px;
       box-sizing: border-box;
       text-align: center;
       margin: auto;
@@ -163,25 +163,25 @@
       opacity: 1;
     }
 
-    /* ---- Action Buttons (Right Side, Vertical Stack) ---- */
+    /* ---- Action Buttons (Right Side, Centered Vertical Stack) ---- */
     .reel__actions {
       position: absolute;
-      right: var(--space-md);
-      bottom: 120px;
+      right: var(--space-md, 16px);
+      top: 50%;
+      transform: translateY(-50%) translateX(16px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-md);
+      gap: 16px;
       z-index: 2;
       opacity: 0;
-      transform: translateX(16px);
       transition: opacity 0.45s var(--ease-smooth) 0.15s,
                   transform 0.45s var(--ease-smooth) 0.15s;
     }
 
     .reel--active .reel__actions {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(-50%) translateX(0);
     }
 
     .reel__action-btn {
@@ -273,66 +273,55 @@
       opacity: 1;
     }
 
-    .reel__music-icon {
-      width: 16px;
-      height: 16px;
-      color: var(--clr-accent);
-      flex-shrink: 0;
-      animation: musicSpin 3s linear infinite;
-    }
-
-    @keyframes musicSpin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    .reel--active .reel__music-icon {
-      animation-play-state: running;
-    }
-
-    .reel:not(.reel--active) .reel__music-icon {
-      animation-play-state: paused;
-    }
-
-    /* ---- Waveform Visualizer (Mini Sound Waves) ---- */
+    /* ---- Studio Waveform Visualizer (5-Bar Cyber Gradient Glow) ---- */
     .waveform-visualizer {
       display: inline-flex;
       align-items: flex-end;
-      gap: 2.5px;
-      height: 13px;
-      margin-right: 4px;
+      gap: 3px;
+      height: 14px;
+      margin-right: 6px;
       flex-shrink: 0;
     }
 
     .waveform-bar {
       width: 2.5px;
-      background: var(--clr-accent, #c084fc);
-      border-radius: 2px;
+      background: linear-gradient(180deg, #38bdf8 0%, #c084fc 100%);
+      border-radius: 3px;
       height: 100%;
       transform-origin: bottom;
       transform: scaleY(0.25);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, filter 0.3s ease;
+      box-shadow: 0 0 6px rgba(192, 132, 252, 0.4);
     }
 
     .is-playing .waveform-bar {
-      animation: waveDance 1.2s ease-in-out infinite alternate;
+      animation: waveDance 1.1s ease-in-out infinite alternate;
     }
 
     .is-playing .waveform-bar:nth-child(1) {
       animation-delay: 0.05s;
       animation-duration: 0.75s;
+      background: linear-gradient(180deg, #38bdf8 0%, #a855f7 100%);
     }
     .is-playing .waveform-bar:nth-child(2) {
-      animation-delay: 0.25s;
+      animation-delay: 0.28s;
       animation-duration: 1.05s;
+      background: linear-gradient(180deg, #f472b6 0%, #c084fc 100%);
     }
     .is-playing .waveform-bar:nth-child(3) {
       animation-delay: 0.12s;
       animation-duration: 0.85s;
+      background: linear-gradient(180deg, #38bdf8 0%, #c084fc 100%);
     }
     .is-playing .waveform-bar:nth-child(4) {
-      animation-delay: 0.35s;
+      animation-delay: 0.38s;
       animation-duration: 1.2s;
+      background: linear-gradient(180deg, #a855f7 0%, #ec4899 100%);
+    }
+    .is-playing .waveform-bar:nth-child(5) {
+      animation-delay: 0.18s;
+      animation-duration: 0.95s;
+      background: linear-gradient(180deg, #38bdf8 0%, #818cf8 100%);
     }
 
     @keyframes waveDance {
@@ -664,6 +653,7 @@
     <div class="reels-header__controls">
       <button class="reels-sound-toggle" id="reels-sound-toggle" aria-label="Toggle Sound">
         <span class="waveform-visualizer" aria-hidden="true">
+          <span class="waveform-bar"></span>
           <span class="waveform-bar"></span>
           <span class="waveform-bar"></span>
           <span class="waveform-bar"></span>

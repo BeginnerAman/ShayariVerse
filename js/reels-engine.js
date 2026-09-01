@@ -362,15 +362,15 @@ function renderReels() {
           </button>
         </div>
 
-        <!-- Music tag (bottom) with Waveform Visualizer & Lucide Icon -->
+        <!-- Music tag (bottom) with Studio Waveform Visualizer -->
         <div class="reel__music-tag action-music-tag" title="Click to toggle sound">
           <span class="waveform-visualizer" aria-hidden="true">
             <span class="waveform-bar"></span>
             <span class="waveform-bar"></span>
             <span class="waveform-bar"></span>
             <span class="waveform-bar"></span>
+            <span class="waveform-bar"></span>
           </span>
-          <i data-lucide="music-2" class="reel__music-icon"></i>
           <span class="reel__music-name">${song ? song.title : 'Soulful Melody'}</span>
         </div>
       </div>
