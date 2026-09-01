@@ -149,9 +149,10 @@
     max-width: 560px;
   }
 
-  /* --- Toast: position from bottom with no bottom-nav offset --- */
+  /* --- Toast: Top Dynamic Island Position --- */
   .toast-container {
-    bottom: calc(var(--audio-player-h) + var(--space-lg));
+    top: 24px;
+    bottom: auto;
   }
 
   /* --- Category filter pills: allow wrapping on desktop --- */
