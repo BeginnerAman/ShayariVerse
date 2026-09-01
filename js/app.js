@@ -539,14 +539,24 @@ async function handleShare(btn) {
    TOAST NOTIFICATION SYSTEM
    ============================ */
 
+let appToastTimer = null;
+let appToastExitTimer = null;
+
 /**
- * Show a temporary toast notification.
+ * Show a temporary single-instance toast notification.
  * @param {string} message - Toast message text
  * @param {string} type - 'success', 'error', or '' (default)
  */
 function showToast(message, type = '') {
   const container = document.getElementById('toast-container');
   if (!container) return;
+
+  /* Clear existing timers to prevent lingering */
+  if (appToastTimer) clearTimeout(appToastTimer);
+  if (appToastExitTimer) clearTimeout(appToastExitTimer);
+
+  /* Clear previous toasts immediately so they NEVER stack */
+  container.innerHTML = '';
 
   const toast = document.createElement('div');
   toast.className = `toast ${type ? `toast--${type}` : ''} toast-enter`;
@@ -556,14 +566,14 @@ function showToast(message, type = '') {
 
   container.appendChild(toast);
 
-  /* Auto-remove after 2.5 seconds */
-  setTimeout(() => {
+  /* Auto-remove after 1.8 seconds with guaranteed cleanup */
+  appToastTimer = setTimeout(() => {
     toast.classList.remove('toast-enter');
     toast.classList.add('toast-exit');
-    toast.addEventListener('animationend', () => {
-      toast.remove();
-    }, { once: true });
-  }, 2500);
+    appToastExitTimer = setTimeout(() => {
+      if (toast.parentNode) toast.remove();
+    }, 260);
+  }, 1800);
 }
 
 

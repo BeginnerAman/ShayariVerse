@@ -597,9 +597,19 @@ function setupKeyboard() {
    8. TOAST
    ============================ */
 
+let reelToastTimer = null;
+let reelToastExitTimer = null;
+
 function showReelToast(message) {
   const container = document.getElementById('reel-toast-container');
   if (!container) return;
+
+  /* Clear existing timers */
+  if (reelToastTimer) clearTimeout(reelToastTimer);
+  if (reelToastExitTimer) clearTimeout(reelToastExitTimer);
+
+  /* Clear any existing toast immediately */
+  container.innerHTML = '';
 
   const toast = document.createElement('div');
   toast.className = 'reel-toast';
@@ -607,10 +617,13 @@ function showReelToast(message) {
   toast.setAttribute('role', 'status');
   container.appendChild(toast);
 
-  setTimeout(() => {
+  /* Auto-dismiss after 1.8 seconds with guaranteed cleanup */
+  reelToastTimer = setTimeout(() => {
     toast.classList.add('reel-toast--exit');
-    toast.addEventListener('animationend', () => toast.remove(), { once: true });
-  }, 2000);
+    reelToastExitTimer = setTimeout(() => {
+      if (toast.parentNode) toast.remove();
+    }, 260);
+  }, 1800);
 }
 
 

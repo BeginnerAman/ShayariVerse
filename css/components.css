@@ -765,6 +765,15 @@
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+.toast-exit {
+  animation: toastIslandOut 0.25s var(--ease-smooth) forwards !important;
+}
+
+@keyframes toastIslandOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-12px) scale(0.95); }
+}
+
 
 /* ============================
    9. SEARCH BAR
