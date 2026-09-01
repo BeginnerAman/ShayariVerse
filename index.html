@@ -272,7 +272,16 @@
       }
     }
 
-    /* ---- Music Prompt (First-time enable) ---- */
+    /* ---- Search Overlay Header Icon ---- */
+    .search-overlay__icon {
+      width: 20px;
+      height: 20px;
+      color: var(--clr-accent, #c084fc);
+      margin-left: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ---- Music Prompt (Studio Flowing Wave Visualizer) ---- */
     .music-prompt {
       position: fixed;
       bottom: calc(var(--bottom-nav-h) + var(--space-md));
@@ -292,40 +301,95 @@
     .music-prompt__btn {
       display: flex;
       align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-lg);
+      gap: 12px;
+      padding: 10px 24px;
       font-family: var(--font-ui);
       font-size: var(--text-sm);
       font-weight: var(--weight-medium);
       color: var(--clr-text-primary);
-      background: var(--clr-bg-glass-heavy);
-      backdrop-filter: blur(var(--glass-blur-heavy));
-      -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
-      border: 1px solid var(--clr-accent-glow);
+      background: rgba(12, 10, 20, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(192, 132, 252, 0.35);
       border-radius: var(--radius-full);
-      box-shadow: var(--shadow-glow), var(--shadow-md);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(192, 132, 252, 0.25);
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       animation: musicPromptPulse 2.5s ease-in-out infinite;
+      transition: border-color var(--duration-fast), transform var(--duration-fast), box-shadow var(--duration-fast);
     }
 
     .music-prompt__btn:hover {
       border-color: var(--clr-accent);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8), 0 0 30px rgba(192, 132, 252, 0.45);
+      transform: translateY(-2px);
     }
 
     .music-prompt__btn:active {
-      transform: scale(0.95);
+      transform: scale(0.96);
     }
 
-    .music-prompt__icon {
-      width: 20px;
-      height: 20px;
-      color: var(--clr-accent);
+    .music-prompt__waves {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .music-prompt__wave {
+      width: 3px;
+      border-radius: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, #38bdf8 0%, #c084fc 100%);
+      transform-origin: center;
+      animation: waveFlow 1.2s ease-in-out infinite alternate;
+      box-shadow: 0 0 6px rgba(192, 132, 252, 0.5);
+    }
+
+    .music-prompt__wave:nth-child(1) {
+      animation-delay: 0.05s;
+      animation-duration: 0.8s;
+      background: linear-gradient(180deg, #38bdf8 0%, #a855f7 100%);
+    }
+    .music-prompt__wave:nth-child(2) {
+      animation-delay: 0.25s;
+      animation-duration: 1.1s;
+      background: linear-gradient(180deg, #f472b6 0%, #c084fc 100%);
+    }
+    .music-prompt__wave:nth-child(3) {
+      animation-delay: 0.12s;
+      animation-duration: 0.9s;
+      background: linear-gradient(180deg, #38bdf8 0%, #c084fc 100%);
+    }
+    .music-prompt__wave:nth-child(4) {
+      animation-delay: 0.35s;
+      animation-duration: 1.25s;
+      background: linear-gradient(180deg, #a855f7 0%, #ec4899 100%);
+    }
+    .music-prompt__wave:nth-child(5) {
+      animation-delay: 0.18s;
+      animation-duration: 1.0s;
+      background: linear-gradient(180deg, #38bdf8 0%, #818cf8 100%);
+    }
+
+    @keyframes waveFlow {
+      0%   { transform: scaleY(0.25); }
+      50%  { transform: scaleY(1.0); }
+      100% { transform: scaleY(0.35); }
+    }
+
+    .music-prompt__text {
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #e2d9f3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     @keyframes musicPromptPulse {
-      0%, 100% { box-shadow: var(--shadow-md), 0 0 20px var(--clr-accent-glow); }
-      50%      { box-shadow: var(--shadow-md), 0 0 40px var(--clr-accent-glow); }
+      0%, 100% { box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 20px rgba(192, 132, 252, 0.25); }
+      50%      { box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 35px rgba(192, 132, 252, 0.45); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -368,12 +432,6 @@
 
     <!-- Header Actions -->
     <div class="header__actions">
-      <!-- Font Size Controls -->
-      <div class="font-controls" role="group" aria-label="Font size controls">
-        <button class="font-controls__btn" id="font-decrease" aria-label="Decrease font size">A-</button>
-        <button class="font-controls__btn" id="font-increase" aria-label="Increase font size">A+</button>
-      </div>
-
       <!-- Theme Toggle -->
       <button class="btn btn--icon" id="theme-toggle" aria-label="Switch theme">
         <i data-lucide="moon" class="btn__icon theme-icon" data-theme-icon="dark"></i>
@@ -395,11 +453,12 @@
   <div class="search-overlay" id="search-overlay" role="dialog" aria-label="Search shayari" aria-modal="true">
     <div class="search-overlay__inner">
       <div class="search-overlay__header">
+        <i data-lucide="search" class="search-overlay__icon"></i>
         <input
           type="search"
           class="search-overlay__input"
           id="search-input"
-          placeholder="Search shayari by keyword or mood... 🔍"
+          placeholder="Search shayari by keyword or mood..."
           autocomplete="off"
           aria-label="Search Shayari">
         <button class="btn btn--icon" id="search-close" aria-label="Close Search">
@@ -507,8 +566,14 @@
        ================================ -->
   <div class="music-prompt" id="music-prompt">
     <button class="music-prompt__btn" id="music-prompt-btn" aria-label="Enable Mood Music">
-      <i data-lucide="music-2" class="music-prompt__icon"></i>
-      <span>🎵 Enable Mood Music</span>
+      <span class="music-prompt__waves" aria-hidden="true">
+        <span class="music-prompt__wave"></span>
+        <span class="music-prompt__wave"></span>
+        <span class="music-prompt__wave"></span>
+        <span class="music-prompt__wave"></span>
+        <span class="music-prompt__wave"></span>
+      </span>
+      <span class="music-prompt__text">Enable Mood Music</span>
     </button>
   </div>
 

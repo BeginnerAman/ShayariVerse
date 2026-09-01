@@ -102,7 +102,7 @@
       width: 100%;
       max-width: min(840px, 92vw);
       max-height: calc(100dvh - 160px);
-      padding: 70px 72px 90px 20px;
+      padding: 40px 72px 40px 20px;
       box-sizing: border-box;
       text-align: center;
       margin: auto;
@@ -122,7 +122,7 @@
       font-family: 'Kalam', 'Playfair Display', cursive, sans-serif;
       font-size: clamp(1.2rem, 1rem + 1.2vw, 1.75rem);
       font-weight: 400;
-      line-height: 1.7;
+      line-height: 1.75;
       letter-spacing: 0.02em;
       color: #f8f3ea;
       text-shadow: 0 0 30px rgba(192, 132, 252, 0.35),
@@ -163,17 +163,17 @@
       opacity: 1;
     }
 
-    /* ---- Action Buttons (Right Side, Centered Vertical Stack) ---- */
+    /* ---- Action Buttons (Centered Directly to the Height of the Poetry Text Box) ---- */
     .reel__actions {
       position: absolute;
-      right: var(--space-md, 16px);
+      right: 4px;
       top: 50%;
       transform: translateY(-50%) translateX(16px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
-      z-index: 2;
+      gap: 14px;
+      z-index: 3;
       opacity: 0;
       transition: opacity 0.45s var(--ease-smooth) 0.15s,
                   transform 0.45s var(--ease-smooth) 0.15s;

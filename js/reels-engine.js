@@ -330,9 +330,30 @@ function renderReels() {
         <!-- Glow overlay -->
         <div class="reel__glow" aria-hidden="true"></div>
 
-        <!-- Content — poetry text -->
+        <!-- Content — poetry text + action buttons anchored to text center -->
         <div class="reel__content">
           <p class="reel__text" lang="hi">${shayari.textHinglish}</p>
+
+          <!-- Action buttons (anchored to the exact vertical center of this shayari's text) -->
+          <div class="reel__actions">
+            <button class="reel__action-btn action-favorite"
+                    data-id="${shayari.id}"
+                    aria-label="Favorite">
+              <i data-lucide="heart"></i>
+            </button>
+
+            <button class="reel__action-btn action-copy"
+                    data-text="${encodeURIComponent(shayari.textHinglish)}"
+                    aria-label="Copy">
+              <i data-lucide="copy"></i>
+            </button>
+
+            <button class="reel__action-btn action-share"
+                    data-text="${encodeURIComponent(shayari.textHinglish)}"
+                    aria-label="Share">
+              <i data-lucide="share-2"></i>
+            </button>
+          </div>
         </div>
 
         <!-- Category badge (top-left) with Lucide Icon -->
@@ -340,27 +361,6 @@ function renderReels() {
           <i data-lucide="${iconName}" style="width:13px; height:13px; vertical-align: middle; margin-right:4px;"></i>
           ${shayari.category}
         </span>
-
-        <!-- Action buttons (right side, vertical) with Lucide Icons -->
-        <div class="reel__actions">
-          <button class="reel__action-btn action-favorite"
-                  data-id="${shayari.id}"
-                  aria-label="Favorite">
-            <i data-lucide="heart"></i>
-          </button>
-
-          <button class="reel__action-btn action-copy"
-                  data-text="${encodeURIComponent(shayari.textHinglish)}"
-                  aria-label="Copy">
-            <i data-lucide="copy"></i>
-          </button>
-
-          <button class="reel__action-btn action-share"
-                  data-text="${encodeURIComponent(shayari.textHinglish)}"
-                  aria-label="Share">
-            <i data-lucide="share-2"></i>
-          </button>
-        </div>
 
         <!-- Music tag (bottom) with Studio Waveform Visualizer -->
         <div class="reel__music-tag action-music-tag" title="Click to toggle sound">

@@ -505,10 +505,6 @@
     </nav>
 
     <div class="header__actions">
-      <div class="font-controls">
-        <button class="font-controls__btn" id="font-decrease" aria-label="Decrease font size">A-</button>
-        <button class="font-controls__btn" id="font-increase" aria-label="Increase font size">A+</button>
-      </div>
       <button class="btn btn--icon" id="theme-toggle" aria-label="Toggle theme">
         <i data-lucide="moon" class="btn__icon icon-moon"></i>
         <i data-lucide="sun" class="btn__icon icon-sun" style="display:none"></i>
@@ -925,7 +921,7 @@
       if (shayaris.length === 0) {
         grid.innerHTML = `
           <div class="browse-empty">
-            <span class="browse-empty__icon">🔍</span>
+            <div class="browse-empty__icon"><i data-lucide="search-x" style="width:44px; height:44px; stroke-width:1.5; color:var(--clr-accent)"></i></div>
             <h3 class="browse-empty__title">Koi shayari nahi mili</h3>
             <p class="browse-empty__desc">
               "${currentQuery || activeCategory}" se match karti hui shayari nahi mili. Dusra word search karein ya filters reset karein.
