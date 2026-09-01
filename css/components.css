@@ -898,11 +898,13 @@
 /* Category filter pills */
 .category-filters {
   display: flex;
-  gap: var(--space-sm);
+  align-items: center;
+  gap: var(--space-sm, 10px);
   overflow-x: auto;
   padding-bottom: var(--space-sm);
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .category-filters::-webkit-scrollbar {
@@ -910,7 +912,11 @@
 }
 
 .category-filter {
-  padding: var(--space-xs) var(--space-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 18px;
   font-family: var(--font-ui);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
@@ -921,15 +927,24 @@
   white-space: nowrap;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
   transition: transform var(--duration-fast) var(--ease-smooth),
               color var(--duration-fast) var(--ease-smooth),
               background var(--duration-fast) var(--ease-smooth),
-              border-color var(--duration-fast) var(--ease-smooth);
+              border-color var(--duration-fast) var(--ease-smooth),
+              box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.category-filter .lucide {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 .category-filter:hover {
   color: var(--clr-text-primary);
-  border-color: var(--clr-border-hover);
+  border-color: var(--clr-accent);
+  transform: translateY(-1px);
 }
 
 .category-filter:active {
@@ -937,7 +952,8 @@
 }
 
 .category-filter.active {
-  color: var(--clr-text-inverse);
+  color: var(--clr-text-inverse, #ffffff);
   background: var(--clr-accent);
   border-color: var(--clr-accent);
+  box-shadow: 0 0 16px var(--clr-accent-glow);
 }

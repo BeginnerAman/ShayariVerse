@@ -341,8 +341,8 @@ function renderReels() {
 
         <!-- Category badge (top-left) with Lucide Icon -->
         <span class="reel__category">
-          <i data-lucide="${iconName}" style="width:13px; height:13px; vertical-align: middle; margin-right:4px;"></i>
-          ${shayari.category}
+          <i data-lucide="${iconName}"></i>
+          <span>${shayari.category}</span>
         </span>
 
         <!-- Action buttons (right edge, minimalist glass) -->
