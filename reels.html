@@ -91,20 +91,18 @@
       z-index: 0;
     }
 
-    /* ---- Reel Content (Balanced Center Poetry Stanza) ---- */
+    /* ---- Reel Content (Centered on Screen) ---- */
     .reel__content {
       position: relative;
       z-index: 1;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100%;
-      max-width: min(840px, 92vw);
+      max-width: min(840px, 94vw);
       max-height: calc(100dvh - 160px);
-      padding: 40px 72px 40px 20px;
+      padding: 20px;
       box-sizing: border-box;
-      text-align: center;
       margin: auto;
       opacity: 0;
       transform: translateY(20px);
@@ -117,6 +115,19 @@
       transform: translateY(0);
     }
 
+    /* ---- Stanza Wrapper (Fits Exact Text Box Dimensions) ---- */
+    .reel__stanza-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      max-width: 100%;
+      padding: 16px 64px 16px 16px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
     /* ---- Shayari Poetry Text ---- */
     .reel__text {
       font-family: 'Kalam', 'Playfair Display', cursive, sans-serif;
@@ -127,6 +138,7 @@
       color: #f8f3ea;
       text-shadow: 0 0 30px rgba(192, 132, 252, 0.35),
                    0 3px 15px rgba(0, 0, 0, 0.85);
+      text-align: center;
       white-space: pre-line;
       word-break: normal;
       overflow-wrap: break-word;
@@ -163,16 +175,16 @@
       opacity: 1;
     }
 
-    /* ---- Action Buttons (Centered Directly to the Height of the Poetry Text Box) ---- */
+    /* ---- Action Buttons (100% Mathematically Locked to Exact Vertical Center of the Stanza) ---- */
     .reel__actions {
       position: absolute;
-      right: 4px;
+      right: 0;
       top: 50%;
       transform: translateY(-50%) translateX(16px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       z-index: 3;
       opacity: 0;
       transition: opacity 0.45s var(--ease-smooth) 0.15s,
@@ -610,9 +622,13 @@
         line-height: 1.65;
       }
       .reel__actions {
-        right: 10px;
-        bottom: 90px;
-        gap: var(--space-sm);
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%) translateX(16px);
+        gap: 10px;
+      }
+      .reel--active .reel__actions {
+        transform: translateY(-50%) translateX(0);
       }
       .reel__action-btn {
         width: 40px;
@@ -627,8 +643,12 @@
         left: 12px;
         right: 60px;
       }
-      .reels-sound-toggle span {
+      #sound-toggle-text {
         display: none;
+      }
+      .reels-sound-toggle {
+        padding: 6px 10px;
+        gap: 6px;
       }
     }
   </style>

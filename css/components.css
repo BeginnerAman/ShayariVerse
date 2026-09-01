@@ -470,7 +470,7 @@
 
 /* ============================
    6. AUDIO PLAYER BAR
-   Fixed bottom (above bottom nav)
+   Studio Floating Glass Dock
    ============================ */
 
 .audio-player {
@@ -482,13 +482,26 @@
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  padding-inline: var(--space-md);
-  background: var(--clr-bg-glass);
-  backdrop-filter: blur(var(--glass-blur-heavy));
-  -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
-  border-top: 1px solid var(--clr-border);
+  padding-inline: var(--space-lg);
+  background: rgba(8, 6, 16, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(192, 132, 252, 0.2);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(139, 92, 246, 0.15);
   z-index: var(--z-audio);
   transition: transform var(--duration-normal) var(--ease-smooth);
+}
+
+/* Glowing accent top line */
+.audio-player::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(192, 132, 252, 0.65) 50%, transparent 100%);
+  pointer-events: none;
 }
 
 /* Hidden state - slide down */
@@ -500,27 +513,59 @@
 .audio-player__info {
   flex: 1;
   min-width: 0;  /* Allow text truncation */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .audio-player__title {
   font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  color: var(--clr-text-primary);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #f8f3ea;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: 0 0 12px rgba(192, 132, 252, 0.3);
 }
 
 .audio-player__artist {
   font-size: var(--text-xs);
-  color: var(--clr-text-faded);
+  color: rgba(226, 217, 243, 0.6);
+  font-weight: 400;
 }
 
 /* Player controls */
 .audio-player__controls {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
+}
+
+/* Play/Pause Button in Audio Bar */
+#audio-play-pause {
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(192, 132, 252, 0.25);
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+#audio-play-pause:hover {
+  background: rgba(192, 132, 252, 0.3);
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.5);
+  transform: scale(1.06);
+}
+
+#audio-play-pause:active {
+  transform: scale(0.94);
 }
 
 /* Progress bar */
@@ -529,14 +574,20 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: var(--clr-progress-bg);
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
+  transition: height 0.2s ease;
+}
+
+.audio-player__progress:hover {
+  height: 6px;
 }
 
 .audio-player__progress-fill {
   height: 100%;
-  background: var(--clr-progress-fill);
+  background: linear-gradient(90deg, #38bdf8 0%, #c084fc 100%);
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.6);
   border-radius: 0 var(--radius-full) var(--radius-full) 0;
   transition: width var(--duration-instant) linear;
   transform-origin: left;
@@ -547,15 +598,15 @@
   display: none;  /* Hidden on mobile, shown on desktop via responsive.css */
   align-items: center;
   gap: var(--space-xs);
-  width: 100px;
+  width: 110px;
 }
 
 .audio-player__volume-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 3px;
-  background: var(--clr-progress-bg);
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-full);
   outline: none;
   cursor: pointer;
@@ -563,23 +614,28 @@
 
 .audio-player__volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: var(--clr-accent);
+  background: linear-gradient(135deg, #38bdf8 0%, #c084fc 100%);
   cursor: pointer;
-  border: 2px solid var(--clr-bg-primary);
-  box-shadow: var(--shadow-sm);
+  border: 2px solid #06060a;
+  box-shadow: 0 0 8px rgba(192, 132, 252, 0.8);
+  transition: transform 0.15s ease;
+}
+
+.audio-player__volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
 }
 
 .audio-player__volume-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: var(--clr-accent);
+  background: linear-gradient(135deg, #38bdf8 0%, #c084fc 100%);
   cursor: pointer;
-  border: 2px solid var(--clr-bg-primary);
-  box-shadow: var(--shadow-sm);
+  border: 2px solid #06060a;
+  box-shadow: 0 0 8px rgba(192, 132, 252, 0.8);
 }
 
 

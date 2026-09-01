@@ -743,7 +743,7 @@ async function initAudio() {
         }, { once: true });
       }
 
-      showToast('🎵 Mood music chalu ho gayi!', 'success');
+      showToast('Mood music chalu ho gayi!', 'success');
     });
   }
 

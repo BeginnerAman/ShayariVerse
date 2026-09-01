@@ -330,29 +330,31 @@ function renderReels() {
         <!-- Glow overlay -->
         <div class="reel__glow" aria-hidden="true"></div>
 
-        <!-- Content — poetry text + action buttons anchored to text center -->
+        <!-- Content — poetry stanza wrapper with anchored action buttons -->
         <div class="reel__content">
-          <p class="reel__text" lang="hi">${shayari.textHinglish}</p>
+          <div class="reel__stanza-wrapper">
+            <p class="reel__text" lang="hi">${shayari.textHinglish}</p>
 
-          <!-- Action buttons (anchored to the exact vertical center of this shayari's text) -->
-          <div class="reel__actions">
-            <button class="reel__action-btn action-favorite"
-                    data-id="${shayari.id}"
-                    aria-label="Favorite">
-              <i data-lucide="heart"></i>
-            </button>
+            <!-- Action buttons anchored to the exact height of this specific shayari's text -->
+            <div class="reel__actions">
+              <button class="reel__action-btn action-favorite"
+                      data-id="${shayari.id}"
+                      aria-label="Favorite">
+                <i data-lucide="heart"></i>
+              </button>
 
-            <button class="reel__action-btn action-copy"
-                    data-text="${encodeURIComponent(shayari.textHinglish)}"
-                    aria-label="Copy">
-              <i data-lucide="copy"></i>
-            </button>
+              <button class="reel__action-btn action-copy"
+                      data-text="${encodeURIComponent(shayari.textHinglish)}"
+                      aria-label="Copy">
+                <i data-lucide="copy"></i>
+              </button>
 
-            <button class="reel__action-btn action-share"
-                    data-text="${encodeURIComponent(shayari.textHinglish)}"
-                    aria-label="Share">
-              <i data-lucide="share-2"></i>
-            </button>
+              <button class="reel__action-btn action-share"
+                      data-text="${encodeURIComponent(shayari.textHinglish)}"
+                      aria-label="Share">
+                <i data-lucide="share-2"></i>
+              </button>
+            </div>
           </div>
         </div>
 
