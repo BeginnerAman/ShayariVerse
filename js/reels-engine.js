@@ -19,13 +19,14 @@ let reelObserver = null;
 let counterEl = null;
 let totalEl = null;
 
-/* Audio State */
-let audioElement = null;
+/* Audio State — Dual-Channel Crossfade Engine */
+let audioChannelA = null;
+let audioChannelB = null;
+let activeChannel = 'A';
 let isMuted = false;
 let isAudioStarted = false;
 let currentSongId = null;
-let fadeInterval = null;
-
+const CROSSFADE_DURATION_MS = 450;
 const TARGET_VOLUME = 0.7;
 
 
@@ -40,8 +41,8 @@ export async function init() {
 
   if (!reelsContainer) return;
 
-  /* Initialize Native Audio Element */
-  initAudioElement();
+  /* Initialize Dual-Channel Audio Elements */
+  initAudioChannels();
 
   /* Load data in parallel */
   const [shayariData, songsData] = await Promise.all([
@@ -109,82 +110,130 @@ async function fetchJSON(url) {
 
 
 /* ============================
-   3. NATIVE AUDIO ELEMENT
+   3. DUAL-CHANNEL AUDIO ENGINE WITH CINEMATIC CROSSFADE
    ============================ */
 
-function initAudioElement() {
-  let el = document.getElementById('reel-native-audio');
-  if (!el) {
-    el = document.createElement('audio');
-    el.id = 'reel-native-audio';
-    el.loop = true;
-    el.preload = 'auto';
-    document.body.appendChild(el);
+function initAudioChannels() {
+  let elA = document.getElementById('reel-native-audio-a');
+  if (!elA) {
+    elA = document.createElement('audio');
+    elA.id = 'reel-native-audio-a';
+    elA.loop = true;
+    elA.preload = 'auto';
+    document.body.appendChild(elA);
   }
-  audioElement = el;
-  audioElement.volume = TARGET_VOLUME;
+  audioChannelA = elA;
+  audioChannelA.volume = 0;
+
+  let elB = document.getElementById('reel-native-audio-b');
+  if (!elB) {
+    elB = document.createElement('audio');
+    elB.id = 'reel-native-audio-b';
+    elB.loop = true;
+    elB.preload = 'auto';
+    document.body.appendChild(elB);
+  }
+  audioChannelB = elB;
+  audioChannelB.volume = 0;
+}
+
+function fadeAudio(audioEl, fromVol, toVol, durationMs, onComplete) {
+  if (!audioEl) return;
+  const startTime = performance.now();
+
+  function step(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(1, elapsed / durationMs);
+    // Studio-grade smooth S-curve interpolation
+    const ease = 0.5 * (1 - Math.cos(Math.PI * progress));
+    const currentVol = fromVol + (toVol - fromVol) * ease;
+
+    try {
+      audioEl.volume = Math.max(0, Math.min(1, currentVol));
+    } catch (e) {}
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      try {
+        audioEl.volume = toVol;
+      } catch (e) {}
+      if (typeof onComplete === 'function') onComplete();
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+function updateVisualizerState(isPlaying) {
+  const toggleBtn = document.getElementById('reels-sound-toggle');
+  if (toggleBtn) {
+    if (isPlaying && !isMuted) {
+      toggleBtn.classList.add('is-playing');
+    } else {
+      toggleBtn.classList.remove('is-playing');
+    }
+  }
+
+  const musicTags = document.querySelectorAll('.reel__music-tag');
+  musicTags.forEach((tag) => {
+    if (isPlaying && !isMuted) {
+      tag.classList.add('is-playing');
+    } else {
+      tag.classList.remove('is-playing');
+    }
+  });
 }
 
 function playSongNative(songId) {
-  if (isMuted || !audioElement) return;
+  if (isMuted) return;
+  if (!audioChannelA || !audioChannelB) initAudioChannels();
 
-  const song = allSongs.find(s => s.id === songId) || allSongs[0];
+  const song = allSongs.find((s) => s.id === songId) || allSongs[0];
   if (!song) return;
 
-  /* If same song already playing, don't restart */
-  if (currentSongId === song.id && !audioElement.paused) {
+  const currentAudio = activeChannel === 'A' ? audioChannelA : audioChannelB;
+  const nextAudio = activeChannel === 'A' ? audioChannelB : audioChannelA;
+
+  /* If same song already playing and not paused, keep playing seamlessly */
+  if (currentSongId === song.id && !currentAudio.paused && currentAudio.currentTime > 0) {
+    updateVisualizerState(true);
     return;
   }
 
   currentSongId = song.id;
 
-  /* Fade out current, then load new */
-  clearInterval(fadeInterval);
-  
-  if (!audioElement.paused && audioElement.currentTime > 0) {
-    let vol = audioElement.volume;
-    fadeInterval = setInterval(() => {
-      vol -= 0.15;
-      if (vol <= 0.05) {
-        clearInterval(fadeInterval);
-        audioElement.pause();
-        startNewTrack(song);
-      } else {
-        audioElement.volume = Math.max(0, vol);
-      }
-    }, 30);
+  /* Crossfade: Smoothly fade out current active channel */
+  if (!currentAudio.paused && currentAudio.volume > 0.05) {
+    fadeAudio(currentAudio, currentAudio.volume, 0, CROSSFADE_DURATION_MS, () => {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    });
   } else {
-    startNewTrack(song);
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
   }
-}
 
-function startNewTrack(song) {
-  if (!audioElement) return;
-  audioElement.src = song.file;
-  audioElement.currentTime = 0;
-  audioElement.volume = 0;
+  /* Switch active channel */
+  activeChannel = activeChannel === 'A' ? 'B' : 'A';
 
-  const playPromise = audioElement.play();
+  /* Prepare and smoothly fade in next channel */
+  nextAudio.src = song.file;
+  nextAudio.currentTime = 0;
+  nextAudio.volume = 0;
+
+  const playPromise = nextAudio.play();
   if (playPromise !== undefined) {
     playPromise
       .then(() => {
         isAudioStarted = true;
         hideAudioPrompt();
-        /* Fade in */
-        let vol = 0;
-        clearInterval(fadeInterval);
-        fadeInterval = setInterval(() => {
-          vol += 0.1;
-          if (vol >= TARGET_VOLUME) {
-            clearInterval(fadeInterval);
-            audioElement.volume = TARGET_VOLUME;
-          } else {
-            audioElement.volume = Math.min(TARGET_VOLUME, vol);
-          }
-        }, 40);
+        updateVisualizerState(true);
+        fadeAudio(nextAudio, 0, TARGET_VOLUME, CROSSFADE_DURATION_MS);
       })
       .catch((err) => {
         console.log('[ReelsEngine] Autoplay waiting for user gesture:', err.message);
+        updateVisualizerState(false);
       });
   }
 }
@@ -313,8 +362,14 @@ function renderReels() {
           </button>
         </div>
 
-        <!-- Music tag (bottom) with Lucide Icon -->
+        <!-- Music tag (bottom) with Waveform Visualizer & Lucide Icon -->
         <div class="reel__music-tag action-music-tag" title="Click to toggle sound">
+          <span class="waveform-visualizer" aria-hidden="true">
+            <span class="waveform-bar"></span>
+            <span class="waveform-bar"></span>
+            <span class="waveform-bar"></span>
+            <span class="waveform-bar"></span>
+          </span>
           <i data-lucide="music-2" class="reel__music-icon"></i>
           <span class="reel__music-name">${song ? song.title : 'Soulful Melody'}</span>
         </div>
@@ -411,9 +466,12 @@ function setupSoundControls() {
     }
 
     if (isMuted) {
-      if (audioElement) audioElement.pause();
+      if (audioChannelA) audioChannelA.pause();
+      if (audioChannelB) audioChannelB.pause();
+      updateVisualizerState(false);
       showReelToast('🔇 Sound Muted');
     } else {
+      updateVisualizerState(true);
       if (activeReelIndex >= 0) {
         const activeEl = reelsContainer.querySelector(`.reel[data-index="${activeReelIndex}"]`);
         const songId = activeEl?.dataset.songId || 'track-1';
@@ -562,9 +620,8 @@ function showReelToast(message) {
 
 export function destroy() {
   if (reelObserver) reelObserver.disconnect();
-  if (audioElement) {
-    audioElement.pause();
-  }
+  if (audioChannelA) audioChannelA.pause();
+  if (audioChannelB) audioChannelB.pause();
 }
 
 window.addEventListener('beforeunload', destroy);

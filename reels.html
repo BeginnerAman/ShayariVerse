@@ -294,6 +294,53 @@
       animation-play-state: paused;
     }
 
+    /* ---- Waveform Visualizer (Mini Sound Waves) ---- */
+    .waveform-visualizer {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 13px;
+      margin-right: 4px;
+      flex-shrink: 0;
+    }
+
+    .waveform-bar {
+      width: 2.5px;
+      background: var(--clr-accent, #c084fc);
+      border-radius: 2px;
+      height: 100%;
+      transform-origin: bottom;
+      transform: scaleY(0.25);
+      transition: transform 0.2s ease;
+    }
+
+    .is-playing .waveform-bar {
+      animation: waveDance 1.2s ease-in-out infinite alternate;
+    }
+
+    .is-playing .waveform-bar:nth-child(1) {
+      animation-delay: 0.05s;
+      animation-duration: 0.75s;
+    }
+    .is-playing .waveform-bar:nth-child(2) {
+      animation-delay: 0.25s;
+      animation-duration: 1.05s;
+    }
+    .is-playing .waveform-bar:nth-child(3) {
+      animation-delay: 0.12s;
+      animation-duration: 0.85s;
+    }
+    .is-playing .waveform-bar:nth-child(4) {
+      animation-delay: 0.35s;
+      animation-duration: 1.2s;
+    }
+
+    @keyframes waveDance {
+      0%   { transform: scaleY(0.2); }
+      50%  { transform: scaleY(1.0); }
+      100% { transform: scaleY(0.3); }
+    }
+
     .reel__music-name {
       font-family: var(--font-ui);
       font-size: var(--text-xs);
@@ -616,6 +663,12 @@
 
     <div class="reels-header__controls">
       <button class="reels-sound-toggle" id="reels-sound-toggle" aria-label="Toggle Sound">
+        <span class="waveform-visualizer" aria-hidden="true">
+          <span class="waveform-bar"></span>
+          <span class="waveform-bar"></span>
+          <span class="waveform-bar"></span>
+          <span class="waveform-bar"></span>
+        </span>
         <span id="sound-icon-on"><i data-lucide="volume-2"></i></span>
         <span id="sound-icon-off" style="display:none;"><i data-lucide="volume-x"></i></span>
         <span id="sound-toggle-text">Music</span>
