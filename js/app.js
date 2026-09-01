@@ -476,7 +476,7 @@ function handleFavorite(btn) {
   }
   localStorage.setItem('sv-favorites', JSON.stringify(favorites));
 
-  showToast(isActive ? '❤️ Pasandida mein joda!' : '💔 Pasandida se hataya');
+  showToast(isActive ? 'Added to Favorites' : 'Removed from Favorites');
 }
 
 /**
@@ -488,8 +488,8 @@ async function handleCopy(btn) {
   if (!text) return;
 
   try {
-    await navigator.clipboard.writeText(text + '\n\n- ShayariVerse ✨');
-    showToast('📋 Shayari copy ho gayi!', 'success');
+    await navigator.clipboard.writeText(text + '\n\n- ShayariVerse');
+    showToast('Shayari copied to clipboard', 'success');
 
     /* Visual feedback - swap icon to checkmark briefly */
     const icon = btn.querySelector('.btn__icon');
@@ -500,7 +500,7 @@ async function handleCopy(btn) {
       }, { once: true });
     }
   } catch {
-    showToast('Copy nahi ho payi 😕', 'error');
+    showToast('Could not copy to clipboard', 'error');
   }
 }
 
@@ -513,7 +513,7 @@ async function handleShare(btn) {
   if (!text) return;
 
   const shareData = {
-    title: 'ShayariVerse ✨',
+    title: 'ShayariVerse',
     text: text + '\n\n- ShayariVerse',
     url: window.location.href,
   };
@@ -524,12 +524,12 @@ async function handleShare(btn) {
     } else {
       /* Fallback: copy to clipboard */
       await navigator.clipboard.writeText(shareData.text);
-      showToast('📋 Share text copy ho gaya!', 'success');
+      showToast('Share text copied to clipboard', 'success');
     }
   } catch (err) {
     /* User cancelled share - not an error */
     if (err.name !== 'AbortError') {
-      showToast('Share nahi ho paya 😕', 'error');
+      showToast('Could not share', 'error');
     }
   }
 }
@@ -743,7 +743,7 @@ async function initAudio() {
         }, { once: true });
       }
 
-      showToast('Mood music chalu ho gayi!', 'success');
+      showToast('Mood Music Enabled', 'success');
     });
   }
 
@@ -760,7 +760,7 @@ async function initAudio() {
       AudioController.nextTrack();
       const state = AudioController.getState();
       if (state.currentTrack) {
-        showToast(`🎵 ${state.currentTrack.title}`, '');
+        showToast(`Now Playing: ${state.currentTrack.title}`, '');
       }
     });
   }

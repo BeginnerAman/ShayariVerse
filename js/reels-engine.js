@@ -471,7 +471,7 @@ function setupSoundControls() {
       if (audioChannelA) audioChannelA.pause();
       if (audioChannelB) audioChannelB.pause();
       updateVisualizerState(false);
-      showReelToast('🔇 Sound Muted');
+      showReelToast('Sound Muted');
     } else {
       updateVisualizerState(true);
       if (activeReelIndex >= 0) {
@@ -481,7 +481,7 @@ function setupSoundControls() {
       } else {
         playSongNative('track-1');
       }
-      showReelToast('🔊 Sound On');
+      showReelToast('Sound On');
     }
   }
 
@@ -530,7 +530,7 @@ function setupActions() {
       if (!isActive) { const i = favs.indexOf(id); if (i > -1) favs.splice(i, 1); }
       localStorage.setItem('sv-favorites', JSON.stringify(favs));
 
-      showReelToast(isActive ? '❤️ Added to Favorites' : '💔 Removed');
+      showReelToast(isActive ? 'Added to Favorites' : 'Removed from Favorites');
       return;
     }
 
@@ -539,9 +539,9 @@ function setupActions() {
     if (copyBtn) {
       e.stopPropagation();
       const text = decodeURIComponent(copyBtn.dataset.text || '');
-      navigator.clipboard.writeText(text + '\n\n- ShayariVerse ✨')
-        .then(() => showReelToast('📋 Copied!'))
-        .catch(() => showReelToast('Copy failed'));
+      navigator.clipboard.writeText(text + '\n\n- ShayariVerse')
+        .then(() => showReelToast('Copied to clipboard'))
+        .catch(() => showReelToast('Could not copy'));
 
       copyBtn.classList.add('reel__action-pop');
       copyBtn.addEventListener('animationend', () => copyBtn.classList.remove('reel__action-pop'), { once: true });
@@ -553,13 +553,13 @@ function setupActions() {
     if (shareBtn) {
       e.stopPropagation();
       const text = decodeURIComponent(shareBtn.dataset.text || '');
-      const shareData = { title: 'ShayariVerse ✨', text: text + '\n\n- ShayariVerse', url: window.location.href };
+      const shareData = { title: 'ShayariVerse', text: text + '\n\n- ShayariVerse', url: window.location.href };
 
       if (navigator.share) {
         navigator.share(shareData).catch(() => {});
       } else {
         navigator.clipboard.writeText(shareData.text)
-          .then(() => showReelToast('📋 Share text copied!'))
+          .then(() => showReelToast('Share text copied'))
           .catch(() => {});
       }
 
