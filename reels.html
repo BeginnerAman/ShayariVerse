@@ -623,8 +623,11 @@
       .scroll-hint { animation: none; }
     }
 
-    /* ---- Responsive: Small Phones (≤480px) ---- */
-    @media (max-width: 480px) {
+    /* ---- Responsive: Small Phones & Tablets (≤768px) ---- */
+    @media (max-width: 768px) {
+      .reels-sound-toggle {
+        display: none;
+      }
       .reel__content {
         padding: 50px 20px 70px 20px;
       }
@@ -653,13 +656,6 @@
         bottom: 16px;
         left: 12px;
         right: 60px;
-      }
-      #sound-toggle-text {
-        display: none;
-      }
-      .reels-sound-toggle {
-        padding: 6px 10px;
-        gap: 6px;
       }
     }
   </style>
