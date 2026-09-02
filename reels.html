@@ -167,12 +167,12 @@
     /* ---- Action Buttons (Fixed Right Edge, Minimalist Glass) ---- */
     .reel__actions {
       position: absolute;
-      right: var(--space-md, 16px);
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 95px);
+      right: var(--space-lg, 20px);
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 120px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
       z-index: 3;
       opacity: 1;
     }
@@ -631,26 +631,23 @@
         line-height: 1.65;
       }
       .reel__actions {
-        right: 12px;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 85px);
-        gap: 12px;
-        transform: translateY(12px);
-      }
-      .reel--active .reel__actions {
-        transform: translateY(0);
+        right: 14px;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 110px);
+        gap: 14px;
+        transform: none;
       }
       .reel__action-btn {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
       }
       .reel__action-btn .lucide {
-        width: 19px;
-        height: 19px;
+        width: 20px;
+        height: 20px;
       }
       .reel__music-tag {
-        bottom: 16px;
-        left: 12px;
-        right: 60px;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+        left: 14px;
+        right: 70px;
       }
     }
   </style>
