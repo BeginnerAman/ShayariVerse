@@ -48,8 +48,8 @@
     /* ---- Favorites Page Layout ---- */
     .favorites-page {
       min-height: 100vh;
-      padding-top: calc(var(--header-h) + var(--space-md));
-      padding-bottom: calc(var(--bottom-nav-h) + var(--space-xl));
+      padding-top: calc(var(--header-height, 64px) + var(--space-md));
+      padding-bottom: calc(var(--bottom-nav-h, 64px) + var(--space-xl));
     }
 
     .favorites-content {
@@ -552,8 +552,10 @@
       function apply() {
         document.documentElement.setAttribute('data-font-size', current);
         localStorage.setItem('sv-font-size', current);
-        document.getElementById('font-decrease').disabled = current === 'small';
-        document.getElementById('font-increase').disabled = current === 'large';
+        const decBtn = document.getElementById('font-decrease');
+        const incBtn = document.getElementById('font-increase');
+        if (decBtn) decBtn.disabled = current === 'small';
+        if (incBtn) incBtn.disabled = current === 'large';
       }
       apply();
     }
