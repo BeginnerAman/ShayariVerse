@@ -143,6 +143,7 @@ function fadeAudio(audioEl, fromVol, toVol, durationMs, onComplete) {
     cancelAnimationFrame(audioEl._fadeRaf);
     audioEl._fadeRaf = null;
   }
+  audioEl._fadeCallback = onComplete || null;
   const startTime = performance.now();
 
   function step(now) {
@@ -163,7 +164,11 @@ function fadeAudio(audioEl, fromVol, toVol, durationMs, onComplete) {
       try {
         audioEl.volume = toVol;
       } catch (e) {}
-      if (typeof onComplete === 'function') onComplete();
+      if (typeof audioEl._fadeCallback === 'function') {
+        const cb = audioEl._fadeCallback;
+        audioEl._fadeCallback = null;
+        cb();
+      }
     }
   }
 
@@ -214,21 +219,35 @@ function playSongNative(songId) {
 
   currentSongId = song.id;
 
-  /* Crossfade: Smoothly fade out current active channel */
+  /* Switch active channel pointer */
+  activeChannel = activeChannel === 'A' ? 'B' : 'A';
+
+  /* Cancel any stale fade callback on nextAudio so old timers can never kill new playback */
+  if (nextAudio._fadeRaf) {
+    cancelAnimationFrame(nextAudio._fadeRaf);
+    nextAudio._fadeRaf = null;
+  }
+  nextAudio._fadeCallback = null;
+
+  /* Crossfade: Smoothly fade out the old active channel */
   if (!currentAudio.paused && currentAudio.volume > 0.05) {
     fadeAudio(currentAudio, currentAudio.volume, 0, CROSSFADE_DURATION_MS, () => {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
+      /* Only pause if this channel is STILL the inactive channel (hasn't been reactivated by a fast swipe back) */
+      const currentActive = activeChannel === 'A' ? audioChannelA : audioChannelB;
+      if (currentAudio !== currentActive) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
     });
   } else {
     try {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
+      const currentActive = activeChannel === 'A' ? audioChannelA : audioChannelB;
+      if (currentAudio !== currentActive) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
     } catch (e) {}
   }
-
-  /* Switch active channel */
-  activeChannel = activeChannel === 'A' ? 'B' : 'A';
 
   /* Prepare and smoothly fade in next channel */
   nextAudio.src = song.file;
@@ -246,7 +265,6 @@ function playSongNative(songId) {
       })
       .catch((err) => {
         console.log('[ReelsEngine] Play interrupted or waiting for gesture:', err.message);
-        /* Reset currentSongId so next scroll settlement immediately retries */
         currentSongId = null;
         updateVisualizerState(false);
       });
@@ -442,7 +460,8 @@ function setupObserver() {
     if (scrollSettleTimer) clearTimeout(scrollSettleTimer);
     scrollSettleTimer = setTimeout(() => {
       const reelHeight = reelsContainer.clientHeight || window.innerHeight;
-      const snapIndex = Math.round(reelsContainer.scrollTop / reelHeight);
+      const rawIndex = Math.round(reelsContainer.scrollTop / reelHeight);
+      const snapIndex = Math.max(0, Math.min(rawIndex, allShayaris.length - 1));
       const targetReel = reelsContainer.querySelector(`.reel[data-index="${snapIndex}"]`);
       if (targetReel) {
         if (snapIndex !== activeReelIndex) {
@@ -456,7 +475,7 @@ function setupObserver() {
           }
         }
       }
-    }, 90);
+    }, 60);
   }, { passive: true });
 }
 
