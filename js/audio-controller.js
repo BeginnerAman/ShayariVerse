@@ -281,3 +281,31 @@ function notifyStateChange() {
     onStateChangeCallback(getState());
   }
 }
+
+/* ============================
+   6. PAGE VISIBILITY (Battery Saver)
+   ============================ */
+
+let wasAudioPlayingBeforeHidden = false;
+
+document.addEventListener('visibilitychange', () => {
+  if (!audioElement) return;
+  if (document.hidden) {
+    if (isPlaying && !audioElement.paused) {
+      wasAudioPlayingBeforeHidden = true;
+      audioElement.pause();
+      isPlaying = false;
+      notifyStateChange();
+    } else {
+      wasAudioPlayingBeforeHidden = false;
+    }
+  } else {
+    if (wasAudioPlayingBeforeHidden && !isMuted) {
+      wasAudioPlayingBeforeHidden = false;
+      audioElement.play().then(() => {
+        isPlaying = true;
+        notifyStateChange();
+      }).catch(() => {});
+    }
+  }
+});

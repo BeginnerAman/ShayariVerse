@@ -701,6 +701,32 @@ export function destroy() {
   }
 }
 
+/* ============================
+   10. PAGE VISIBILITY (Zero Background Battery Drain)
+   ============================ */
+
+let wasPlayingBeforeHidden = false;
+
+document.addEventListener('visibilitychange', () => {
+  const currentAudio = activeChannel === 'A' ? audioChannelA : audioChannelB;
+  if (document.hidden) {
+    if (currentAudio && !currentAudio.paused) {
+      wasPlayingBeforeHidden = true;
+      currentAudio.pause();
+      updateVisualizerState(false);
+    } else {
+      wasPlayingBeforeHidden = false;
+    }
+  } else {
+    if (wasPlayingBeforeHidden && !isMuted && isAudioStarted && currentAudio) {
+      wasPlayingBeforeHidden = false;
+      currentAudio.play().then(() => {
+        updateVisualizerState(true);
+      }).catch(() => {});
+    }
+  }
+});
+
 window.addEventListener('beforeunload', destroy);
 
 document.addEventListener('DOMContentLoaded', init);

@@ -729,19 +729,19 @@
        ================================ -->
   <script type="module" src="js/reels-engine.js"></script>
 
-  <!-- Hide scroll hint after first scroll -->
+  <!-- Hide scroll hint after first scroll (detaches listener immediately after hide) -->
   <script>
     (function() {
       const hint = document.getElementById('scroll-hint');
       const container = document.getElementById('reels-container');
       if (!hint || !container) return;
-      let hidden = false;
-      container.addEventListener('scroll', function() {
-        if (!hidden && container.scrollTop > 50) {
+      function onScrollOnce() {
+        if (container.scrollTop > 50) {
           hint.classList.add('hidden');
-          hidden = true;
+          container.removeEventListener('scroll', onScrollOnce);
         }
-      }, { passive: true });
+      }
+      container.addEventListener('scroll', onScrollOnce, { passive: true });
     })();
   </script>
 

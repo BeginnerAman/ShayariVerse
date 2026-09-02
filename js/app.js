@@ -337,17 +337,26 @@ function initScrollReveal() {
 
 /**
  * Create ambient floating particles in the hero section.
+ * Optimized for mobile battery & thermals with offscreen observer.
  */
 function initParticles() {
   const container = document.getElementById('particles-container');
   if (!container) return;
 
-  const particleConfigs = [
-    { className: 'particle particle--slow', size: 200, count: 3 },
-    { className: 'particle particle--medium', size: 120, count: 3 },
-    { className: 'particle particle--fast', size: 60, count: 4 },
-    { className: 'particle particle--slow particle--warm', size: 150, count: 2 },
-  ];
+  const isMobile = window.innerWidth < 768;
+  const particleConfigs = isMobile
+    ? [
+        { className: 'particle particle--slow', size: 130, count: 1 },
+        { className: 'particle particle--medium', size: 80, count: 1 },
+        { className: 'particle particle--fast', size: 45, count: 1 },
+        { className: 'particle particle--slow particle--warm', size: 90, count: 1 },
+      ]
+    : [
+        { className: 'particle particle--slow', size: 200, count: 2 },
+        { className: 'particle particle--medium', size: 120, count: 2 },
+        { className: 'particle particle--fast', size: 60, count: 3 },
+        { className: 'particle particle--slow particle--warm', size: 150, count: 2 },
+      ];
 
   const fragment = document.createDocumentFragment();
 
@@ -370,6 +379,17 @@ function initParticles() {
   });
 
   container.appendChild(fragment);
+
+  /* Battery saver: Disconnect/hide particles when hero section is off-screen */
+  const heroSection = document.getElementById('hero');
+  if (heroSection && 'IntersectionObserver' in window) {
+    const particleObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        container.style.display = entry.isIntersecting ? 'block' : 'none';
+      });
+    }, { threshold: 0.05 });
+    particleObserver.observe(heroSection);
+  }
 }
 
 
