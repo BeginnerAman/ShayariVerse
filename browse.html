@@ -750,7 +750,7 @@
 
 
     /* ---- Init ---- */
-    document.addEventListener('DOMContentLoaded', async () => {
+    async function init() {
       /* Theme */
       ThemeManager.init(updateThemeIcon);
       updateThemeIcon(ThemeManager.get());
@@ -878,7 +878,13 @@
         if (!currentCardShayari) return;
         await ShareManager.shareWithCard(currentCardShayari);
       });
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
 
 
     /* ---- Update category counts on pills ---- */

@@ -41,6 +41,9 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
 
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     /* ---- Favorites Page Layout ---- */
     .favorites-page {
@@ -99,34 +102,51 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: var(--space-lg);
-      min-height: 50vh;
+      gap: var(--space-md);
+      min-height: 55vh;
       text-align: center;
+      padding: var(--space-xl) var(--space-md);
     }
 
-    .favorites-empty__icon {
-      font-size: 64px;
-      opacity: 0.5;
+    .favorites-empty__icon-box {
+      width: 76px;
+      height: 76px;
+      border-radius: var(--radius-full);
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(244, 63, 94, 0.25);
       animation: emptyFloat 3s ease-in-out infinite;
+      margin-bottom: var(--space-xs);
+    }
+
+    .favorites-empty__icon-box .lucide {
+      width: 36px;
+      height: 36px;
+      color: #f43f5e;
     }
 
     @keyframes emptyFloat {
       0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-10px); }
+      50%      { transform: translateY(-8px); }
     }
 
     .favorites-empty__title {
       font-family: var(--font-heading);
-      font-size: var(--text-xl);
+      font-size: var(--text-2xl);
       color: var(--clr-text-primary);
+      margin: 0;
     }
 
     .favorites-empty__subtitle {
       font-family: var(--font-ui);
-      font-size: var(--text-base);
-      color: var(--clr-text-faded);
-      max-width: 300px;
+      font-size: var(--text-sm);
+      color: var(--clr-text-secondary);
+      max-width: 340px;
       line-height: 1.6;
+      margin: 0 0 var(--space-md);
     }
 
     /* ---- Card Modal (reuse from browse) ---- */
@@ -340,7 +360,7 @@
 
 
     /* ---- Init ---- */
-    document.addEventListener('DOMContentLoaded', async () => {
+    async function init() {
       /* Theme */
       ThemeManager.init(updateThemeIcon);
       updateThemeIcon(ThemeManager.get());
@@ -390,7 +410,13 @@
         if (!currentCardShayari) return;
         await ShareManager.shareWithCard(currentCardShayari);
       });
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
 
 
     /* ---- Render Favorites ---- */
@@ -403,20 +429,22 @@
       const favIds = FavoritesManager.getAll();
       const favShayaris = allShayaris.filter((s) => favIds.includes(s.id));
 
-      if (countEl) countEl.textContent = `${favShayaris.length} saved shayari${favShayaris.length !== 1 ? 's' : ''}`;
+      if (countEl) countEl.textContent = favShayaris.length > 0 ? `${favShayaris.length} saved shayari${favShayaris.length !== 1 ? 's' : ''}` : '';
       if (clearBtn) clearBtn.style.display = favShayaris.length > 0 ? 'inline-block' : 'none';
 
       if (favShayaris.length === 0) {
         area.innerHTML = `
           <div class="favorites-empty">
-            <i data-lucide="heart-off" style="width: 56px; height: 56px; color: var(--clr-accent); opacity: 0.5;"></i>
-            <h2 class="favorites-empty__title">No favorites yet</h2>
+            <div class="favorites-empty__icon-box">
+              <i data-lucide="heart"></i>
+            </div>
+            <h2 class="favorites-empty__title">No Favorites Yet</h2>
             <p class="favorites-empty__subtitle">
-              Tap the heart button on any shayari card to save your favorite poetry here!
+              Save your favorite couplets from Browse or Reels to build your personal collection here.
             </p>
             <a href="browse.html" class="btn btn--primary">
               <i data-lucide="compass" style="width: 16px; height: 16px; margin-right: 6px;"></i>
-              Browse Shayari
+              Explore Poetry
             </a>
           </div>
         `;
@@ -429,6 +457,7 @@
       const grid = document.getElementById('fav-grid');
       renderShayariCards(grid, favShayaris);
       FavoritesManager.restoreUI();
+      if (window.lucide) window.lucide.createIcons();
     }
 
 
