@@ -139,6 +139,10 @@ function initAudioChannels() {
 
 function fadeAudio(audioEl, fromVol, toVol, durationMs, onComplete) {
   if (!audioEl) return;
+  if (audioEl._fadeRaf) {
+    cancelAnimationFrame(audioEl._fadeRaf);
+    audioEl._fadeRaf = null;
+  }
   const startTime = performance.now();
 
   function step(now) {
@@ -153,8 +157,9 @@ function fadeAudio(audioEl, fromVol, toVol, durationMs, onComplete) {
     } catch (e) {}
 
     if (progress < 1) {
-      requestAnimationFrame(step);
+      audioEl._fadeRaf = requestAnimationFrame(step);
     } else {
+      audioEl._fadeRaf = null;
       try {
         audioEl.volume = toVol;
       } catch (e) {}
@@ -162,7 +167,7 @@ function fadeAudio(audioEl, fromVol, toVol, durationMs, onComplete) {
     }
   }
 
-  requestAnimationFrame(step);
+  audioEl._fadeRaf = requestAnimationFrame(step);
 }
 
 function updateVisualizerState(isPlaying) {
@@ -175,14 +180,20 @@ function updateVisualizerState(isPlaying) {
     }
   }
 
-  const musicTags = document.querySelectorAll('.reel__music-tag');
-  musicTags.forEach((tag) => {
-    if (isPlaying && !isMuted) {
-      tag.classList.add('is-playing');
-    } else {
+  /* GPU Battery Optimization: Only animate the single active visible reel's waveform visualizer */
+  const activeReel = reelsContainer ? reelsContainer.querySelector(`.reel[data-index="${activeReelIndex}"]`) : null;
+  const activeMusicTag = activeReel ? activeReel.querySelector('.reel__music-tag') : null;
+
+  const allTags = document.querySelectorAll('.reel__music-tag.is-playing');
+  allTags.forEach((tag) => {
+    if (tag !== activeMusicTag || !isPlaying || isMuted) {
       tag.classList.remove('is-playing');
     }
   });
+
+  if (activeMusicTag && isPlaying && !isMuted) {
+    activeMusicTag.classList.add('is-playing');
+  }
 }
 
 function playSongNative(songId) {
@@ -471,6 +482,11 @@ function activateReel(index, reelEl) {
   /* Update counter */
   if (counterEl) counterEl.textContent = index + 1;
 
+  /* Sync visualizer for newly active reel */
+  const currentAudio = activeChannel === 'A' ? audioChannelA : audioChannelB;
+  const isPlaying = !isMuted && isAudioStarted && currentAudio && !currentAudio.paused;
+  updateVisualizerState(isPlaying);
+
   /* Play song with slight debounce so rapid swipes don't conflict */
   if (reelAudioDebounceTimer) clearTimeout(reelAudioDebounceTimer);
   reelAudioDebounceTimer = setTimeout(() => {
@@ -675,8 +691,14 @@ function showReelToast(message) {
 
 export function destroy() {
   if (reelObserver) reelObserver.disconnect();
-  if (audioChannelA) audioChannelA.pause();
-  if (audioChannelB) audioChannelB.pause();
+  if (audioChannelA) {
+    if (audioChannelA._fadeRaf) cancelAnimationFrame(audioChannelA._fadeRaf);
+    audioChannelA.pause();
+  }
+  if (audioChannelB) {
+    if (audioChannelB._fadeRaf) cancelAnimationFrame(audioChannelB._fadeRaf);
+    audioChannelB.pause();
+  }
 }
 
 window.addEventListener('beforeunload', destroy);
