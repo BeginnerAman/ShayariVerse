@@ -63,11 +63,9 @@
   border: 1px solid var(--clr-border);
 }
 
-/* Featured card - accent border glow */
+/* Featured card - seamlessly unified with grid styling */
 .shayari-card--featured {
-  border-color: var(--clr-accent);
-  box-shadow: var(--shadow-card),
-              0 0 30px var(--clr-accent-glow);
+  border-color: var(--clr-border);
 }
 
 /* Card content area - vertically centered poetry stanza */
