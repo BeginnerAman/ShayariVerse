@@ -148,10 +148,9 @@ function createCardHTML(shayari, index) {
   const categoryLabel = CATEGORY_LABELS[shayari.category] || shayari.category;
   const iconName = CATEGORY_ICONS[shayari.category] || 'sparkles';
   const staggerClass = index < 12 ? `stagger-${index + 1}` : '';
-  const featuredClass = shayari.featured ? 'shayari-card--featured' : '';
 
   return `
-    <article class="shayari-card ${featuredClass} reveal visible ${staggerClass}"
+    <article class="shayari-card reveal visible ${staggerClass}"
              role="article"
              lang="hi"
              data-id="${shayari.id}"
