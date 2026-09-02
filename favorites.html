@@ -81,19 +81,140 @@
 
     .favorites-header__clear {
       font-family: var(--font-ui);
-      font-size: var(--text-sm);
-      color: var(--clr-text-faded);
-      background: none;
+      font-size: 0.82rem;
+      font-weight: var(--weight-medium);
+      color: var(--clr-text-secondary);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--clr-border);
-      border-radius: var(--radius-sm);
-      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-full);
+      padding: 7px 14px;
       cursor: pointer;
-      transition: color var(--duration-fast), border-color var(--duration-fast);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: color var(--duration-fast), border-color var(--duration-fast), background var(--duration-fast), transform var(--duration-fast);
     }
 
     .favorites-header__clear:hover {
       color: #f87171;
-      border-color: #f87171;
+      border-color: rgba(248, 113, 113, 0.4);
+      background: rgba(248, 113, 113, 0.08);
+    }
+
+    .favorites-header__clear:active {
+      transform: scale(0.95);
+    }
+
+    .favorites-header__clear .lucide {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ---- In-App Confirmation Modal ---- */
+    .confirm-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: var(--z-modal, 400);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+      animation: fadeIn 0.2s var(--ease-smooth);
+    }
+
+    .confirm-modal-overlay.active {
+      display: flex;
+    }
+
+    .confirm-modal {
+      background: rgba(18, 14, 28, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl) var(--space-lg);
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(248, 113, 113, 0.12);
+      animation: modalSpringUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes modalSpringUp {
+      from { transform: scale(0.92) translateY(12px); opacity: 0; }
+      to   { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .confirm-modal__icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+      box-shadow: 0 0 20px rgba(248, 113, 113, 0.2);
+    }
+
+    .confirm-modal__icon-box .lucide {
+      width: 26px;
+      height: 26px;
+      color: #f87171;
+    }
+
+    .confirm-modal__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-bold);
+      color: var(--clr-text-primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .confirm-modal__subtitle {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--clr-text-secondary);
+      line-height: 1.55;
+      margin-bottom: var(--space-lg);
+    }
+
+    .confirm-modal__actions {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: center;
+    }
+
+    .confirm-modal__actions .btn {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: var(--text-sm);
+      border-radius: var(--radius-full);
+    }
+
+    .btn--danger {
+      background: #ef4444;
+      color: #ffffff;
+      border: 1px solid #ef4444;
+      font-weight: var(--weight-semibold);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn--danger:hover {
+      background: #dc2626;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.5);
+    }
+
+    .btn--danger:active {
+      transform: scale(0.96);
     }
 
     /* ---- Empty State ---- */
@@ -248,9 +369,9 @@
           </h1>
           <span class="favorites-header__count" id="fav-count"></span>
         </div>
-        <button class="favorites-header__clear" id="fav-clear-all" style="display:none">
-          <i data-lucide="trash-2" style="width: 14px; height: 14px; margin-right: 4px; vertical-align: middle;"></i>
-          Clear All
+        <button class="favorites-header__clear" id="fav-clear-all" style="display:none" aria-label="Clear all favorites">
+          <i data-lucide="trash-2"></i>
+          <span>Clear All</span>
         </button>
       </div>
 
@@ -260,6 +381,26 @@
       </section>
     </div>
   </main>
+
+
+  <!-- ================================
+       CLEAR ALL CONFIRMATION MODAL
+       ================================ -->
+  <div class="confirm-modal-overlay" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+    <div class="confirm-modal">
+      <div class="confirm-modal__icon-box">
+        <i data-lucide="trash-2"></i>
+      </div>
+      <h2 class="confirm-modal__title" id="confirm-modal-title">Clear All Favorites?</h2>
+      <p class="confirm-modal__subtitle">
+        Are you sure you want to remove all saved shayaris from your collection? This action cannot be undone.
+      </p>
+      <div class="confirm-modal__actions">
+        <button class="btn btn--ghost" id="confirm-cancel">Cancel</button>
+        <button class="btn btn--danger" id="confirm-action">Clear All</button>
+      </div>
+    </div>
+  </div>
 
 
   <!-- ================================
@@ -384,13 +525,34 @@
         showToast(labels[t] || t, '');
       });
 
-      /* Clear all favorites */
-      document.getElementById('fav-clear-all')?.addEventListener('click', () => {
-        if (confirm('Kya aap saare saved favorites remove karna chahte hain?')) {
-          FavoritesManager.clearAll();
-          renderFavorites();
-          showToast('All favorites cleared', '');
-        }
+      /* In-app Clear All Confirmation Modal */
+      const confirmModal = document.getElementById('confirm-modal');
+      const confirmCancelBtn = document.getElementById('confirm-cancel');
+      const confirmActionBtn = document.getElementById('confirm-action');
+
+      function openConfirmModal() {
+        if (!confirmModal) return;
+        confirmModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeConfirmModal() {
+        if (!confirmModal) return;
+        confirmModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('fav-clear-all')?.addEventListener('click', openConfirmModal);
+      confirmCancelBtn?.addEventListener('click', closeConfirmModal);
+      confirmModal?.addEventListener('click', (e) => {
+        if (e.target === confirmModal) closeConfirmModal();
+      });
+
+      confirmActionBtn?.addEventListener('click', () => {
+        closeConfirmModal();
+        FavoritesManager.clearAll();
+        renderFavorites();
+        showToast('All favorites cleared', '');
       });
 
       /* Card actions - event delegation */
