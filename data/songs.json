@@ -103,6 +103,46 @@
       "mood": "dosti",
       "duration": 9,
       "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-14",
+      "title": "Khwaab-e-Ishq",
+      "file": "content/audio/background/track-14.mp3",
+      "mood": "romantic",
+      "duration": 15,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-15",
+      "title": "Dheeme Ehsaas",
+      "file": "content/audio/background/track-15.mp3",
+      "mood": "romantic",
+      "duration": 16,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-16",
+      "title": "Pehla Pyaar",
+      "file": "content/audio/background/track-16.mp3",
+      "mood": "love",
+      "duration": 22,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-17",
+      "title": "Dil Ka Aalam",
+      "file": "content/audio/background/track-17.mp3",
+      "mood": "romantic",
+      "duration": 18,
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-18",
+      "title": "Tanhai Ka Noor",
+      "file": "content/audio/background/track-18.mp3",
+      "mood": "romantic",
+      "duration": 15,
+      "artist": "ShayariVerse"
     }
   ],
   "reelSongs": [
@@ -208,6 +248,46 @@
       "file": "content/audio/songs/track-13.mp3",
       "duration": 9,
       "mood": "dosti",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-14",
+      "title": "Khwaab-e-Ishq",
+      "file": "content/audio/songs/track-14.mp3",
+      "duration": 15,
+      "mood": "romantic",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-15",
+      "title": "Dheeme Ehsaas",
+      "file": "content/audio/songs/track-15.mp3",
+      "duration": 16,
+      "mood": "romantic",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-16",
+      "title": "Pehla Pyaar",
+      "file": "content/audio/songs/track-16.mp3",
+      "duration": 22,
+      "mood": "love",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-17",
+      "title": "Dil Ka Aalam",
+      "file": "content/audio/songs/track-17.mp3",
+      "duration": 18,
+      "mood": "romantic",
+      "artist": "ShayariVerse"
+    },
+    {
+      "id": "track-18",
+      "title": "Tanhai Ka Noor",
+      "file": "content/audio/songs/track-18.mp3",
+      "duration": 15,
+      "mood": "romantic",
       "artist": "ShayariVerse"
     }
   ]

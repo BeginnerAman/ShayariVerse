@@ -25,7 +25,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-3",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-08-31"
@@ -37,7 +37,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-4",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-08-31"
@@ -61,7 +61,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-9",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-08-31"
@@ -73,7 +73,7 @@
       "category": "motivational",
       "mood": "motivational",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-11",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-08-31"
@@ -85,7 +85,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-13",
+      "songId": "track-12",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -97,7 +97,7 @@
       "category": "dosti",
       "mood": "dosti",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -109,7 +109,7 @@
       "category": "dosti",
       "mood": "dosti",
       "poet": "",
-      "songId": "track-11",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -121,7 +121,7 @@
       "category": "dosti",
       "mood": "dosti",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-13",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -133,7 +133,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-2",
+      "songId": "track-7",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -145,7 +145,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -157,7 +157,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-11",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -181,7 +181,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-6",
+      "songId": "track-7",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -193,7 +193,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -205,7 +205,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-9",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -217,7 +217,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-11",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -229,7 +229,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-12",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -253,7 +253,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-15",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -265,19 +265,19 @@
       "category": "funny",
       "mood": "funny",
       "poet": "",
-      "songId": "track-13",
+      "songId": "track-16",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
     },
     {
       "id": "shayari-023",
-      "textHindi": "",
+      "textHindi": "चलो आज हम इज़हार करते हैं,\nहाँ हम तुमसे प्यार करते हैं,\nतस्वीर देख कर तुम्हारी, हाल अपना बेहाल करते हैं,\nमिल जाए फ़ुरसत तुम्हें दुनिया की उलझनों से,\nतो याद कर लेना, हम हर पल आपके मैसेज का इंतज़ार करते हैं...।",
       "textHinglish": "Chalo aaj hum izhaar karte hain,\nHaan hum tumse pyar karte hain,\nTasveer dekh kar tumhari haal behaal karte hain,\nMil jaye fursat tumhein duniya ki uljhanon se,\nToh yaad kar lena hum har pal tumhare message ka intezar karte hain.",
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-17",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -289,7 +289,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -301,7 +301,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -313,7 +313,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-6",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -325,7 +325,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-2",
+      "songId": "track-7",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -337,7 +337,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -349,7 +349,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-9",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -361,7 +361,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-11",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -385,7 +385,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-14",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -397,7 +397,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-6",
+      "songId": "track-2",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -409,7 +409,7 @@
       "category": "dosti",
       "mood": "dosti",
       "poet": "",
-      "songId": "track-8",
+      "songId": "track-13",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -421,7 +421,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-17",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -433,7 +433,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-8",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -445,7 +445,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-13",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -469,7 +469,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-4",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -481,7 +481,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -493,7 +493,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-9",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -505,7 +505,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-11",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -529,7 +529,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-14",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -541,7 +541,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-15",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -553,7 +553,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-16",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -565,7 +565,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-10",
+      "songId": "track-7",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -577,7 +577,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-11",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -589,7 +589,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -601,7 +601,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-3",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -613,7 +613,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-4",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -625,7 +625,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -637,7 +637,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-9",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -649,7 +649,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-11",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -661,7 +661,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-12",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -673,7 +673,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-14",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -685,7 +685,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-15",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -697,7 +697,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-16",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -709,7 +709,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-17",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -721,7 +721,7 @@
       "category": "funny",
       "mood": "funny",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -733,7 +733,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -757,7 +757,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-4",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -769,7 +769,7 @@
       "category": "romantic",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -781,7 +781,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-9",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -793,7 +793,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-11",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -805,7 +805,7 @@
       "category": "funny",
       "mood": "funny",
       "poet": "",
-      "songId": "track-8",
+      "songId": "track-12",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -817,7 +817,7 @@
       "category": "dosti",
       "mood": "dosti",
       "poet": "",
-      "songId": "track-13",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -829,7 +829,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-15",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -841,7 +841,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-16",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -853,7 +853,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-17",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -865,7 +865,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -877,7 +877,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-8",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -889,7 +889,7 @@
       "category": "funny",
       "mood": "funny",
       "poet": "",
-      "songId": "track-13",
+      "songId": "track-3",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-08-31"
@@ -913,7 +913,7 @@
       "category": "dosti",
       "mood": "dosti",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-13",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -925,7 +925,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-9",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -937,7 +937,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-11",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -949,7 +949,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-12",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -961,7 +961,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-14",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -973,7 +973,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-15",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -985,7 +985,7 @@
       "category": "sad",
       "mood": "melancholic",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-6",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -997,7 +997,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-13",
+      "songId": "track-17",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -1009,7 +1009,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-2",
+      "songId": "track-10",
       "songStart": 0,
       "featured": true,
       "dateAdded": "2026-09-01"
@@ -1021,7 +1021,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1045,7 +1045,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-4",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1057,7 +1057,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1069,7 +1069,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-9",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1093,7 +1093,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-10",
+      "songId": "track-7",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1105,7 +1105,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-10",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1117,7 +1117,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-15",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1129,7 +1129,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-16",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1141,7 +1141,7 @@
       "category": "dosti",
       "mood": "dosti",
       "poet": "",
-      "songId": "track-11",
+      "songId": "track-1",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1153,7 +1153,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1189,7 +1189,7 @@
       "category": "motivational",
       "mood": "inspiring",
       "poet": "",
-      "songId": "track-13",
+      "songId": "track-11",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1213,7 +1213,7 @@
       "category": "motivational",
       "mood": "inspiring",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-8",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1225,7 +1225,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-6",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1237,7 +1237,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-12",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1249,7 +1249,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-14",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1273,7 +1273,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-16",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1285,7 +1285,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-17",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1297,7 +1297,7 @@
       "category": "zindagi",
       "mood": "calm",
       "poet": "",
-      "songId": "track-5",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1309,7 +1309,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-6",
+      "songId": "track-2",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1321,7 +1321,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-10",
+      "songId": "track-6",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1333,7 +1333,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-4",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1345,7 +1345,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-10",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1369,7 +1369,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-9",
+      "songId": "track-11",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1381,7 +1381,7 @@
       "category": "sad",
       "mood": "melancholic",
       "poet": "",
-      "songId": "track-6",
+      "songId": "track-7",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1405,7 +1405,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-7",
+      "songId": "track-2",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1417,7 +1417,7 @@
       "category": "motivational",
       "mood": "inspiring",
       "poet": "",
-      "songId": "track-11",
+      "songId": "track-5",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1429,7 +1429,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-3",
+      "songId": "track-17",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1441,7 +1441,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-1",
+      "songId": "track-18",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1465,7 +1465,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-4",
+      "songId": "track-3",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1477,7 +1477,7 @@
       "category": "love",
       "mood": "romantic",
       "poet": "",
-      "songId": "track-12",
+      "songId": "track-4",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1489,7 +1489,7 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-6",
+      "songId": "track-10",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
@@ -1501,10 +1501,358 @@
       "category": "sad",
       "mood": "sad",
       "poet": "",
-      "songId": "track-10",
+      "songId": "track-2",
       "songStart": 0,
       "featured": false,
       "dateAdded": "2026-09-01"
+    },
+    {
+      "id": "shayari-126",
+      "textHindi": "कल रात तेरी यादों में तस्वीर बना डाली,\nइतनी अच्छी लगी कि गले से लगा डाली...\nजब हुआ ख़ौफ़ कि कोई चुरा न ले,\nइतना रोये कि आँसुओं से मिटा डाली...!!",
+      "textHinglish": "Kal raat teri yaadon mein tasveer bana daali,\nItni achhi lagi ki gale se laga daali...\nJab hua khauf ki koi chura na le,\nItna roye ki aansuon se mita daali...!!",
+      "category": "sad",
+      "mood": "sad",
+      "poet": "",
+      "songId": "track-6",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-127",
+      "textHindi": "मेरा नसीब मुझसे खफ़ा हो जाता है,\nअपना जिसे भी मानो वो बेवफ़ा हो जाता है...\nक्यों ना हो शिकायत मेरी नजरों को रात से,\nख्वाब पूरा होता नहीं और सवेरा हो जाता है...!",
+      "textHinglish": "Mera naseeb mujhse khafa ho jaata hai,\nApna jise bhi maano woh bewafa ho jaata hai...\nKyon na ho shikayat meri nazron ko raat se,\nKhwaab poora hota nahi aur savera ho jaata hai...!",
+      "category": "sad",
+      "mood": "sad",
+      "poet": "",
+      "songId": "track-7",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-128",
+      "textHindi": "माना के हम इज़हार नहीं करते,\nमतलब ये नहीं कि आपका ख्याल नहीं करते,\nमायूसी में बीत जाते हैं वो दिन,\nजिस दिन आप हमसे बात नहीं करते।",
+      "textHinglish": "Maana ke hum izhaar nahi karte,\nMatlab yeh nahi ki aapka khayal nahi karte,\nMaayusi mein beet jaate hain woh दिन,\nJis din aap humse baat nahi karte.",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-14",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-129",
+      "textHindi": "अजनबी गलियों से हम गुज़रा नहीं करते,\nदर्दे दिल लिया और दिया नहीं करते,\nये प्यारा सा रिश्ता सिर्फ आपसे है,\nवरना इतना याद हम किसी को किया नहीं करते..।",
+      "textHinglish": "Ajnabi galiyon se hum guzra nahi karte,\nDard-e-dil liya aur diya nahi karte,\nYeh pyara sa rishta sirf aapse hai,\nWarna itna yaad hum kisi ko kiya nahi karte..!",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-15",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-130",
+      "textHindi": "मुझे इश्क की बीमारी न होती\nअगर तू इतनी प्यारी न होती,\nरातें यूँ बेचैन न होती\nअगर तेरी यादें इतनी गहरी न होती,\nसाँसों में ये रवानी न होती\nअगर तू मेरी जिंदगी की कहानी न होती,\nये दिल यूँ दीवाना न होता\nअगर तू इतनी मस्तानी न होती।",
+      "textHinglish": "Mujhe ishq ki bimari na hoti\nAgar tu itni pyaari na hoti,\nRaatein yoon bechain na hoti\nAgar teri yaadein itni gehri na hoti,\nSaanson mein yeh rawani na hoti\nAgar tu meri zindagi ki kahani na hoti,\nYeh dil yoon deewana na hota\nAgar tu itni mastaani na hoti.",
+      "category": "romantic",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-16",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-131",
+      "textHindi": "उसको अपना इश्क़ बहुत जताया मैंने,\nवो कहता था उसको बहुत सताया मैंने,\nएक ना एक दिन वो मेरा हो ही जायेगा,\nयह सोच कर जाने कितनों को ठुकराया मैंने,\nइससे ज़्यादा उससे क्या मोहब्बत करते,\nउसके महबूब को भी अपना दोस्त बनाया मैंने।",
+      "textHinglish": "Usko apna ishq bahut jataya maine,\nWoh kehta tha usko bahut sataya maine,\nEk na ek din woh mera ho hi jayega,\nYeh soch kar jaane kitno ko thukraya maine,\nIsse zyada usse kya mohabbat karte,\nUske mehboob ko bhi apna dost banaya maine.",
+      "category": "sad",
+      "mood": "sad",
+      "poet": "",
+      "songId": "track-7",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-132",
+      "textHindi": "चुप रहोगे तो बात कौन करेगा..!\nहम नहीं रहेंगे तो, याद कौन करेगा..!\nमाना कि हम इतने अच्छे नहीं हैं..\nपर हम ना रहे तो परेशान कौन करेगा..!",
+      "textHinglish": "Chup rahoge toh baat kaun karega..!\nHum nahi rahenge toh, yaad kaun karega..!\nMaana ki hum itne achhe nahi hain..\nPar hum na rahe toh pareshan kaun karega..!",
+      "category": "dosti",
+      "mood": "dosti",
+      "poet": "",
+      "songId": "track-8",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-133",
+      "textHindi": "टूटे हुए सपनों को सजाना आता है,\nरोते हुए दिल को मनाना आता है !!\nउससे कह दो हमारे ज़ख्म की फ़िक्र ना करे,\nहमें दर्द में भी मुस्कुराना आता है !!",
+      "textHinglish": "Toote hue sapno ko sajana aata hai,\nRote hue dil ko manana aata hai !!\nUsse keh do hamare zakhm ki fikr na kare,\nHumein dard mein bhi muskurana aata hai !!",
+      "category": "motivational",
+      "mood": "motivational",
+      "poet": "",
+      "songId": "track-5",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-134",
+      "textHindi": "आज बुरा है, कल अच्छा आयेगा,\nवक़्त ही तो है, बदल जायेगा।\nजो आज मुश्किल लगता है, कल कहानी बन जायेगा,\nयह आज का बोझ, कल हल्का हो जायेगा।\nथोड़ा सब्र रख, यह दौर भी गुज़र जायेगा,\nवक़्त ही तो है, बदल जायेगा...।",
+      "textHinglish": "Aaj bura hai, kal achha aayega,\nWaqt hi toh hai, badal jayega.\nJo aaj mushkil lagta hai kal kahani ban jayega,\nYeh aaj ka bojh kal halka ho jayega.\nThoda sabr rakh, yeh daur bhi guzar jaega,\nWaqt hi toh hai, badal jayega...",
+      "category": "motivational",
+      "mood": "motivational",
+      "poet": "",
+      "songId": "track-8",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-135",
+      "textHindi": "मुस्कान का कोई मोल नहीं होता,\nकुछ रिश्तों की तोल नहीं होती,\nदोस्त तो मिल जाते हैं हर रास्ते पर,\nलेकिन हर कोई आपकी तरह अनमोल नहीं होता..!",
+      "textHinglish": "Muskaan ka koi mol nahi hota,\nKuch rishton ki tol nahi hoti,\nDost toh mil jaate hain har raaste par,\nLekin har koi aapki tarah anmol nahi hota..!",
+      "category": "dosti",
+      "mood": "dosti",
+      "poet": "",
+      "songId": "track-13",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-136",
+      "textHindi": "मांगी थी दुआ रब से,\nकि दोस्त देना जो अलग हो सबसे,\nखुदा ने तुमसे मिला दिया और कहा,\nध्यान रखना अनमोल हैं सबसे..!",
+      "textHinglish": "Maangi thi dua rab se,\nKi dost dena jo alag ho sabse,\nKhuda ne tumse mila diya aur kaha,\nDhyan rakhna anmol hain sabse..!",
+      "category": "dosti",
+      "mood": "dosti",
+      "poet": "",
+      "songId": "track-1",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-137",
+      "textHindi": "जीना चाहा तो जिंदगी से दूर थे हम,\nमरना चाहा तो जीने को मजबूर थे हम,\nसर झुकाकर कुबूल कर ली हर सजा मैंने,\nबस कसूर इतना था कि बेकसूर थे हम।",
+      "textHinglish": "Jeena chaaha toh zindagi se door the hum,\nMarna chaaha toh jeene ko majboor the hum,\nSar jhukakar qubool kar li har saza maine,\nBas kasoor itna tha ki bekasoor the hum.",
+      "category": "zindagi",
+      "mood": "sad",
+      "poet": "",
+      "songId": "track-2",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-138",
+      "textHindi": "तरस गये आप के दीदार को,\nदिल फिर भी आप का इंतज़ार करता है...\nहमसे अच्छा तो आप के घर का आइना है,\nजो हर रोज़ आपका दीदार करता है..!!",
+      "textHinglish": "Taras gaye aap ke deedar ko,\nDil phir bhi aap ka intezar karta hai...\nHumse achha toh aap ke ghar ka aaina hai,\nJo har roz aap ka deedar karta hai..!!",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-11",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-139",
+      "textHindi": "आज थोड़ा प्यार जता दूँ क्या,\nतुम मेरे हो सबको बता दूँ क्या...\nमेरी कलाई जो पकड़ ले तू,\nहाय ! मेरी जान गवां दूँ क्या...\nमेरा कमरा बहुत उदास सा है,\nतेरी एक तस्वीर लगा दूँ क्या...!!",
+      "textHinglish": "Aaj thoda pyaar jata doon kya,\nTum mere ho sabko bata doon kya...\nMeri kalai jo pakad le tu,\nHaaye ! meri jaan gawa doon kya...\nMera kamra bahut udaas sa hai,\nTeri ek tasveer laga doon kya...!!",
+      "category": "romantic",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-12",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-140",
+      "textHindi": "अरे तुम खूबसूरत जैसे चाँद लगती हो,\nतुम नादान पर प्यारी बेहिसाब लगती हो,\nये काँच का टुकड़ा (आईना) क्या बताएगा तुम्हें तुम्हारी खूबसूरती,\nज़रा मेरी आँखों से पूछो तुम कितनी लाजवाब लगती हो।",
+      "textHinglish": "Arre tum khoobsurat jaise chaand lagti ho,\nTum naadan par pyaari behisaab lagti ho,\nYeh kaanch ka tukda (aaina) kya batayega tumhe tumhari khoobsurti,\nZara meri aankhon se poochho tum kitni laajawaab lagti ho.",
+      "category": "romantic",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-14",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-141",
+      "textHindi": "हर नज़र को एक नज़र की तलाश है,\nइस चेहरे में कुछ तो ख़ास है,\nआपसे मोहब्बत हम यूँ ही नहीं कर बैठे,\nक्या करें हमारी पसंद ही कुछ ख़ास है।",
+      "textHinglish": "Har nazar ko ek nazar ki talaash hai,\nIs chehre mein kuch toh khaas hai,\nAapse mohabbat hum yoon hi nahi kar baithe,\nKya karein hamari pasand hi kuch khaas hai.",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-15",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-142",
+      "textHindi": "खुदा ने कहा दोस्ती न कर,\nदोस्ती में तू खो जाएगा,\nमैंने कहा ज़मीन पर आकर,\nमेरे दोस्त से तो मिल,\nतू भी उसपर फ़ना हो जाएगा...।",
+      "textHinglish": "Khuda ne kaha dosti na kar,\nDosti mein tu kho jaayega,\nMaine kaha zameen par aakar,\nMere dost se toh mil,\nTu bhi uspar fanaa ho jaayega...",
+      "category": "dosti",
+      "mood": "dosti",
+      "poet": "",
+      "songId": "track-13",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-143",
+      "textHindi": "हँसते दिलों में ग़म भी है,\nमुस्कुराती आँखें नम भी हैं...\nदुआ करते हैं आपकी खुशी कभी ना रुके,\nक्योंकि आपकी हँसी के दीवाने हम भी हैं..!",
+      "textHinglish": "Hanste dilon mein gham bhi hai,\nMuskurati aankhein nam bhi hain...\nDua karte hain aapki khushi kabhi na ruke,\nKyunki aapki hansi ke deewane hum bhi hain..!",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-17",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-144",
+      "textHindi": "तकलीफों से थक कर आँखों से आँसू बहते हैं,\nकहने वाले क्या जाने सहने वाले कितना सहते हैं....!!",
+      "textHinglish": "Takleefon se thak kar aankhon se aansu behte hain,\nKehne waale kya jaane sehne waale kitna sehte hain....!!",
+      "category": "sad",
+      "mood": "sad",
+      "poet": "",
+      "songId": "track-10",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-145",
+      "textHindi": "नाराज़गी ख़त्म हो जाएगी\nरूठ जाने से क्या होगा,\nयाद तो फिर भी आएगी\nभूल जाने से क्या होगा,\nरिश्ता तो फिर भी रहेगा\nछोड़ जाने से क्या होगा,\nअगर साथ लिखा होगा ज़िंदगी के सफ़र में,\nकिस्मत फिर ढूँढेगी दूर जाने से क्या होगा।",
+      "textHinglish": "Narazgi khatam ho jaayegi\nRooth jaane se kya hoga,\nYaad toh phir bhi aayegi\nBhool jaane se kya hoga,\nRishta toh phir bhi rahega\nChhod jaane se kya hoga,\nAgar saath likha hoga zindagi ke safar mein,\nKismat phir dhoondhegi door jaane se kya hoga.",
+      "category": "zindagi",
+      "mood": "calm",
+      "poet": "",
+      "songId": "track-1",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-146",
+      "textHindi": "ना जाने क्यों आती है याद तुम्हारी,\nचुरा ले जाती है आँखों से नींद हमारी,\nयही ख्याल रहता है सुबह शाम,\nकब होगी तुमसे मुलाक़ात हमारी।",
+      "textHinglish": "Na jaane kyon aati hai yaad tumhari,\nChura le jaati hai aankhon se neend hamari,\nYahi khayal rehta hai subah shaam,\nKab hogi tumse mulaqaat hamari.",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-3",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-147",
+      "textHindi": "आपकी कमी से दिल मेरा उदास है,\nपर मुझे तो आपसे मिलने की आस है,\nज़ख्म नहीं पर दर्द का अहसास है,\nऐसा लगता है जैसे दिल का एक टुकड़ा आपके पास है।",
+      "textHinglish": "Aapki kami se dil mera udaas hai,\nPar mujhe toh aapse milne ki aas hai,\nZakhm nahi par dard ka ehsaas hai,\nAisa lagta hai jaise dil ka ek tukda aapke paas hai.",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-4",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-148",
+      "textHindi": "क्यों कोई मेरा इंतज़ार करेगा,\nअपनी जिंदगी मेरे लिए बेकार करेगा !!\nहम कौन सा किसी के लिए ख़ास हैं,\nक्या सोच कर हमें कोई याद करेगा !!",
+      "textHinglish": "Kyon koi mera intezar karega,\nApni zindagi mere liye bekaar karega !!\nHum kaun sa kisi ke liye khaas hain,\nKya soch kar humein koi yaad karega !!",
+      "category": "sad",
+      "mood": "sad",
+      "poet": "",
+      "songId": "track-10",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-149",
+      "textHindi": "आज हमारे शहर में बरसात हो गयी,\nदिन ढला और फिर से रात हो गयी,\nकरना नहीं चाहते हम ज़िक्र उनका,\nअरे यार...\nफिर शायरी में उनकी बात हो गयी...!!",
+      "textHinglish": "Aaj hamare shehar mein barsaat ho gayi,\nDin dhala aur phir se raat ho gayi,\nKarna nahi chahte hum zikr unka,\nArey yaar...\nPhir shayari mein unki baat ho gayi...!!",
+      "category": "sad",
+      "mood": "melancholic",
+      "poet": "",
+      "songId": "track-2",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-150",
+      "textHindi": "उनका नाम लेते लेते सुबह से शाम हो गयी,\nउनसे मिलने की खुशी में नींदें हराम हो गयी...\nहम दिल थाम कर चलते थे इश्क़ की गलियों में जनाब,\nमगर जबसे देखा उनको एक नज़र एक जिंदगी थी जो अब उनके नाम हो गयी..!",
+      "textHinglish": "Unka naam lete lete subah se shaam ho gayi,\nUnse milne ki khushi mein neendein haraam ho gayi...\nHum dil thaam kar chalte the ishq ki galiyon mein janaab,\nMagar jabse dekha unko ek nazar ek zindagi thi jo ab unke naam ho gayi..!",
+      "category": "romantic",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-11",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-151",
+      "textHindi": "जो शख्स इस दिल में बसता है,\nवो कुछ भी पहन ले उसपे जचता है,\nमेरी धड़कन रुक जाती है उस एक पल को,\nजब भी वो मेरी तरफ देख के हंसता है,\nऔर क्या किस्मत है उस आईने की,\nजिसके सामने ये रोज़ बैठ कर सजता संवरता है।",
+      "textHinglish": "Jo shakhs is dil mein basta hai,\nWoh kuch bhi pehan le uspe jachta hai,\nMeri dhadkan ruk jaati hai us ek pal ko,\nJab bhi woh meri taraf dekh ke hansta hai,\nAur kya kismat hai us aaine ki,\nJiske saamne yeh roz baith kar sajta sanwarta hai.",
+      "category": "romantic",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-12",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-152",
+      "textHindi": "अजनबी से थे आप हमारे लिए,\nहमें दोस्ती करना अच्छा लगा...\nतैरना तो आता था पर आपकी आँखों\nमें डूबना अच्छा लगा..!!",
+      "textHinglish": "Ajnabi se the aap hamare liye,\nHumein dosti karna achha laga...\nTairna toh aata tha par aapki aankhon\nmein doobna achha laga..!!",
+      "category": "love",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-14",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-153",
+      "textHindi": "मेरी हर बात से इन्कार करते हो !\nमैं कैसे मान लूं तुम मुझसे प्यार करते हो !\nबातें कभी कभार करते हो मैं कैसे मान लूं\nतुम मुझसे प्यार करते हो !\nजिस बात से मुझे चिढ़ होती है\nवही बार बार करते हो !\nमैं कैसे मान लूं तुम मुझसे\nप्यार करते हो !!",
+      "textHinglish": "Meri har baat se inkaar karte ho !\nMain kaise maan loon tum mujhse pyaar karte ho !\nBaatein kabhi kabhaar karte ho main kaise maan loon\nTum mujhse pyaar karte ho !\nJis baat se mujhe chidh hoti hai\nWahi baar baar karte ho !\nMain kaise maan loon tum mujhse\nPyaar karte ho !!",
+      "category": "romantic",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-15",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
+    },
+    {
+      "id": "shayari-154",
+      "textHindi": "कितनी जल्दी ये शाम आ गई, गुड नाइट\nकहने की बात याद आ गई...\nहम तो बैठे थे सितारों की महफ़िल में,\nचाँद को देखा तो आपकी याद आ गई...!!",
+      "textHinglish": "Kitni jaldi yeh shaam aa gayi, Good Night\nKehne ki baat yaad aa gayi...\nHum toh baithe the sitaron ki mehfil mein,\nChaand ko dekha toh aapki yaad aa gayi...!!",
+      "category": "romantic",
+      "mood": "romantic",
+      "poet": "",
+      "songId": "track-16",
+      "songStart": 0,
+      "featured": false,
+      "dateAdded": "2026-09-06"
     }
   ]
 }
