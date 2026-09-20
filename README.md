@@ -1,6 +1,6 @@
 # ShayariVerse
 
-Live Demo: [https://beginneraman.github.io/ShayariVerse/](https://beginneraman.github.io/ShayariVerse/)
+Website: [ShayariVerse](https://beginneraman.github.io/ShayariVerse/)
 
 Read, Listen, Feel - A modern web application for exploring Hindi and Urdu poetry with ambient music and vertical reels.
 
