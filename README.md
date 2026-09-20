@@ -1,36 +1,10 @@
 # ShayariVerse
 
+Website: https://beginneraman.github.io/ShayariVerse/
+
 Read, Listen, Feel - A modern web application for exploring Hindi and Urdu poetry with ambient music and vertical reels.
 
-<div align="center">
-
-<a href="https://beginneraman.github.io/ShayariVerse/" target="_blank">
-  <img src="https://img.shields.io/badge/Live%20Demo-ShayariVerse-ff6b6b?style=for-the-badge" alt="Live Demo" />
-</a>
-<a href="https://beginneraman.github.io/ShayariVerse/" target="_blank">
-  <img src="https://img.shields.io/badge/GitHub-Pages-Open%20Site-222222?style=for-the-badge" alt="Open Site" />
-</a>
-<a href="https://beginneraman.github.io/ShayariVerse/" target="_blank">
-  <img src="https://img.shields.io/badge/Mobile-Friendly-Yes-4ecdc4?style=for-the-badge" alt="Mobile Friendly" />
-</a>
-
-</div>
-
 Hosted directly on GitHub Pages with zero server dependencies.
-
----
-
-## Live Demo
-
-Open the app directly in your browser:
-
-- Website: https://beginneraman.github.io/ShayariVerse/
-- Home Page: https://beginneraman.github.io/ShayariVerse/index.html
-- Browse Page: https://beginneraman.github.io/ShayariVerse/browse.html
-- Reels Page: https://beginneraman.github.io/ShayariVerse/reels.html
-- Favorites Page: https://beginneraman.github.io/ShayariVerse/favorites.html
-
-This makes it easy for users to open the website on mobile or desktop without cloning the repository.
 
 ---
 
@@ -180,9 +154,6 @@ To run the project locally without any dependencies or build tools:
     ```
     https://beginneraman.github.io/ShayariVerse/
     ```
-
-    You can also open it directly here:
-    https://beginneraman.github.io/ShayariVerse/
 
 ---
 
