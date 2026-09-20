@@ -2,13 +2,41 @@
 
 Read, Listen, Feel - A modern web application for exploring Hindi and Urdu poetry with ambient music and vertical reels.
 
+<div align="center">
+
+<a href="https://beginneraman.github.io/ShayariVerse/" target="_blank">
+  <img src="https://img.shields.io/badge/Live%20Demo-ShayariVerse-ff6b6b?style=for-the-badge" alt="Live Demo" />
+</a>
+<a href="https://beginneraman.github.io/ShayariVerse/" target="_blank">
+  <img src="https://img.shields.io/badge/GitHub-Pages-Open%20Site-222222?style=for-the-badge" alt="Open Site" />
+</a>
+<a href="https://beginneraman.github.io/ShayariVerse/" target="_blank">
+  <img src="https://img.shields.io/badge/Mobile-Friendly-Yes-4ecdc4?style=for-the-badge" alt="Mobile Friendly" />
+</a>
+
+</div>
+
 Hosted directly on GitHub Pages with zero server dependencies.
+
+---
+
+## Live Demo
+
+Open the app directly in your browser:
+
+- Website: https://beginneraman.github.io/ShayariVerse/
+- Home Page: https://beginneraman.github.io/ShayariVerse/index.html
+- Browse Page: https://beginneraman.github.io/ShayariVerse/browse.html
+- Reels Page: https://beginneraman.github.io/ShayariVerse/reels.html
+- Favorites Page: https://beginneraman.github.io/ShayariVerse/favorites.html
+
+This makes it easy for users to open the website on mobile or desktop without cloning the repository.
 
 ---
 
 ## Overview
 
-ShayariVerse is a client-side web application designed for poetry lovers. It combines curated poetic couplets with ambient audio playback, dynamic search and filtering, and full-screen vertical reels.
+ShayariVerse is a client-side web application designed for poetry lovers. It combines curated poetic couplets with ambient audio playback, dynamic search and filtering, and full-screen vertical reels for a modern storytelling experience.
 
 The project is built entirely with standard web technologies (HTML5, CSS3, ES6 JavaScript) and static JSON data files. It requires no backend server, database, or build steps to run.
 
@@ -112,46 +140,49 @@ ShayariVerse/
 To run the project locally without any dependencies or build tools:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/BeginnerAman/ShayariVerse.git
-   cd ShayariVerse
-   ```
+    ```bash
+    git clone https://github.com/BeginnerAman/ShayariVerse.git
+    cd ShayariVerse
+    ```
 
 2. Start a local HTTP server using Python or Node:
-   ```bash
-   # Using Python 3
-   python -m http.server 8080
+    ```bash
+    # Using Python 3
+    python -m http.server 8080
 
-   # Or using Node http-server
-   npx http-server -p 8080
-   ```
+    # Or using Node http-server
+    npx http-server -p 8080
+    ```
 
 3. Open your browser and navigate to:
-   ```
-   http://localhost:8080
-   ```
+    ```
+    http://localhost:8080
+    ```
 
 ---
 
 ## Deployment to GitHub Pages
 
 1. Commit and push your changes to the `main` branch:
-   ```bash
-   git add .
-   git commit -m "Deploy ShayariVerse static web app"
-   git push origin main
-   ```
+    ```bash
+    git add .
+    git commit -m "Deploy ShayariVerse static web app"
+    git push origin main
+    ```
 
 2. Go to the repository settings on GitHub:
-   - Navigate to **Settings** > **Pages**.
-   - Under **Build and deployment**, set **Source** to `Deploy from a branch`.
-   - Select the `main` branch and `/ (root)` folder.
-   - Click **Save**.
+    - Navigate to **Settings** > **Pages**.
+    - Under **Build and deployment**, set **Source** to `Deploy from a branch`.
+    - Select the `main` branch and `/ (root)` folder.
+    - Click **Save**.
 
 3. Your website will be live at:
-   ```
-   https://beginneraman.github.io/ShayariVerse/
-   ```
+    ```
+    https://beginneraman.github.io/ShayariVerse/
+    ```
+
+    You can also open it directly here:
+    https://beginneraman.github.io/ShayariVerse/
 
 ---
 
